@@ -5,37 +5,38 @@ fis-spriter-csssprite
 安装
 ==
 
-    ```bash
-    npm install -g fis-spriter-csssprite
-    ```
+```bash
+npm install -g fis-spriter-csssprite
+```
 
 配置
 ==
-    ```javascript
-    fis.config.merge({
-        namespace: 'demo',
-        modules: {
-            spriter: 'csssprite' 
+
+```javascript
+fis.config.merge({
+    namespace: 'demo',
+    modules: {
+        spriter: 'csssprite' 
+    },
+    pack: {
+        'aio.css': [
+            '**.css'
+        ]
+    },
+    settings: {
+        smarty: {
+            left_delimiter: '{%',
+            right_delimiter: '%}',
         },
-        pack: {
-            'aio.css': [
-                '**.css'
-            ]
-        },
-        settings: {
-            smarty: {
-                left_delimiter: '{%',
-                right_delimiter: '%}',
-            },
-            spriter: {
-                csssprite: {
-                    margin: 10
-                }
+        spriter: {
+            csssprite: {
+                margin: 10
             }
         }
-    });
+    }
+});
 
-    ```
+```
 
 使用
 ==
@@ -62,21 +63,21 @@ fis-spriter-csssprite
 
 ###实例
 
-    ```css
-    .header {
-        background: url(/img/head_bg.png?m=x) repeat-x;
-    }
-    
-    .nav {
-        background: url(/img/nav_bg.png?m=y) repeat-y;
-    }
-    
-    .icon_add {
-        background: url(/img/icon/add.jpg?m=z) no-repeat;
-    }
-    
-    .icon_mul {
-        background: url(/img/icon/mul.jpg?m=z) no-repeat;
-    }
-    ```
+```css
+.header {
+    background: url(/img/head_bg.png?m=x) repeat-x;
+}
+
+.nav {
+    background: url(/img/nav_bg.png?m=y) repeat-y;
+}
+
+.icon_add {
+    background: url(/img/icon/add.jpg?m=z) no-repeat;
+}
+
+.icon_mul {
+    background: url(/img/icon/mul.jpg?m=z) no-repeat;
+}
+```
 如上，`head_bg.png`会合并到`aio_x.png`(**aio.css对应图片**), `nav_bg.png`合并到`aio_y.png`, `add.jpg`和`mul.jpg`被合并到`aio_z.png`。
