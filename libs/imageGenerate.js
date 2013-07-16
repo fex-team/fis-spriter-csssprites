@@ -37,6 +37,7 @@ function getImage(img_release) {
             return srcMap[i];
         }
     }
+    return false;
 }
 
 /**

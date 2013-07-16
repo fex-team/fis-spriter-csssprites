@@ -1,12 +1,12 @@
-fis-spriter-csssprite
+fis-spriter-csssprites
 =====================
-基于FIS的csssprite，通过FIS插件的方式对合并后的css进行csssprite处理。其支持`repeat-x, repeat-y, background-position`
+基于FIS的csssprites，通过FIS插件的方式对合并后的css进行csssprites处理。其支持`repeat-x, repeat-y, background-position`
 
 安装
 ==
 
 ```bash
-npm install -g fis-spriter-csssprite
+npm install -g fis-spriter-csssprites
 ```
 
 配置
@@ -16,7 +16,7 @@ npm install -g fis-spriter-csssprite
 fis.config.merge({
     namespace: 'demo',
     modules: {
-        spriter: 'csssprite' 
+        spriter: 'csssprites' 
     },
     pack: {
         'aio.css': [
@@ -29,7 +29,7 @@ fis.config.merge({
             right_delimiter: '%}',
         },
         spriter: {
-            csssprite: {
+            csssprites: {
                 margin: 10
             }
         }
