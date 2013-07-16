@@ -1,4 +1,6 @@
-
+/**
+ * License: https://github.com/jakesgordon/bin-packing/blob/master/js/packer.js
+ */
 var GrowingPacker = function() {};
 
 GrowingPacker.prototype = {
