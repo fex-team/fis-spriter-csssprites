@@ -18,8 +18,9 @@
   },
   "keywords": [
     "fis",
-    "image",
-    "csssprite",
+    "node-images",
+    "node-pngcrush",
+    "csssprites",
     "css",
     "pngcrush",
     "png",
