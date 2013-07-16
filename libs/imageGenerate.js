@@ -114,8 +114,8 @@ function genImageX(list) {
                 x_image.draw(images[i].image, images[i].width * (k + 1), y);
             }
         }
-        _css += images[i].sl + '{background-position:' + x + 'px '
-            + y + 'px}';
+        _css += images[i].sl + '{background-position:' + -x + 'px '
+            + -y + 'px}';
         cls.push(images[i].sl);
         y += images[i].height + margin;
     }
@@ -163,8 +163,8 @@ function genImageY(list) {
                 y_image.draw(images[i].image, images[i].height * (k + 1), y);
             }
         }
-        _css += images[i].sl + '{background-position:' + x + 'px '
-            + y + 'px}';
+        _css += images[i].sl + '{background-position:' + -x + 'px '
+            + -y + 'px}';
         cls.push(images[i].sl);
         x += images[i].width + margin;
     }
@@ -180,38 +180,51 @@ function genImageZ(list) {
     if (list.length == 0) {
         return;
     }
-    var i, len = list.length;
+    var i, parsed = [], len = list.length;
     var blocks = [];
     for (i = 0; i < len; i++) {
         var bg = list[i];
+        if (parsed.indexOf(bg.image_url) != -1) {
+            continue;
+        }
+        parsed.push(bg.image_url);
         var img_src_info = getImage(bg.image_url);
         var img = Image(img_src_info.getContent()).size();
         blocks.push(
             {
-                sl: bg.selector, //css选择器
-                url: img_src_info.subpath, //图片subpath
+                id: bg.image_url, //图片subpath
+                url: img_src_info.subpath,
                 w: img.width + margin, //宽
-                h: img.height + margin, //高
-                o_x: bg.position[0],
-                o_y: bg.position[1]
+                h: img.height + margin //高
             }
         );
-        Pack.fit(blocks);
     }
-    len = blocks.length;
+    Pack.fit(blocks);
     //获取计算得到的合并图大小
     var root = Pack.getRoot();
     var z_image = Image(root.w - margin, root.h - margin);
-    var cls = [];
-    for (i = 0; i < len; i++) {
-        var current_img = blocks[i];
+    var cls = [], current_img;
+    parsed = [];
+
+    for (i = 0, len = list.length; i < len; i++) {
+        var current = list[i];
+        for (var j = 0, l = blocks.length; j < l; j++) {
+            if (current.image_url == blocks[j].id) {
+                current_img = blocks[j];
+                current_img.sl = current.selector;
+                current_img.o_x = current.position[0];
+                current_img.o_y = current.position[1];
+            }
+        }
         cls.push(current_img.sl);
         _css += current_img.sl + '{background-position:'
-                + (current_img.o_x + current_img.fit.x) + 'px '
-                + (current_img.o_y + current_img.fit.y) + 'px}'
-        //图片平铺到固定大小的大图上
-        z_image.draw(Image(srcMap[current_img.url].getContent()), current_img.fit.x, current_img.fit.y);
+                + -(current_img.o_x + current_img.fit.x) + 'px '
+                + -(current_img.o_y + current_img.fit.y) + 'px}'
+        if (parsed.indexOf(current.image_url) == -1) {
+            parsed.push(current.image_url);
+            //图片平铺到固定大小的大图上
+            z_image.draw(Image(srcMap[current_img.url].getContent()), current_img.fit.x, current_img.fit.y);
+        }
     }
-
     collect(z_image, cls, 'z');
 }
