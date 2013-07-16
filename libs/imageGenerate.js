@@ -52,7 +52,7 @@ function collect(image, cls, type) {
     image_file.setContent(image.encode('png'));
     image_file.compiled = true;
     pkgMap[_file.subpathNoExt + ext] = image_file;
-    _css += cls.join(',') + '{background-image: url(' + image_file.getUrl(_opt.hash, _opt.domain) + ');}';
+    _css += cls.join(',') + '{background-image: url(' + image_file.getUrl(_opt.hash, _opt.domain) + ')}';
 }
 
 function factory(bgMap) {
@@ -114,7 +114,7 @@ function genImageX(list) {
             }
         }
         _css += images[i].sl + '{background-position:' + x + 'px '
-            + y + 'px;}';
+            + y + 'px}';
         cls.push(images[i].sl);
         y += images[i].height + margin;
     }
@@ -163,7 +163,7 @@ function genImageY(list) {
             }
         }
         _css += images[i].sl + '{background-position:' + x + 'px '
-            + y + 'px;}';
+            + y + 'px}';
         cls.push(images[i].sl);
         x += images[i].width + margin;
     }
@@ -176,10 +176,12 @@ function genImageY(list) {
  * @param list
  */
 function genImageZ(list) {
-    var i, len = 0;
+    if (list.length == 0) {
+        return;
+    }
+    var i, len = list.length;
     var blocks = [];
-    len = list.length;
-    for (i = 0; i < list.length; i++) {
+    for (i = 0; i < len; i++) {
         var bg = list[i];
         var img_src_info = getImage(bg.image_url);
         var img = Image(img_src_info.getContent()).size();
@@ -205,7 +207,7 @@ function genImageZ(list) {
         cls.push(current_img.sl);
         _css += current_img.sl + '{background-position:'
                 + (current_img.o_x + current_img.fit.x) + 'px '
-                + (current_img.o_y + current_img.fit.y) + 'px;}'
+                + (current_img.o_y + current_img.fit.y) + 'px}'
         //图片平铺到固定大小的大图上
         z_image.draw(Image(srcMap[current_img.url].getContent()), current_img.fit.x, current_img.fit.y);
     }
