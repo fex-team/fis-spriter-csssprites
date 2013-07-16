@@ -80,4 +80,4 @@ fis.config.merge({
     background: url(/img/icon/mul.jpg?m=z) no-repeat;
 }
 ```
-如上，`head_bg.png`会合并到`aio_x.png`(**aio.css对应图片**), `nav_bg.png`合并到`aio_y.png`, `add.jpg`和`mul.jpg`被合并到`aio_z.png`。
+如上，`head_bg.png`会合并到`aio_x.png`(aio.css对应图片), `nav_bg.png`合并到`aio_y.png`, `add.jpg`和`mul.jpg`被合并到`aio_z.png`。
