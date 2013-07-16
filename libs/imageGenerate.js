@@ -1,4 +1,4 @@
-var Image = require('images');
+var Image = require('node-images');
 //var C = require('node-pngcrush');
 var Pack = require('./pack.js');
 var margin;
