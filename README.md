@@ -1,16 +1,13 @@
-fis-spriter-csssprites
-=====================
+##fis-spriter-csssprites
 基于FIS的csssprites，通过FIS插件的方式对合并后的css进行csssprites处理。其支持`repeat-x, repeat-y, background-position`
 
-安装
-==
+###安装
 
 ```bash
-npm install -g fis-spriter-csssprites
+$ npm install -g fis-spriter-csssprites
 ```
 
-配置
-==
+###配置
 
 ```javascript
 fis.config.merge({
@@ -38,8 +35,7 @@ fis.config.merge({
 
 ```
 
-使用
-==
+###使用
 工具通过图片添加query识别图片是否需要做图片合并，具体
 
 <table>
@@ -61,7 +57,7 @@ fis.config.merge({
     </tr>
 </table>
 
-###实例
+###示例
 
 ```css
 .header {
