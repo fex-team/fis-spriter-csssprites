@@ -41,7 +41,7 @@ function getImage(img_release) {
 }
 
 /**
- * 收集
+ * 收集参数后的图片
  * @param image
  * @param cls
  * @param type
@@ -84,39 +84,54 @@ function genImageX(list) {
     }
     var max_width = 0,
         images = [],
-        total_height = 0;
+        total_height = 0,
+        parsed = [],
+        i, k, j, len, count;
+    for (i = 0, k = -1, len = list.length; i < len; i++) {
+        if (parsed.indexOf(list[i].image_url) == -1) {
+            parsed.push(list[i].image_url);
+            k++;
+            var img_src_info = getImage(list[i].image_url);
+            var img = Image(img_src_info.getContent());
+            var size = img.size();
+            images[k] = {
+                cls: [],
+                image: img,
+                width: size.width,
+                height: size.height
+            };
+            images[k].cls.push({
+                selector: list[i].selector,
+                position:list[i].position
+            });
 
-    for (var i = 0, len = list.length; i < len; i++) {
-        var img_src_info = getImage(list[i].image_url);
-        var img = Image(img_src_info.getContent());
-        var size = img.size();
-        images.push({
-            sl: list[i].selector,
-            image: img,
-            width: size.width,
-            height: size.height
-        });
-
-        if (size.width > max_width) {
-            max_width = size.width;
+            if (size.width > max_width) {
+                max_width = size.width;
+            }
+            total_height += size.height + margin;
+        } else {
+            images[k].cls.push({
+                selector: list[i].selector,
+                position:list[i].position
+            });
         }
-        total_height += size.height + margin;
     }
 
     var x_image = Image(max_width, total_height);
-
     var x = 0, y = 0, cls = [];
     for (i = 0, len = images.length; i < len; i++) {
         x_image.draw(images[i].image, x, y);
         //如果宽度小于最大宽度，则在X轴平铺当前图
         if (images[i].width < max_width) {
-            for (var k = 0, count = max_width / images[i].width; k < count; k++) {
+            for (k = 0, count = max_width / images[i].width; k < count; k++) {
                 x_image.draw(images[i].image, images[i].width * (k + 1), y);
             }
         }
-        _css += images[i].sl + '{background-position:' + -x + 'px '
-            + -y + 'px}';
-        cls.push(images[i].sl);
+        for (k = 0, count = images[i].cls.length; k < count; k++) {
+            _css += images[i].cls[k].selector + '{background-position:' + -(images[i].cls[k].position[0] + x) + 'px '
+                + -(images[i].cls[k].position[1] + y) + 'px}';
+            cls.push(images[i].cls[k].selector);
+        }
         y += images[i].height + margin;
     }
 
@@ -133,23 +148,38 @@ function genImageY(list) {
     }
     var max_height = 0,
         images = [],
-        total_width = 0;
+        total_width = 0,
+        parsed = [],
+        i, k, j, len, count;
 
-    for (var i = 0, len = list.length; i < len; i++) {
-        var img_src_info = getImage(list[i].image_url);
-        var img = Image(img_src_info.getContent());
-        var size = img.size();
-        images.push({
-            sl: list[i].selector,
-            image: img,
-            width: size.width,
-            height: size.height
-        });
+    for (i = 0, k = -1, len = list.length; i < len; i++) {
+        if (parsed.indexOf(list[i].image_url) == -1) {
+            parsed.push(list[i].image_url);
+            k++;
+            var img_src_info = getImage(list[i].image_url);
+            var img = Image(img_src_info.getContent());
+            var size = img.size();
+            images[k] = {
+                cls: [],
+                image: img,
+                width: size.width,
+                height: size.height
+            };
+            images[k].cls.push({
+                selector: list[i].selector,
+                position:list[i].position
+            });
 
-        if (size.width > max_height) {
-            max_height = size.height;
+            if (size.height > max_height) {
+                max_height = size.height;
+            }
+            total_width += size.width + margin;
+        } else {
+            images[k].cls.push({
+                selector: list[i].selector,
+                position:list[i].position
+            });
         }
-        total_width += size.width + margin;
     }
 
     var y_image = Image(total_width, max_height);
@@ -159,13 +189,15 @@ function genImageY(list) {
         y_image.draw(images[i].image, x, y);
         //如果高度小于最大高度，则在Y轴平铺当前图
         if (images[i].height < max_height) {
-            for (var k = 0, count = max_height / images[i].height; k < count; k++) {
+            for (k = 0, count = max_height / images[i].height; k < count; k++) {
                 y_image.draw(images[i].image, x, images[i].height * (k + 1));
             }
         }
-        _css += images[i].sl + '{background-position:' + -x + 'px '
-            + -y + 'px}';
-        cls.push(images[i].sl);
+        for (k = 0, count = images[i].cls.length; k < count; k++) {
+            _css += images[i].cls[k].selector + '{background-position:' + -(images[i].cls[k].position[0] + x) + 'px '
+                + -(images[i].cls[k].position[1] + y) + 'px}';
+            cls.push(images[i].cls[k].selector);
+        }
         x += images[i].width + margin;
     }
 
