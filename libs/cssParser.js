@@ -17,8 +17,8 @@ CssParser.parse = function (content) {
                 selector: selector,
                 position: [0, 0]
             };
-            var bg_reg = /(?:\/\*[\s\S]*?(?:\*\/|$))|\b(background(?:-image)?:)([\s\S]*?)\burl\s*\(\s*("(?:[^\\"\r\n\f]|\\[\s\S])*"|'(?:[^\\'\n\r\f]|\\[\s\S])*'|[^)}]+)\s*\)([\s\S]*?);?/gi;
-            var bg_pos_reg = /(left|top|\d+px|0)\s*(top|right|\d+px|0)(?:\s*;|\s*$)/;
+            var bg_reg = /(?:\/\*[\s\S]*?(?:\*\/|$))|\b(background(?:-image)?:)([\s\S]*?)\burl\s*\(\s*("(?:[^\\"\r\n\f]|\\[\s\S])*"|'(?:[^\\'\n\r\f]|\\[\s\S])*'|[^)}]+)\s*\)([\s\S]*?)$/gi;
+            var bg_pos_reg = /(left|top|-?\d+px|0)\s*(top|right|-?\d+px|0)(?:\s*;|\s*$)/;
             function _parsePosition(m, left, right) {
                 matchFlag = true;
                 var position = [];
