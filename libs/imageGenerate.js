@@ -160,7 +160,7 @@ function genImageY(list) {
         //如果高度小于最大高度，则在Y轴平铺当前图
         if (images[i].height < max_height) {
             for (var k = 0, count = max_height / images[i].height; k < count; k++) {
-                y_image.draw(images[i].image, images[i].height * (k + 1), y);
+                y_image.draw(images[i].image, x, images[i].height * (k + 1));
             }
         }
         _css += images[i].sl + '{background-position:' + -x + 'px '
