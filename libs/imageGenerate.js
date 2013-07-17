@@ -117,6 +117,8 @@ function genImageX(list) {
         }
     }
 
+    //减掉多加的一次margin
+    total_height -= margin;
     var x_image = Image(max_width, total_height);
     var x = 0, y = 0, cls = [];
     for (i = 0, len = images.length; i < len; i++) {
@@ -182,6 +184,8 @@ function genImageY(list) {
         }
     }
 
+    //减掉多加的一次margin
+    total_width -= margin;
     var y_image = Image(total_width, max_height);
 
     var x = 0, y = 0, cls = [];
