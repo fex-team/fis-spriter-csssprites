@@ -136,7 +136,6 @@ function genImageX(list) {
         }
         y += images[i].height + margin;
     }
-
     collect(x_image, cls, 'x');
 }
 

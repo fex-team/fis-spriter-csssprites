@@ -2,9 +2,10 @@
  * fis.baidu.com
  * @type {Function}
  */
-var CssParser = module.exports = {};
 
-var arrBackground = {};
+var
+    CssParser = module.exports = {}
+    , arrBackground = {};
 
 CssParser.parse = function (content) {
     arrBackground = {};
@@ -17,7 +18,7 @@ CssParser.parse = function (content) {
                 selector: selector,
                 position: [0, 0]
             };
-            var bg_reg = /(?:\/\*[\s\S]*?(?:\*\/|$))|\b(background(?:-image)?:)([\s\S]*?)\burl\s*\(\s*("(?:[^\\"\r\n\f]|\\[\s\S])*"|'(?:[^\\'\n\r\f]|\\[\s\S])*'|[^)}]+)\s*\)([\s\S]*?)$/gi;
+            var bg_reg = /(?:\/\*[\s\S]*?(?:\*\/|$))|\b(background(?:-image)?:)([\s\S]*?)\burl\s*\(\s*("(?:[^\\"\r\n\f]|\\[\s\S])*"|'(?:[^\\'\n\r\f]|\\[\s\S])*'|[^)}]+)\s*\)([\s\S]*?)(?:;|$)/gi;
             var bg_pos_reg = /(left|top|-?\d+px|0)\s*(top|right|-?\d+px|0)(?:\s*;|\s*$)/;
             function _parsePosition(m, left, right) {
                 matchFlag = true;
@@ -39,29 +40,30 @@ CssParser.parse = function (content) {
             }
             rules = rules.replace(bg_reg, function(bg_m, rule, pre, url, after) {
                 if (url) {
-                    matchFlag = true;
                     var info = fis.util.stringQuote(url);
                     var res;
                     BackgroundMap.image_url = fis.util.query(info.rest).rest;
                     if ((res = info.rest.match(/\?\s*m\s*=\s*(x|y|z)/i))) {
                         BackgroundMap.direction = res[1];
-                    }
-                    pre = !pre ? '' : pre.replace(bg_pos_reg, _parsePosition).trim();
-                    after = !after ? '': after.replace(bg_pos_reg, _parsePosition).trim();
-                    bg_m = rule + pre + after;
-                    if (!pre && !after) {
-                        bg_m = '';
+                        matchFlag = true;
+                        pre = !pre ? '' : pre.replace(bg_pos_reg, _parsePosition).trim();
+                        after = !after ? '': after.replace(bg_pos_reg, _parsePosition).trim();
+                        bg_m = rule + pre + after;
+                        if (!pre && !after) {
+                            bg_m = '';
+                        }
                     }
                 }
                 return bg_m;
-            }).replace(/\bbackground-position:\s*([\s\S]+;|$)/g, function(m, val) {
-                if (val) {
-                    m = val.replace(bg_pos_reg, _parsePosition);
-                }
-                return m;
             });
-            //收集
             if (matchFlag) {
+                rules = rules.replace(/\bbackground-position:\s*([\s\S]+;|$)/g, function(m, val) {
+                    if (val) {
+                        m = val.replace(bg_pos_reg, _parsePosition);
+                    }
+                    return m;
+                });
+
                 if (arrBackground[selector]) {
                     arrBackground[selector] = fis.util.merge(arrBackground[selector], BackgroundMap);
                 } else {
