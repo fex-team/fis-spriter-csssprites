@@ -1,0 +1,24 @@
+/**
+ * url, position写在一起的情况
+ */
+.icon_x_a {
+}
+
+.icon_y_b {
+}
+
+/**
+ * background
+ */
+.icon_z_c1 {
+}
+
+.icon_z_c2 {
+}
+/**
+ * 不带query的情况
+ */
+.icon_x_empty {
+    background-image: url('img/empty.jpeg');
+}
+

@@ -5,6 +5,13 @@ var assert = require('chai').assert
     , gen = require('../../libs/imageGenerate.js')
     , __root = __dirname + '/imageGenerate/'
 
+function __replace(cont) {
+    return cont.replace(/[\r\n ]/g, function(m) {
+        return '';
+    });
+}
+
+
 PROJECT_ROOT = __root;
 //init env
 fis.project.setProjectRoot(__root);
@@ -28,6 +35,6 @@ fis.release({
 }, function (ret) {
     fis.util.map(css, function(k, info) {
         var expect_f = fis.file.wrap(info.path);
-        expect(ret.pkg[k].getContent()).to.is.equal(expect_f.getContent());
+        expect(__replace(ret.pkg[k].getContent())).to.is.equal(__replace(expect_f.getContent()));
     });
 });

@@ -6,14 +6,8 @@
     background-position: 10px 0px;
 }
 
-/**
- * url, position分开写的情况
- */
 .icon_y_b {
     background-image: url('img/b.png?m=y');
-}
-
-.icon_y_b {
     background-position: 10px -2px;
 }
 

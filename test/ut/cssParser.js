@@ -2,7 +2,8 @@ var assert = require('chai').assert
     , expect = require('chai').expect
     , fs = require('fs')
     , fis = require('fis')
-    , parser = require('../../libs/cssParser.js');
+    , parser = require('../../libs/cssParser.js')
+    , __root = __dirname + '/cssParser/';
 
 //tests
 var files = {
@@ -13,11 +14,6 @@ var files = {
                     position: [ 0, 0 ],
                     image_url: 'img/a.png',
                     direction: 'x'
-                },
-            '.icon_x_empty':
-                { selector: '.icon_x_empty',
-                    position: [ 0, 0 ],
-                    image_url: 'img/empty.jpeg'
                 }
         }
     },
@@ -28,11 +24,6 @@ var files = {
                     position: [ 0, 0 ],
                     image_url: 'img/a.png',
                     direction: 'x'
-                },
-            '.icon_x_empty':
-                { selector: '.icon_x_empty',
-                    position: [ 0, 0 ],
-                    image_url: 'img/empty.jpeg'
                 }
         }
     },
@@ -61,26 +52,31 @@ var files = {
                     position: [10, -12],
                     image_url: 'img/c2.png',
                     direction: 'z'
-                },
-            '.icon_x_empty':
-                { selector: '.icon_x_empty',
-                    position: [ 0, 0 ],
-                    image_url: 'img/empty.jpeg'
                 }
         }
     }
 };
 
+function __replace(cont) {
+    return cont.replace(/[\r\n ]/g, function(m) {
+        return '';
+    });
+}
+
 for (var file in files) {
     if (!files.hasOwnProperty(file)) {
         continue;
     }
-    var cont = fs.readFileSync('cssParser/src/' + file, {
+    var cont = fs.readFileSync(__root + 'src/' + file, {
         encoding: 'utf-8'
     });
 
-    parser.parse(cont);
+    var active_cont = parser.parse(cont);
     var map = parser.getBGMap();
-    expect(map).to.be.a('object');
-    expect(map).to.deep.equal(files[file].map);
+    expect(map, file).to.be.a('object');
+    expect(map, file).to.deep.equal(files[file].map);
+
+    //比较替换后的内容
+    var expect_cont = fs.readFileSync(__root + '/expect/' + file, {encoding: 'utf-8'});
+    expect(__replace(active_cont), file).to.equal(__replace(expect_cont));
 }
