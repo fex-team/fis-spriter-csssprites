@@ -7,7 +7,7 @@
 }
 
 .icon_y_b {
-    background-image: url('img/b.png?m=y');
+    background-image: url('img/b.png?__sprites');
     background-position: 10px -2px;
 }
 
@@ -15,11 +15,11 @@
  * background
  */
 .icon_z_c1 {
-    background: 10px -12px url('img/c1.png?m=z');
+    background: 10px -12px url('img/c1.png?__sprites');
 }
 
 .icon_z_c2 {
-    background: url('img/c2.png?m=z') 10px -12px ;
+    background: url('img/c2.png?__sprites') 10px -12px ;
 }
 /**
  * 不带query的情况

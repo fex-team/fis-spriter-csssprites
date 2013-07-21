@@ -20,10 +20,10 @@ var CssSprite = module.exports = function(ret, conf, settings, opt) {
     //对打包后的css做csssprite
     fis.util.map(ret.pkg, function (subpath, file) {
         if (file.rExt == '.css') {
-            var content = cssParser.parse(file.getContent(), ret.pkg, conf);
-            var bgMap = cssParser.getBGMap();
-            if (!isEmpty(bgMap)) {
-                imgGen.create(file, bgMap, ret, conf, settings, opt);
+            var res = cssParser(file.getContent());
+            content = res.content;
+            if (res.map && res.map.length > 0) {
+                imgGen.create(file, res.map, ret, conf, settings, opt);
                 content = content + imgGen.css();
             }
             file.setContent(content);

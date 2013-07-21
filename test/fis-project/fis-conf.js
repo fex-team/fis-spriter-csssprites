@@ -1,8 +1,8 @@
 
 fis.config.merge({
-    namespace: 'csssprite',
+    namespace: 'csssprites',
     modules: {
-        spriter: 'csssprite'
+        spriter: 'csssprites'
     },
     pack: {
         '/aio.css': '**.css'

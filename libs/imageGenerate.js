@@ -56,16 +56,16 @@ function collect(image, cls, type) {
     _css += cls.join(',') + '{background-image: url(' + image_file.getUrl(_opt.hash, _opt.domain) + ')}';
 }
 
-function factory(bgMap) {
+function factory(map) {
     var list_x = [];
     var list_y = [];
     var list_z = [];
-    fis.util.map(bgMap, function (k, bg) {
-        if (bg.direction === 'x') {
+    fis.util.map(map, function (k, bg) {
+        if (bg.getDirect() === 'x') {
             list_x.push(bg);
-        } else if (bg.direction === 'y') {
+        } else if (bg.getDirect() === 'y') {
             list_y.push(bg);
-        } else if (bg.direction === 'z') {
+        } else if (bg.getDirect() === 'z') {
             list_z.push(bg);
         }
     });
@@ -88,10 +88,10 @@ function genImageX(list) {
         parsed = [],
         i, k, j, len, count;
     for (i = 0, k = -1, len = list.length; i < len; i++) {
-        if (parsed.indexOf(list[i].image_url) == -1) {
-            parsed.push(list[i].image_url);
+        if (parsed.indexOf(list[i].getImageUrl()) == -1) {
+            parsed.push(list[i].getImageUrl());
             k++;
-            var img_src_info = getImage(list[i].image_url);
+            var img_src_info = getImage(list[i].getImageUrl());
             var img = Image(img_src_info.getContent());
             var size = img.size();
             images[k] = {
@@ -101,8 +101,8 @@ function genImageX(list) {
                 height: size.height
             };
             images[k].cls.push({
-                selector: list[i].selector,
-                position:list[i].position
+                selector: list[i].getId(),
+                position:list[i].getPosition()
             });
 
             if (size.width > max_width) {
@@ -111,8 +111,8 @@ function genImageX(list) {
             total_height += size.height + margin;
         } else {
             images[k].cls.push({
-                selector: list[i].selector,
-                position:list[i].position
+                selector: list[i].getId(),
+                position:list[i].getPosition()
             });
         }
     }
@@ -154,10 +154,10 @@ function genImageY(list) {
         i, k, j, len, count;
 
     for (i = 0, k = -1, len = list.length; i < len; i++) {
-        if (parsed.indexOf(list[i].image_url) == -1) {
-            parsed.push(list[i].image_url);
+        if (parsed.indexOf(list[i].getImageUrl()) == -1) {
+            parsed.push(list[i].getImageUrl());
             k++;
-            var img_src_info = getImage(list[i].image_url);
+            var img_src_info = getImage(list[i].getImageUrl());
             var img = Image(img_src_info.getContent());
             var size = img.size();
             images[k] = {
@@ -167,8 +167,8 @@ function genImageY(list) {
                 height: size.height
             };
             images[k].cls.push({
-                selector: list[i].selector,
-                position:list[i].position
+                selector: list[i].getId(),
+                position:list[i].getPosition()
             });
 
             if (size.height > max_height) {
@@ -177,8 +177,8 @@ function genImageY(list) {
             total_width += size.width + margin;
         } else {
             images[k].cls.push({
-                selector: list[i].selector,
-                position:list[i].position
+                selector: list[i].getId(),
+                position:list[i].getPosition()
             });
         }
     }
@@ -219,15 +219,15 @@ function genImageZ(list) {
     var blocks = [];
     for (i = 0; i < len; i++) {
         var bg = list[i];
-        if (parsed.indexOf(bg.image_url) != -1) {
+        if (parsed.indexOf(bg.getImageUrl()) != -1) {
             continue;
         }
-        parsed.push(bg.image_url);
-        var img_src_info = getImage(bg.image_url);
+        parsed.push(bg.getImageUrl());
+        var img_src_info = getImage(bg.getImageUrl());
         var img = Image(img_src_info.getContent()).size();
         blocks.push(
             {
-                id: bg.image_url, //图片subpath
+                id: bg.getImageUrl(),
                 url: img_src_info.subpath,
                 w: img.width + margin, //宽
                 h: img.height + margin //高
@@ -244,19 +244,20 @@ function genImageZ(list) {
     for (i = 0, len = list.length; i < len; i++) {
         var current = list[i];
         for (var j = 0, l = blocks.length; j < l; j++) {
-            if (current.image_url == blocks[j].id) {
+            if (current.getImageUrl() == blocks[j].id) {
+                console.log(current.getPosition());
                 current_img = blocks[j];
-                current_img.sl = current.selector;
-                current_img.o_x = current.position[0];
-                current_img.o_y = current.position[1];
+                current_img.sl = current.getId();
+                current_img.o_x = (current.getPosition())[0];
+                current_img.o_y = (current.getPosition())[1];
             }
         }
         cls.push(current_img.sl);
         _css += current_img.sl + '{background-position:'
                 + -(current_img.o_x + current_img.fit.x) + 'px '
                 + -(current_img.o_y + current_img.fit.y) + 'px}'
-        if (parsed.indexOf(current.image_url) == -1) {
-            parsed.push(current.image_url);
+        if (parsed.indexOf(current.getImageUrl()) == -1) {
+            parsed.push(current.getImageUrl());
             //图片平铺到固定大小的大图上
             z_image.draw(Image(srcMap[current_img.url].getContent()), current_img.fit.x, current_img.fit.y);
         }
