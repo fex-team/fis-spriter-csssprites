@@ -10,7 +10,7 @@ var Rules = Object.derive(function (id, css) {
     var self = this
         , _ = fis.util
         , __background_import_re = /!import/i
-        , __background_re = /(?:\/\*[\s\S]*?(?:\*\/|$))|\bbackground(?:-image)?:([\s\S]*?)(?:;|$)|background-position:([\s\S]*?)(?:;|$)/gi
+        , __background_re = /(?:\/\*[\s\S]*?(?:\*\/|$))|\bbackground(?:-image)?:([\s\S]*?)(?:;|$)|background-position:([\s\S]*?)(?:;|$)|background-repeat:([\s\S]*?)(?:;|$)/gi
         , __image_url_re = /url\s*\(\s*("(?:[^\\"\r\n\f]|\\[\s\S])*"|'(?:[^\\'\n\r\f]|\\[\s\S])*'|[^)}]+)\s*\)/i
         , __support_position_re = /(0|(?:-)?\d+px)\s*(0|(?:-)?\d+px)/i
         , __repeat_re = /\brepeat-(x|y)/i
@@ -25,7 +25,7 @@ var Rules = Object.derive(function (id, css) {
     self._direct = 'z';
     self._have_position = false;
     self._css = css.replace(__background_re,
-        function(m, image, position) {
+        function(m, image, position, repeat) {
             var res, info;
             if (image) {
                 //get the url of image
@@ -42,9 +42,7 @@ var Rules = Object.derive(function (id, css) {
                 res = image.match(__repeat_re);
                 if (res) {
                     self._repeat = true;
-                    if (res[1]) {
-                        self._direct = res[1].trim()
-                    }
+                    self._direct = res[1].trim()
                 }
                 //if set position then get it.
                 res = image.match(__support_position_re);
@@ -61,6 +59,14 @@ var Rules = Object.derive(function (id, css) {
                     self._have_position = true;
                     self._position[0] = parseFloat(res[1]);
                     self._position[1] = parseFloat(res[2]);
+                }
+            }
+            //background-repeat
+            if (repeat) {
+                res = repeat.match(__repeat_re);
+                if (res) {
+                    self._repeat = true;
+                    self._direct = res[1];
                 }
             }
             return __sprites_hook_ld + m + __sprites_hook_rd;
