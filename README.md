@@ -44,16 +44,8 @@ fis.config.merge({
         <th>说明</th>
     </tr>
     <tr>
-        <td>?m=x</td>
-        <td>图片需要repeat-x时，通过?m=x来标识</td>
-    </tr>
-    <tr>
-        <td>?m=y</td>
-        <td>图片需要repeat-y时，通过?m=y来标识</td>
-    </tr>
-    <tr>
-        <td>?m=z</td>
-        <td>图片不需要任何重复时，通过?m=z来标识</td>
+        <td>?__sprites</td>
+        <td>标识图片要做合并</td>
     </tr>
 </table>
 
@@ -61,19 +53,19 @@ fis.config.merge({
 
 ```css
 .header {
-    background: url(/img/head_bg.png?m=x) repeat-x;
+    background: url(/img/head_bg.png?__sprites) repeat-x;
 }
 
 .nav {
-    background: url(/img/nav_bg.png?m=y) repeat-y;
+    background: url(/img/nav_bg.png?__sprites) repeat-y;
 }
 
 .icon_add {
-    background: url(/img/icon/add.jpg?m=z) no-repeat;
+    background: url(/img/icon/add.jpg?__sprites);
 }
 
 .icon_mul {
-    background: url(/img/icon/mul.jpg?m=z) no-repeat;
+    background: url(/img/icon/mul.jpg?__sprites) no-repeat;
 }
 ```
 如上，`head_bg.png`会合并到`aio_x.png`(aio.css对应图片), `nav_bg.png`合并到`aio_y.png`, `add.jpg`和`mul.jpg`被合并到`aio_z.png`。
