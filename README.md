@@ -15,6 +15,11 @@ fis.config.merge({
     modules: {
         spriter: 'csssprites'
     },
+    pack: {
+        'aio.css': [
+            '**.css'
+        ]
+    },
     settings: {
         spriter: {
             csssprites: {
@@ -44,19 +49,19 @@ fis.config.merge({
 
 ```css
 .header {
-    background: url(/img/head_bg.png?__sprites) repeat-x;
+    background: url(/img/head_bg.png?__sprite) repeat-x;
 }
 
 .nav {
-    background: url(/img/nav_bg.png?__sprites) repeat-y;
+    background: url(/img/nav_bg.png?__sprite) repeat-y;
 }
 
 .icon_add {
-    background: url(/img/icon/add.jpg?__sprites);
+    background: url(/img/icon/add.jpg?__sprite);
 }
 
 .icon_mul {
-    background: url(/img/icon/mul.jpg?__sprites) no-repeat;
+    background: url(/img/icon/mul.jpg?__sprite) no-repeat;
 }
 ```
 如上，`head_bg.png`会合并到`aio_x.png`(aio.css对应图片), `nav_bg.png`合并到`aio_y.png`, `add.jpg`和`mul.jpg`被合并到`aio_z.png`。
