@@ -6,7 +6,7 @@
 'use strict';
 
 var Rules = require('./css/rules.js');
- module.exports = function (content) {
+module.exports = function (content) {
     var _arr_css = []
         , _content;
     var reg = /(?:\/\*[\s\S]*?(?:\*\/|$))|([^\{\}\/]*)\{([^\{\}]*)\}/gi;
