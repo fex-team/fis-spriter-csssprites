@@ -245,7 +245,6 @@ function genImageZ(list) {
         var current = list[i];
         for (var j = 0, l = blocks.length; j < l; j++) {
             if (current.getImageUrl() == blocks[j].id) {
-                console.log(current.getPosition());
                 current_img = blocks[j];
                 current_img.sl = current.getId();
                 current_img.o_x = (current.getPosition())[0];
