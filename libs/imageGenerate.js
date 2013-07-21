@@ -45,7 +45,7 @@ function getImage(img_release) {
 }
 
 /**
- * 收集参数后的图片
+ * 收集产出后的图片
  * @param image
  * @param cls
  * @param type
