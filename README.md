@@ -40,7 +40,7 @@ fis.config.merge({
         <th>说明</th>
     </tr>
     <tr>
-        <td>?__sprites</td>
+        <td>?__sprite</td>
         <td>标识图片要做合并</td>
     </tr>
 </table>
