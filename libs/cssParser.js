@@ -3,6 +3,8 @@
  * @type {Function}
  */
 
+'use strict';
+
 var Rules = require('./css/rules.js');
  module.exports = function (content) {
     var _arr_css = []

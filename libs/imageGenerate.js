@@ -1,3 +1,10 @@
+/**
+ * fis.baidu.com
+ * @type {Function}
+ */
+
+'use strict';
+
 var Image = require('node-images');
 //var C = require('node-pngcrush');
 var Pack = require('./pack.js');
