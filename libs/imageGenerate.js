@@ -17,16 +17,13 @@ var _css = '';  //合并图片后产出的css片段
  * @param settings
  * @param opt
  */
-ImageGen.create = function(file, bgMap, ret, conf, settings, opt) {
+module.exports = function(file, bgMap, ret, conf, settings, opt) {
     _file = file;
     margin = settings.margin ? parseFloat(settings.margin) : 0; //margin
     srcMap = ret.src;
     pkgMap = ret.pkg;
     _opt = opt;
     factory(bgMap);
-};
-
-ImageGen.css = function() {
     return _css;
 };
 

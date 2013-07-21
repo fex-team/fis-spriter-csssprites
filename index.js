@@ -23,8 +23,8 @@ var CssSprite = module.exports = function(ret, conf, settings, opt) {
             var res = cssParser(file.getContent());
             content = res.content;
             if (res.map && res.map.length > 0) {
-                imgGen.create(file, res.map, ret, conf, settings, opt);
-                content = content + imgGen.css();
+                var css = imgGen(file, res.map, ret, conf, settings, opt);
+                content = content + css;
             }
             file.setContent(content);
         }
