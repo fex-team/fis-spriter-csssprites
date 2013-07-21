@@ -26,7 +26,7 @@ var Rules = Object.derive(function (id, css) {
     self._have_position = false;
     self._css = css.replace(__background_re,
         function(m, image, position, repeat) {
-            var res, info;
+            var res, info, ret;
             if (image) {
                 //get the url of image
                 res = image.match(__image_url_re);
@@ -69,7 +69,11 @@ var Rules = Object.derive(function (id, css) {
                     self._direct = res[1];
                 }
             }
-            return __sprites_hook_ld + m + __sprites_hook_rd;
+            ret = m;
+            if (self._is_sprites) {
+                ret = __sprites_hook_ld + m + __sprites_hook_rd;
+            }
+            return ret;
         }
     );
 }, {
