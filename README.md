@@ -13,18 +13,9 @@ $ npm install -g fis-spriter-csssprites
 fis.config.merge({
     namespace: 'demo',
     modules: {
-        spriter: 'csssprites' 
-    },
-    pack: {
-        'aio.css': [
-            '**.css'
-        ]
+        spriter: 'csssprites'
     },
     settings: {
-        smarty: {
-            left_delimiter: '{%',
-            right_delimiter: '%}',
-        },
         spriter: {
             csssprites: {
                 margin: 10
