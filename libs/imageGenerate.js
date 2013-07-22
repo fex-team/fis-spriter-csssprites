@@ -238,13 +238,16 @@ function genImageZ(list) {
             }
         );
     }
+    //高度从大到小排序
+    blocks.sort(function(a, b) {
+        return -(a.h - b.h);
+    });
     Pack.fit(blocks);
     //获取计算得到的合并图大小
     var root = Pack.getRoot();
     var z_image = Image(root.w - margin, root.h - margin);
     var cls = [], current_img;
     parsed = [];
-
     for (i = 0, len = list.length; i < len; i++) {
         var current = list[i];
         for (var j = 0, l = blocks.length; j < l; j++) {
