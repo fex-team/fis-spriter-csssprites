@@ -6,39 +6,37 @@
 'use strict';
 
 var Image = require('node-images');
-//var C = require('node-pngcrush');
 var Pack = require('./pack.js');
-var margin;
 
-var ImageGen = module.exports = {};
-var srcMap, pkgMap, _opt;
-var _file; //当前处理css文件
-var _css = '';  //合并图片后产出的css片段
+var margin;
+var g_file;
+var g_ret;
+var g_css;
+var g_opt;
 
 /**
  * 生成图片
  * @param file  当前处理css文件
- * @param bgMap 获取到的图片信息列表
+ * @param image_map 获取到的图片信息列表
  * @param ret   资源列表，其中包含各个图片的详细信息
  * @param conf
  * @param settings
  * @param opt
  */
-module.exports = function(file, bgMap, ret, conf, settings, opt) {
-    _file = file;
+module.exports = function(file, image_map, ret, conf, settings, opt) {
+    g_file= file;
+    g_ret = ret;
+    g_opt = conf;
     margin = settings.margin ? parseFloat(settings.margin) : 0; //margin
-    srcMap = ret.src;
-    pkgMap = ret.pkg;
-    _opt = opt;
-    factory(bgMap);
-    return _css;
+    factory(image_map);
+    return g_css;
 };
 
 function getImage(img_release) {
     var i;
-    for (i in srcMap) {
-        if (srcMap.hasOwnProperty(i) && srcMap[i].getUrl(_opt.hash, _opt.domain) == img_release) {
-            return srcMap[i];
+    for (i in g_ret.src) {
+        if (g_ret.src.hasOwnProperty(i) && g_ret.src[i].getUrl(g_opt.hash, g_opt.domain) == img_release) {
+            return g_ret.src[i];
         }
     }
     return false;
@@ -52,12 +50,11 @@ function getImage(img_release) {
  */
 function collect(image, cls, type) {
     var ext = '_' + type + '.png';
-    var image_file = fis.file.wrap(_file.realpathNoExt + ext);
-    //image_file.setContent(C.option('-v -bit_depth 8 -brute -rem alla -reduce').compress(image.encode('png')));
+    var image_file = fis.file.wrap(g_file.realpathNoExt + ext);
     image_file.setContent(image.encode('png'));
     image_file.compiled = true;
-    pkgMap[_file.subpathNoExt + ext] = image_file;
-    _css += cls.join(',') + '{background-image: url(' + image_file.getUrl(_opt.hash, _opt.domain) + ')}';
+    g_ret.pkg[g_file.subpathNoExt + ext] = image_file;
+    g_css += cls.join(',') + '{background-image: url(' + image_file.getUrl(g_opt.hash, g_opt.domain) + ')}';
 }
 
 function factory(map) {
@@ -134,7 +131,7 @@ function genImageX(list) {
             }
         }
         for (k = 0, count = images[i].cls.length; k < count; k++) {
-            _css += images[i].cls[k].selector + '{background-position:' + -(images[i].cls[k].position[0] + x) + 'px '
+            g_css += images[i].cls[k].selector + '{background-position:' + -(images[i].cls[k].position[0] + x) + 'px '
                 + -(images[i].cls[k].position[1] + y) + 'px}';
             cls.push(images[i].cls[k].selector);
         }
@@ -201,7 +198,7 @@ function genImageY(list) {
             }
         }
         for (k = 0, count = images[i].cls.length; k < count; k++) {
-            _css += images[i].cls[k].selector + '{background-position:' + -(images[i].cls[k].position[0] + x) + 'px '
+            g_css += images[i].cls[k].selector + '{background-position:' + -(images[i].cls[k].position[0] + x) + 'px '
                 + -(images[i].cls[k].position[1] + y) + 'px}';
             cls.push(images[i].cls[k].selector);
         }
@@ -259,13 +256,13 @@ function genImageZ(list) {
             }
         }
         cls.push(current_img.sl);
-        _css += current_img.sl + '{background-position:'
+        g_css += current_img.sl + '{background-position:'
                 + -(current_img.o_x + current_img.fit.x) + 'px '
                 + -(current_img.o_y + current_img.fit.y) + 'px}'
         if (parsed.indexOf(current.getImageUrl()) == -1) {
             parsed.push(current.getImageUrl());
             //图片平铺到固定大小的大图上
-            z_image.draw(Image(srcMap[current_img.url].getContent()), current_img.fit.x, current_img.fit.y);
+            z_image.draw(Image(g_ret.src[current_img.url].getContent()), current_img.fit.x, current_img.fit.y);
         }
     }
     collect(z_image, cls, 'z');
