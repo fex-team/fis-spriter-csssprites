@@ -131,7 +131,7 @@ function genImageX(list) {
             }
         }
         for (k = 0, count = images[i].cls.length; k < count; k++) {
-            g_css += images[i].cls[k].selector + '{background-position:' + -(images[i].cls[k].position[0] + x) + 'px '
+            g_css += images[i].cls[k].selector + '{background-repeat:repeat-x;background-position:' + -(images[i].cls[k].position[0] + x) + 'px '
                 + -(images[i].cls[k].position[1] + y) + 'px}';
             cls.push(images[i].cls[k].selector);
         }
@@ -198,7 +198,7 @@ function genImageY(list) {
             }
         }
         for (k = 0, count = images[i].cls.length; k < count; k++) {
-            g_css += images[i].cls[k].selector + '{background-position:' + -(images[i].cls[k].position[0] + x) + 'px '
+            g_css += images[i].cls[k].selector + '{background-repeat:repeat-y;background-position:' + -(images[i].cls[k].position[0] + x) + 'px '
                 + -(images[i].cls[k].position[1] + y) + 'px}';
             cls.push(images[i].cls[k].selector);
         }
@@ -256,7 +256,7 @@ function genImageZ(list) {
             }
         }
         cls.push(current_img.sl);
-        g_css += current_img.sl + '{background-position:'
+        g_css += current_img.sl + '{background-repeat:no-repeat;background-position:'
                 + -(current_img.o_x + current_img.fit.x) + 'px '
                 + -(current_img.o_y + current_img.fit.y) + 'px}'
         if (parsed.indexOf(current.getImageUrl()) == -1) {
