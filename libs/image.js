@@ -72,6 +72,7 @@ Generator.prototype = {
         }
         var max = 0,
             images = [],
+            //宽度或者高的和
             total = 0,
             parsed = [],
             i, k, j, len, count, op_max;
@@ -120,12 +121,14 @@ Generator.prototype = {
         var x = 0, y = 0, cls = [];
         for (i = 0, len = images.length; i < len; i++) {
             image.draw(images[i].image, x, y);
-            //如果高度小于最大高度，则在Y轴平铺当前图
+
             if (direct == 'y' && images[i].height < max) {
+                //如果高度小于最大高度，则在Y轴平铺当前图
                 for (k = 0, count = max / images[i].height; k < count; k++) {
                     image.draw(images[i].image, x, images[i].height * (k + 1));
                 }
             } else if (direct == 'x' && images[i].width < max) {
+                //如果宽度小于最大宽度，则在X轴方向平铺当前图
                 for (k = 0, count = max / images[i].width; k < count; k++) {
                     image.draw(images[i].image, images[i].width * (k + 1), y);
                 }
