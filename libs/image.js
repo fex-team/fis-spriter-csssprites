@@ -120,8 +120,8 @@ Generator.prototype = {
             }
             for (k = 0, count = images[i].cls.length; k < count; k++) {
                 this.css += images[i].cls[k].selector + '{background-position:'
-                    + -(images[i].cls[k].position[0] + x) + 'px '
-                    + -(images[i].cls[k].position[1] + y) + 'px}';
+                    + (images[i].cls[k].position[0] + -x) + 'px '
+                    + (images[i].cls[k].position[1] + -y) + 'px}';
                 cls.push(images[i].cls[k].selector);
             }
             x += images[i].width + this.settings.margin;
