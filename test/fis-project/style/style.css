@@ -1,1 +1,4 @@
-@import url(./icon.css?__inline);
+@import url(./icon.css);
+@import url('./background-no-repeat.css');
+@import url('./background-x.css');
+@import url('./background-y.css');

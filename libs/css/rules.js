@@ -21,8 +21,9 @@ var Rules = Object.derive(function (id, css) {
     self.id = id;
     //use image url
     self.image = '';
-    self._position = [0, 0];
     self.repeat = false;
+
+    self._position = [0, 0];
     //image has __sprite query ?
     self._is_sprites = false;
     //x,y,z
@@ -67,7 +68,7 @@ var Rules = Object.derive(function (id, css) {
                 //judge repeat-x or repeat-y
                 res = image.match(__repeat_re);
                 if (res) {
-                    self._repeat = true;
+                    self.repeat = res[1].trim();
                     self._direct = res[1].trim()
                 }
                 //if set position then get it.
@@ -86,7 +87,7 @@ var Rules = Object.derive(function (id, css) {
             if (repeat) {
                 res = repeat.match(__repeat_re);
                 if (res) {
-                    self._repeat = true;
+                    self.repeat = res[1].trim();
                     self._direct = res[1];
                 }
             }
@@ -107,7 +108,7 @@ var Rules = Object.derive(function (id, css) {
         if (this.isSprites()) {
             ret = ret.replace(__sprites_hook_re, '');
             if (this.repeat) {
-                ret += 'background-repeat: repeat-' + this.repeat();
+                ret += 'background-repeat: repeat-' + this.repeat;
             } else {
                 ret += 'background-repeat: no-repeat;';
             }

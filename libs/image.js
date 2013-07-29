@@ -96,7 +96,7 @@ Generator.prototype = {
                 if (op_max > max) {
                     max = op_max;
                 }
-                total += op_max + this.settings.margin;
+                total += (direct == 'x' ? size.height : size.width) + this.settings.margin;
             } else {
                 images[k].cls.push({
                     selector: list[i].getId(),
@@ -107,7 +107,9 @@ Generator.prototype = {
 
         //减掉多加的一次margin
         total -= this.settings.margin;
-        var image = Image(total, max);
+        var height = direct == 'x' ? total : max;
+        var width = direct == 'x' ? max : total;
+        var image = Image(width, height);
 
         var x = 0, y = 0, cls = [];
         for (i = 0, len = images.length; i < len; i++) {
