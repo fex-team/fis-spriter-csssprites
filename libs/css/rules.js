@@ -106,12 +106,16 @@ var Rules = Object.derive(function (id, css) {
             , ret = this._css;
         //if use sprites, replace background-image + background-position to space;
         if (this.isSprites()) {
-            ret = ret.replace(__sprites_hook_re, '');
+            ret = ret.replace(__sprites_hook_re, '').trim();
             //压缩会去掉最后一个;所以最前面加一个;
+            var pre_pad = '';
+            if (ret.length > 0 && ret.charAt(ret.length - 1) != ';') {
+                pre_pad = ';';
+            }
             if (this.repeat) {
-                ret += ';background-repeat: repeat-' + this.repeat;
+                ret += pre_pad + 'background-repeat: repeat-' + this.repeat;
             } else {
-                ret += ';background-repeat: no-repeat;';
+                ret += pre_pad + 'background-repeat: no-repeat;';
             }
         }
         return ret;
