@@ -12,18 +12,44 @@ var Rules = Object.derive(function (id, css) {
         , __background_import_re = /!import/i
         , __background_re = /(?:\/\*[\s\S]*?(?:\*\/|$))|\bbackground(?:-image)?:([\s\S]*?)(?:;|$)|background-position:([\s\S]*?)(?:;|$)|background-repeat:([\s\S]*?)(?:;|$)/gi
         , __image_url_re = /url\s*\(\s*("(?:[^\\"\r\n\f]|\\[\s\S])*"|'(?:[^\\'\n\r\f]|\\[\s\S])*'|[^)}]+)\s*\)/i
-        , __support_position_re = /(0|(?:-)?\d+px)\s*(0|(?:-)?\d+px)/i
+        , __support_position_re = /(0|[+-]?(?:\d*\.|)\d+px|left)\s*(0|[+-]?(?:\d*\.|)\d+px|top)/i
         , __repeat_re = /\brepeat-(x|y)/i
         , __sprites_re = /\?__sprite/i
         , __sprites_hook_ld = '<<<'
         , __sprites_hook_rd = '>>>';
-    self._id = id;
-    self._image = '';
+    //selectors
+    self.id = id;
+    //use image url
+    self.image = '';
     self._position = [0, 0];
-    self._repeat = false;
+    self.repeat = false;
+    //image has __sprite query ?
     self._is_sprites = false;
+    //x,y,z
     self._direct = 'z';
+    //left or right
+    self._type = null;
     self._have_position = false;
+
+    /**
+     * get position
+     * @param res
+     * @private
+     */
+    function _get_position(res) {
+        if (!res[1] || !res[2]) {
+            return;
+        }
+        self._have_position = true;
+        if (['left', 'right'].indexOf(res[1]) != -1) {
+            self._type = res[1];
+            self._position[0] = res[1];
+        } else {
+            self._position[0] = parseFloat(res[1]);
+        }
+        self._position[1] = res[2] === 'top' ? 0 : parseFloat(res[2]);
+    }
+
     self._css = css.replace(__background_re,
         function(m, image, position, repeat) {
             var res, info;
@@ -33,7 +59,7 @@ var Rules = Object.derive(function (id, css) {
                 if (res && res[1]) {
                     info = _.stringQuote(res[1]);
                     info = _.query(info.rest);
-                    self._image = info.rest;
+                    self.image = info.rest;
                     if (info.query && __sprites_re.test(info.query)) {
                         self._is_sprites = true;
                     }
@@ -47,18 +73,14 @@ var Rules = Object.derive(function (id, css) {
                 //if set position then get it.
                 res = image.match(__support_position_re);
                 if (res) {
-                    self._have_position = true;
-                    self._position[0] = parseFloat(res[1]);
-                    self._position[1] = parseFloat(res[2]);
+                    _get_position(res);
                 }
             }
             if (position) {
                 //if use background-position, get it.
                 res = position.match(__support_position_re);
                 if (res) {
-                    self._have_position = true;
-                    self._position[0] = parseFloat(res[1]);
-                    self._position[1] = parseFloat(res[2]);
+                    _get_position(res);
                 }
             }
             if (repeat) {
@@ -73,19 +95,21 @@ var Rules = Object.derive(function (id, css) {
     );
 }, {
     getId: function() {
-        return this._id;
+        return this.id;
     },
     getImageUrl: function() {
-        return this._image;
+        return this.image;
     },
     getCss: function() {
-        var __sprites_hook_re = /<<<[\s\S]*?>>>/
+        var __sprites_hook_re = /<<<[\s\S]*?>>>/g
             , ret = this._css;
         //if use sprites, replace background-image + background-position to space;
         if (this.isSprites()) {
             ret = ret.replace(__sprites_hook_re, '');
-            if (this.getRepeat()) {
-                ret += 'background-repeat: repeat-' + this.getRepeat();
+            if (this.repeat) {
+                ret += 'background-repeat: repeat-' + this.repeat();
+            } else {
+                ret += 'background-repeat: no-repeat;';
             }
         }
         return ret;
@@ -93,8 +117,10 @@ var Rules = Object.derive(function (id, css) {
     isSprites: function() {
         return this._is_sprites;
     },
-    getRepeat: function() {
-        return this._repeat;
+    getType: function() {
+        //return this._type;
+        //测试
+        return 'left';
     },
     getDirect: function() {
         return this._direct;
