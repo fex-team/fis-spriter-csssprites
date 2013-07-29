@@ -220,8 +220,8 @@ Generator.prototype = {
                 image.draw(Image(current.image), x, y);
                 for (j = 0, count = current.cls.length; j < count; j++) {
                     this.css += current.cls[j].selector + '{background-position:'
-                        + -(current.cls[j].position[0] + x)+ 'px '
-                        + -(current.cls[j].position[1] + y) + 'px}';
+                        + (current.cls[j].position[0] + -x)+ 'px '
+                        + (current.cls[j].position[1] + -y) + 'px}';
                     cls.push(current.cls[j].selector);
                 }
             }
@@ -234,9 +234,17 @@ Generator.prototype = {
                 x = max[zero] + max[left] - current.w;
                 image.draw(Image(current.image), x, y);
                 for (j = 0, count = current.cls.length; j < count; j++) {
+                    var x_cur;
+                    if (current.cls[j].position[0] == 'right') {
+                        x_cur = 'right ';
+                    } else if (current.cls[j].position[0] == 'left') {
+                        x_cur = -x + 'px ';
+                    } else {
+                        x_cur = (-x + current.cls[j].position[0]) + 'px ';
+                    }
                     this.css += current.cls[j].selector + '{background-position:'
-                        + -x + 'px '
-                        + -y + 'px}';
+                        + x_cur
+                        + (current.cls[j].position[1] + -y) + 'px}';
                     cls.push(current.cls[j].selector);
                 }
                 y += current.h;
