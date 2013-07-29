@@ -225,6 +225,7 @@ Generator.prototype = {
         }
         //减掉多加了一次的margin
         height = height - this.settings.margin;
+        //@TODO zero为混排，混排暂时不启动，都使用竖排，需要再做实验调整
         //left, zero
         //zero | left
         var image = Image(max[left] + max[zero], height)
