@@ -1,0 +1,811 @@
+/**
+ * @mixin answer-type
+ * @description 回答状态icon 
+ */
+.answer-excellent {
+  width: 41px;
+  height: 57px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/answer-excellent.png?__sprite);
+}
+
+.answer-best {
+  width: 41px;
+  height: 57px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/answer-best.png?__sprite);
+}
+
+.answer-recommend {
+  width: 41px;
+  height: 57px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/answer-recommend.png?__sprite);
+}
+.answer-best-recommend {
+  width: 73px;
+  height: 57px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/answer-best-recommend.png?__sprite);
+}
+/**
+ * @mixin icon
+ * @description 方形icon 
+ */
+/**
+ * @selector i-tick
+ * @description 勾勾
+ */
+.i-tick {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-tick.png?__sprite);
+}
+/**
+ * @selector i-failure
+ * @description 圈叉叉
+ */
+.i-failure {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-failure.png?__sprite);
+}
+/**
+ * @selector i-updating
+ * @description 正在提交
+ */
+.i-updating {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-updating.png?__sprite);
+}
+/**
+ * @selector i-status-being
+ * @description 普通提问
+ */
+.i-status-being {
+  width: 21px;
+  height: 21px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-status-being.png?__sprite);
+}
+/**
+ * @selector i-related-search
+ * @description 相关搜索
+ */
+.i-related-search {
+  width: 19px;
+  height: 19px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-related-search.png?__sprite);
+}
+/**
+ * @selector i-evaluate
+ * @description 赞同
+ */
+.i-evaluate {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-evaluate.png?__sprite);
+}
+/**
+ * @selector i-wealth
+ * @description 财富值
+ */
+.i-wealth {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-wealth.png?__sprite);
+}
+.i-scores {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-scores.png?__sprite);
+}
+.i-diamond {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-diamond.png?__sprite);
+}
+/**
+ * @selector i-from-wap
+ * @description 来自无线
+ */
+.i-from-wap {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-from-wap.png?__sprite);
+}
+/**
+ * @selector i-from-open
+ * @description 来自开放知道的问题
+ */
+.i-from-open {
+  width: 19px;
+  height: 19px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-from-open.png?__sprite);
+}
+/**
+ * @selector i-insert-img
+ * @description 插入图片
+ */
+.i-insert-img {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-insert-img.png?__sprite);
+}
+/**
+ * @selector i-insert-map
+ * @description 插入地图
+ */
+.i-insert-map {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-insert-map.png?__sprite);
+}
+/**
+ * @selector i-del-img
+ * @description 删除图片
+ */
+.i-del-img {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-del-img.png?__sprite);
+}
+/**
+ * @selector i-del-map
+ * @description 删除地图
+ */
+.i-del-map {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-del-map.png?__sprite);
+}
+/**
+ * @selector i-has-img
+ * @description 包含图片
+ */
+.i-has-img {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-has-img.png?__sprite);
+}
+/**
+ * @selector i-added
+ * @description 问题补充
+ */
+.i-added {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-added.png?__sprite);
+}
+/**
+ * @selector i-enhance
+ * @description 提高悬赏
+ */
+.i-enhance {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-enhance.png?__sprite);
+}
+/**
+ * @selector i-adopt
+ * @description 采纳
+ */
+.i-adopt {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-adopt.png?__sprite);
+}
+/**
+* @selector i-category
+* @description 修改分类
+*/
+.i-category {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-category.png?__sprite);
+}
+/**
+ * @selector i-team
+ * @description 求助团队
+ */
+.i-team {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-team.png?__sprite);
+}
+/**
+ * @selector i-arrow-up
+ * @description 向上箭头(blue)
+ */
+.i-arrow-up {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-arrow-up.png?__sprite);
+}
+/**
+ * @selector i-arrow-down
+ * @description 向下箭头(blue)
+ */
+.i-arrow-down {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-arrow-down.png?__sprite);
+}
+/**
+ * @selector i-arrow-up-green
+ * @description 向上箭头
+ */
+.i-arrow-up-green {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-arrow-up-green.png?__sprite);
+}
+/**
+ * @selector i-arrow-down-green
+ * @description 向下箭头
+ */
+.i-arrow-down-green {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-arrow-down-green.png?__sprite);
+}
+/**
+ * @selector i-arrow-up-black
+ * @description 向上箭头
+ */
+.i-arrow-up-black {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-arrow-up-black.png?__sprite);
+}
+/**
+ * @selector i-arrow-down-black
+ * @description 向下箭头
+ */
+.i-arrow-down-black {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-arrow-down-black.png?__sprite);
+}
+/**
+ * @selector i-list-dot
+ * @description 灰色的列表前面的灰色点
+ */
+.i-list-dot {
+  width: 11px;
+  height: 11px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-list-dot.png?__sprite);
+}
+/**
+ * @selector i-lbs
+ * @description lbs地理标签
+ */
+.i-lbs {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-lbs.png?__sprite);
+}
+/**
+ * @selector i-auth
+ * @description 认证用户
+ */
+.i-auth {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-auth.png?__sprite);
+}
+/**
+ * @selector i-set-noname
+ * @description 设置用户名
+ */
+.i-set-noname {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-set-noname.png?__sprite);
+}
+/**
+ * @selector i-reward
+ * @description 奖励徽章
+ */
+.i-reward {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-reward.png?__sprite);
+}
+/**
+ * @selector i-push-asker
+ * @description 提问者零回答看到的推送icon
+ */
+.i-push-asker {
+  width: 46px;
+  height: 46px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-push-asker.png?__sprite);
+}
+/**
+ * @selector i-del
+ * @description 删除icon
+ */
+.i-del {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-del.png?__sprite);
+}
+/**
+ * @selector i-del-hover
+ * @description 删除icon高亮
+ */
+.i-del-hover {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-del-hover.png?__sprite);
+}
+/**
+ * @selector i-hi-on
+ * @description HI在线
+ */
+.i-hi-on {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-hi-on.png?__sprite);
+}
+/**
+ * @selector i-hi-off
+ * @description HI不在线
+ */
+.i-hi-off {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-hi-off.png?__sprite);
+}
+/**
+ * @selector i-excellent
+ * @description 精华知识
+ */
+.i-excellent {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-excellent.png?__sprite);
+}
+/**
+ * @selector i-exp
+ * @description 经验
+ */
+.i-exp {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-image: url(./icon/i-exp.png?__sprite);
+}
+.i-guan {
+  width: 19px;
+  height: 19px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-image: url(./icon/i-guan.png?__sprite);
+}
+.i-zhuan {
+  width: 19px;
+  height: 19px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-image: url(./icon/i-zhuan.png?__sprite);
+}
+.i-government {
+  width: 19px;
+  height: 19px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-image: url(./icon/i-government.png?__sprite);
+}
+.i-company {
+  width: 19px;
+  height: 19px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-image: url(./icon/i-company.png?__sprite);
+}
+.i-government-avatar {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-image: url(./icon/i-government-avatar.png?__sprite);
+}
+.i-company-avatar {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-image: url(./icon/i-company-avatar.png?__sprite);
+}
+.i-guan-avatar {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-image: url(./icon/i-guan-avatar.png?__sprite);
+}
+.i-zhuan-avatar {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-image: url(./icon/i-zhuan-avatar.png?__sprite);
+}
+/**
+ * @selector i-famous
+ * @description 名人
+ */
+.i-famous {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-famous.png?__sprite);
+}
+/**
+ * @selector i-master
+ * @description 达人
+ */
+.i-master {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-master.png?__sprite);
+}
+/**
+ * @selector i-open-answer-total
+ * @description 企业回答总数
+ */
+.i-open-answer-total {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-open-answer-total.png?__sprite);
+}
+/**
+ * @selector i-open-answer-best
+ * @description 企业最佳回答数
+ */
+.i-open-answer-best {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-open-answer-best.png?__sprite);
+}
+/* 知道管理员icon */
+.i-user-admin-0 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-0.png?__sprite);
+}
+.i-user-admin-1 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-1.png?__sprite);
+}
+.i-user-admin-2 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-2.png?__sprite);
+}
+.i-user-admin-3 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-3.png?__sprite);
+}
+.i-user-admin-4 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-4.png?__sprite);
+}
+.i-user-admin-5 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-5.png?__sprite);
+}
+.i-user-admin-6 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-6.png?__sprite);
+}
+.i-user-admin-7 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-7.png?__sprite);
+}
+.i-user-admin-8 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-8.png?__sprite);
+}
+.i-user-admin-9 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-9.png?__sprite);
+}
+.i-user-admin-10 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-10.png?__sprite);
+}
+.i-user-admin-11 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-11.png?__sprite);
+}
+.i-user-admin-12 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-12.png?__sprite);
+}
+.i-user-admin-13 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-13.png?__sprite);
+}
+.i-user-admin-14 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-14.png?__sprite);
+}
+.i-user-admin-15 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-15.png?__sprite);
+}
+.i-user-admin-16 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-16.png?__sprite);
+}
+.i-user-admin-17 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-17.png?__sprite);
+}
+.i-user-admin-18 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-18.png?__sprite);
+}
+.i-user-admin-19 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-19.png?__sprite);
+}
+.i-user-admin-20 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-20.png?__sprite);
+}
+.i-user-admin-10000 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-10000.png?__sprite);
+}
+/* 企业平台等级徽章 */
+.open-level {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/open-level.png?__sprite);
+}
+.open-level-1 {
+  width: 36px;
+  background-position: left top;
+}
+.open-level-2 {
+  width: 39px;
+  background-position: left -18px;
+}
+.open-level-3 {
+  width: 39px;
+  background-position: left -36px;
+}
+.open-level-4 {
+  width: 39px;
+  background-position: left -54px;
+}
+.open-level-5 {
+  width: 39px;
+  background-position: left -72px;
+}
+.open-level-6 {
+  width: 37px;
+  background-position: left -90px;
+}
+.open-level-7 {
+  width: 37px;
+  background-position: left -108px;
+}
+.open-level-8 {
+  width: 37px;
+  background-position: left -126px;
+}
+.open-level-9 {
+  width: 37px;
+  background-position: left -144px;
+}
+.open-level-10 {
+  width: 41px;
+  background-position: left -162px;
+}
+.open-level-11 {
+  width: 39px;
+  background-position: left -180px;
+}
+.open-level-12 {
+  width: 42px;
+  background-position: left -198px;
+}
+.open-level-13 {
+  width: 42px;
+  background-position: left -216px;
+}
+.open-level-14 {
+  width: 42px;
+  background-position: left -234px;
+}
+.open-level-15 {
+  width: 42px;
+  background-position: left -252px;
+}
+.open-level-16 {
+  width: 42px;
+  background-position: left -270px;
+}
+.open-level-17 {
+  width: 42px;
+  background-position: left -288px;
+}
+.open-level-18 {
+  width: 42px;
+  background-position: left -306px;
+}
+.open-level-19 {
+  width: 42px;
+  background-position: left -324px;
+}
+.open-level-20 {
+  width: 45px;
+  background-position: left -342px;
+}
