@@ -53,13 +53,17 @@ Generator.prototype = {
         var image_file = fis.file.wrap(this.file.realpathNoExt + ext);
         if (this.opt.optimize) {
             var compress_conf = fis.config.get('settings.optimizer.pngcrush') || {};
-            image_file.setContent(PngCrush.option(compress_conf).compress(image.encode('png')));
+            image_file.setContent(
+                PngCrush.option(compress_conf)
+                        .compress(image.encode('png'))
+            );
         } else {
             image_file.setContent(image.encode('png'));
         }
         image_file.compiled = true;
         this.ret.pkg[this.file.subpathNoExt + ext] = image_file;
-        this.css += arr_selector.join(',') + '{background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + ')}';
+        this.css += arr_selector.join(',')
+            + '{background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + ')}';
     },
     z_pack: require('./pack.js'),
     fill: function(list, direct) {
@@ -92,10 +96,12 @@ Generator.prototype = {
                     selector: list[i].getId(),
                     position:list[i].getPosition()
                 });
+                //如果是repeat-x的，记录最大宽度；如果是repeat-y的，记录最大高度
                 op_max = (direct == 'x') ? size.width : size.height;
                 if (op_max > max) {
                     max = op_max;
                 }
+                //如果是repeat-x的，计算高度和；如果是repeat-y的，计算宽度和
                 total += (direct == 'x' ? size.height : size.width) + this.settings.margin;
             } else {
                 images[k].cls.push({
@@ -115,9 +121,13 @@ Generator.prototype = {
         for (i = 0, len = images.length; i < len; i++) {
             image.draw(images[i].image, x, y);
             //如果高度小于最大高度，则在Y轴平铺当前图
-            if (images[i].height < max) {
+            if (direct == 'y' && images[i].height < max) {
                 for (k = 0, count = max / images[i].height; k < count; k++) {
                     image.draw(images[i].image, x, images[i].height * (k + 1));
+                }
+            } else if (direct == 'x' && images[i].width < max) {
+                for (k = 0, count = max / images[i].width; k < count; k++) {
+                    image.draw(images[i].image, images[i].width * (k + 1), y);
                 }
             }
             for (k = 0, count = images[i].cls.length; k < count; k++) {
@@ -126,7 +136,11 @@ Generator.prototype = {
                     + (images[i].cls[k].position[1] + -y) + 'px}';
                 cls.push(images[i].cls[k].selector);
             }
-            x += images[i].width + this.settings.margin;
+            if (direct == 'x') {
+                y += images[i].height + this.settings.margin;
+            } else {
+                x += images[i].width + this.settings.margin;
+            }
         }
 
         this.after(image, cls, direct);
