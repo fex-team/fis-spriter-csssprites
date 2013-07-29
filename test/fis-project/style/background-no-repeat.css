@@ -18,3 +18,10 @@
     height: 256px;
     display: inline-block;
 }
+
+.facebook-right {
+    background: url('./img/Facebook.png?__sprite') no-repeat right top;
+    width: 500px;
+    height: 256px;
+    display: inline-block;
+}
