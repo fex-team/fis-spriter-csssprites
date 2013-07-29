@@ -6,7 +6,7 @@ fis.config.merge({
     roadmap: {
         path: [
             {
-                reg: '/style/**.css',
+                reg: '**.css',
                 useSprite: true
             }
         ]

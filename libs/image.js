@@ -67,7 +67,7 @@ Generator.prototype = {
     },
     z_pack: require('./pack.js'),
     fill: function(list, direct) {
-        if (list.length <= 1) {
+        if (list.length == 0) {
             return;
         }
         var max = 0,
@@ -149,7 +149,7 @@ Generator.prototype = {
         this.after(image, cls, direct);
     },
     zFill: function(list) {
-        if (list.length <= 1) {
+        if (list.length == 0) {
             return;
         }
         var i, k, k0, length, images = [[], []], parsed = [], max = [0, 0], total = [0, 0];
