@@ -25,3 +25,7 @@
     height: 256px;
     display: inline-block;
 }
+
+.big-image {
+    background: url(./img/awk.png?__sprite) no-repeat;
+}

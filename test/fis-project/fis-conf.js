@@ -19,11 +19,6 @@ fis.config.merge({
             csssprites: {
                 margin: 10
             }
-        },
-        optimizer: {
-            pngcrush: {
-                params: "-v"
-            }
         }
     }
 });
