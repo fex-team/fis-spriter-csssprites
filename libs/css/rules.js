@@ -107,10 +107,11 @@ var Rules = Object.derive(function (id, css) {
         //if use sprites, replace background-image + background-position to space;
         if (this.isSprites()) {
             ret = ret.replace(__sprites_hook_re, '');
+            //压缩会去掉最后一个;所以最前面加一个;
             if (this.repeat) {
-                ret += 'background-repeat: repeat-' + this.repeat;
+                ret += ';background-repeat: repeat-' + this.repeat;
             } else {
-                ret += 'background-repeat: no-repeat;';
+                ret += ';background-repeat: no-repeat;';
             }
         }
         return ret;
