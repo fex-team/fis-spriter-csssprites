@@ -5,7 +5,7 @@
 
 'use strict';
 var Image = require('node-images');
-var PngCrush = require('node-pngcrush');
+var Pngquant = require('node-pngquant-native');
 
 module.exports = function(file, list, ret, settings, opt) {
     var gen = new Generator(file, list, ret, settings, opt);
@@ -52,9 +52,9 @@ Generator.prototype = {
         var ext = '_' + direct + '.png';
         var image_file = fis.file.wrap(this.file.realpathNoExt + ext);
         if (this.opt.optimize) {
-            var compress_conf = fis.config.get('settings.optimizer.pngcrush') || {};
+            var compress_conf = fis.config.get('settings.optimizer.pngquant') || {};
             image_file.setContent(
-                PngCrush.option(compress_conf)
+                Pngquant.option(compress_conf)
                         .compress(image.encode('png'))
             );
         } else {

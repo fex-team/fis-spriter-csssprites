@@ -1,6 +1,6 @@
 {
   "name": "fis-spriter-csssprites",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "基于fis的csssprite，支持repeat-x，repeat-x，background-position",
   "main": "index.js",
   "directories": {
@@ -15,7 +15,7 @@
   },
   "dependencies": {
       "node-images": "1.5.1",
-      "node-pngcrush": "0.0.7"
+      "node-pngquant-native": "0.0.2"
   },
   "keywords": [
     "fis",
