@@ -14,8 +14,8 @@
     "url": "https://github.com/xiangshouding/fis-spriter-csssprites.git"
   },
   "dependencies": {
-      "node-images": "1.5.1",
-      "node-pngquant-native": "0.0.2"
+      "node-images": "1.5.2",
+      "node-pngquant-native": "0.0.3"
   },
   "keywords": [
     "fis",
