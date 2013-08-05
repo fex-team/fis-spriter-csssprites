@@ -47,7 +47,8 @@ fis.config.merge({
 ###使用
 
 ![background](https://raw.github.com/xiangshouding/fis-spriter-csssprites/master/doc/image/background.png)
-工具通过图片添加query识别图片是否需要做图片合并，具体
+
+通过图片添加query识别图片是否需要做图片合并，具体
 
 <table>
     <tr>
