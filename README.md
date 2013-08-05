@@ -68,8 +68,8 @@ fis.config.merge({
 
 支持以下几种`background-position`，有的同学不知道`background-position`是如何工作的，请参见[MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-position)
 
-|支持写法|示例|使用场景
-|:------|:----|
+|支持写法|示例|使用场景|
+|:------|:----|:--------|
 |background-position: \d+px \d+px;|background-position: -9px -1px;|需要合并的图是一个合并了很多小图的图片|
 |background-position: left  \d+px;|background-position: left -11px;|需要合并的图片向左浮动|
 |background-position: right \d+px;|background-position: right -1px;|需要合并的图片向右浮动|
