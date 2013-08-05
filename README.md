@@ -83,17 +83,25 @@ fis.config.merge({
 ```css
 .header, .footer {
     background: url(/img/1px_bg.png?__sprite) repeat-x;
+    height: 150px;
+    width: 960px;
 }
 
 .nav {
+    min-height: 400px;
+    width: 100px;
     background: url(/img/nav_bg.png?__sprite) repeat-y;
 }
 
 .icon_add {
+    width: 25px;
+    height: 25px;
     background: url(/img/icon/add.jpg?__sprite) no-repeat;
 }
 
 .icon_mul {
+    width: 25px;
+    height: 25px;
     background: url(/img/icon/mul.jpg?__sprite) no-repeat;
 }
 ```
@@ -101,35 +109,43 @@ fis.config.merge({
 
 ```css
 .header, .footer {
-    background-repeat: repeat-x;
+    height: 150px;
+    width: 960px;
+    background-repeat: repeat-x
 }
 
 .nav {
-    background-repeat: repeat-y;
+    min-height: 400px;
+    width: 100px;
+    background-repeat: repeat-y
 }
 
 .icon_add {
-    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    background-repeat: no-repeat
 }
 
 .icon_mul {
-    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    background-repeat: no-repeat
 }
 
 .header, .footer {
-    background-position: 0 0;
+    background-position: 0px 0px;
 }
 
 .nav {
-    background-position: 0 0;
+    background-position: 0px 0px;
 }
 
 .icon_add {
-    background-position: 0 0;
+    background-position: 0px 0px;
 }
 
 .icon_mul {
-    background-position: 0 -250px;
+    background-position: 0px -25px;
 }
 
 .header, .footer {
