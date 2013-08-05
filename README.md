@@ -58,6 +58,16 @@ fis.config.merge({
     </tr>
 </table>
 
+部分支持`background-position`，支持列表
+
+|支持写法|示例|
+|:------|:----|
+|background-position: \d+px \d+px;|background-position: -9px -1px;|
+|background-position: left  \d+px;|background-position: left -11px;|
+|background-position: right \d+px;|background-position: right -1px;|
+|background-position: left top;|background-position: left top;|
+|background-position: right top;|background-position: right top;|
+
 ###示例
 
 ```css
