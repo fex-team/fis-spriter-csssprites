@@ -45,6 +45,9 @@ fis.config.merge({
 ```
 
 ###使用
+调用执行spriter，需要`fis release`时加`-p`参数: `fis release -p`
+
+在书写css时标注`background-image`的图片是否进行合并，标注说明；
 
 ![background](https://raw.github.com/xiangshouding/fis-spriter-csssprites/master/doc/image/background.png)
 
