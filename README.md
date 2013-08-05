@@ -163,3 +163,6 @@ fis.config.merge({
 ```
 
 如上，`1px_bg.png`会合并到`aio_x.png`(aio.css对应图片), `nav_bg.png`合并到`aio_y.png`, `add.jpg`和`mul.jpg`被合并到`aio_z.png`。
+
+###其他
+[实现原理](https://github.com/xiangshouding/fis-spriter-csssprites/wiki/CssSprites%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86)
