@@ -1,20 +1,16 @@
 /**
  * url, position写在一起的情况
  */
-.icon_x_a {
-}
+.icon_x_a {background-repeat: no-repeat;}
 
-.icon_y_b {
-}
+.icon_y_b {background-repeat: no-repeat;}
 
 /**
  * background
  */
-.icon_z_c1 {
-}
+.icon_z_c1 {background-repeat: no-repeat;}
 
-.icon_z_c2 {
-}
+.icon_z_c2 {background-repeat: no-repeat;}
 /**
  * 不带query的情况
  */
