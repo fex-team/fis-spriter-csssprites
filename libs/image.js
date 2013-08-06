@@ -48,6 +48,14 @@ Generator.prototype = {
         }
         return false;
     },
+    _imageExist: function (images, url) {
+        for (var i = 0, len = images.length; i < len; i++) {
+            if (url == images[i].url) {
+                return i;
+            }
+        }
+        return false;
+    },
     after: function (image, arr_selector, direct) {
         var ext = '_' + direct + '.png';
         var image_file = fis.file.wrap(this.file.realpathNoExt + ext);
@@ -88,6 +96,7 @@ Generator.prototype = {
                 var img = Image(image_info.getContent());
                 var size = img.size();
                 images[k] = {
+                    url: list[i].getImageUrl(),
                     cls: [],
                     image: img,
                     width: size.width,
@@ -105,7 +114,8 @@ Generator.prototype = {
                 //如果是repeat-x的，计算高度和；如果是repeat-y的，计算宽度和
                 total += (direct == 'x' ? size.height : size.width) + this.settings.margin;
             } else {
-                images[k].cls.push({
+                var key = this._imageExist(images, list[i].getImageUrl());
+                images[key].cls.push({
                     selector: list[i].getId(),
                     position: list[i].getPosition()
                 });
@@ -152,11 +162,16 @@ Generator.prototype = {
         if (list.length == 0) {
             return;
         }
-        var i, k, k0, length, images = [[], []], parsed = [], max = [0, 0], total = [0, 0];
+        var i, k, k0, length, images = [[], []], parsed = [[], []], max = [0, 0], total = [0, 0];
         for (i = 0, k = [-1, -1], length = list.length; i < length; i++) {
-            if (parsed.indexOf(list[i].getImageUrl()) == -1) {
-                parsed.push(list[i].getImageUrl());
-                var item = list[i];
+            var item = list[i];
+            if (item.getType() == 'left') {
+                k0 = 0;
+            } else {
+                k0 = 1;
+            }
+            if (parsed[k0].indexOf(item.getImageUrl()) == -1) {
+                parsed[k0].push(item.getImageUrl());
                 var image_info = this.getImage(item.getImageUrl());
                 if (!image_info) {
                     continue;
@@ -164,17 +179,15 @@ Generator.prototype = {
                 var img = Image(image_info.getContent());
                 var size = img.size();
                 if (item.getType() == 'left') {
-                    k0 = 0;
                     //计算最大宽度
                     if (size.width > max[k0]) {
                         max[k0] = size.width;
                     }
                     total[k0] += size.height + this.settings.margin;
-                }  else {
-                    k0 = 1;
                 }
                 k[k0] ++;
                 images[k0][k[k0]] = {
+                    url: item.getImageUrl(),
                     cls: [],
                     image: img,
                     w: size.width + this.settings.margin,
@@ -189,12 +202,8 @@ Generator.prototype = {
                     position:list[i].getPosition()
                 });
             } else {
-                if (item.getType() == 'left') {
-                    k0 = 0;
-                } else {
-                    k0 = 1;
-                }
-                images[k0][k[k0]].cls.push({
+                var key = this._imageExist(images[k0], item.getImageUrl());
+                images[k0][key].cls.push({
                     selector: list[i].getId(),
                     position:list[i].getPosition()
                 });
