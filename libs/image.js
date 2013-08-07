@@ -122,6 +122,10 @@ Generator.prototype = {
             }
         }
 
+        if (images.length == 0) {
+            return;
+        }
+
         //减掉多加的一次margin
         total -= this.settings.margin;
         var height = direct == 'x' ? total : max;
