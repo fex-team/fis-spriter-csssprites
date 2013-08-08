@@ -13,7 +13,25 @@ module.exports = function(file, list, ret, settings, opt) {
 };
 
 function Generator(file, list, ret, settings, opt) {
-    settings.margin = settings.margin ? parseFloat(settings.margin) : '0';
+    var default_settings = {
+        'margin': 3,
+        'width_limit': 10240,
+        'height_limit': 10240
+    }
+
+    fis.util.map(default_settings, function (key, value) {
+        if (settings.hasOwnProperty(key)) {
+            if ((typeof value) == 'number') {
+                settings[key] = parseFloat(settings[key]);
+            }
+        } else {
+            settings[key] = value;
+        }
+    });
+
+    //设置宽高限制
+    Image.setLimit(settings.width_limit, settings.height_limit);
+
     this.file = file;
     this.ret = ret;
     this.settings = settings;
@@ -43,7 +61,11 @@ Generator.prototype = {
         for (i in this.ret.src) {
             if (this.ret.src.hasOwnProperty(i)
                     && this.ret.src[i].getUrl(this.opt.hash, this.opt.domain) == release) {
-                return this.ret.src[i];
+                if (this.ret.src[i].release != false) {
+                    return this.ret.src[i];
+                } else {
+                    break;
+                }
             }
         }
         return false;
@@ -59,16 +81,8 @@ Generator.prototype = {
     after: function (image, arr_selector, direct) {
         var ext = '_' + direct + '.png';
         var image_file = fis.file.wrap(this.file.realpathNoExt + ext);
-        if (this.opt.optimize) {
-            var compress_conf = fis.config.get('settings.optimizer.pngquant') || {};
-            image_file.setContent(
-                Pngquant.option(compress_conf)
-                        .compress(image.encode('png'))
-            );
-        } else {
-            image_file.setContent(image.encode('png'));
-        }
-        image_file.compiled = true;
+        image_file.setContent(image.encode('png'));
+        fis.compile(image_file);
         this.ret.pkg[this.file.subpathNoExt + ext] = image_file;
         this.css += arr_selector.join(',')
             + '{background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + ')}';
@@ -273,8 +287,6 @@ Generator.prototype = {
                     var x_cur;
                     if (current.cls[j].position[0] == 'right') {
                         x_cur = 'right ';
-                    } else if (current.cls[j].position[0] == 'left') {
-                        x_cur = -x + 'px ';
                     } else {
                         x_cur = (-x + current.cls[j].position[0]) + 'px ';
                     }

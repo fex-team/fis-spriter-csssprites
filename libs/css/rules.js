@@ -44,7 +44,7 @@ var Rules = Object.derive(function (id, css) {
         self._have_position = true;
         if (['left', 'right'].indexOf(res[1]) != -1) {
             self._type = res[1];
-            self._position[0] = res[1];
+            self._position[0] = (res[1] == 'left') ? 0 : res[1];
         } else {
             self._position[0] = parseFloat(res[1]);
         }
