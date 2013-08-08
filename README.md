@@ -8,7 +8,7 @@ $ npm install -g fis-spriter-csssprites
 ```
 
 ####环境要求
-0. 依赖两个native插件，[node-pngquant-native](https://github.com/xiangshouding/node-pngquant-native), [node-images](https://github.com/xiangshouding/node-images) 环境需要符合这两个插件的要求。
+0. 依赖native插件，[node-images](https://github.com/xiangshouding/node-images) 环境需要符合这两个插件的要求。
 0. 只能在FIS中使用
 
 ###配置
