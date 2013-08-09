@@ -15,7 +15,6 @@
   },
   "dependencies": {
       "node-images": "1.5.2",
-      "node-pngquant-native": "0.0.3"
   },
   "keywords": [
     "fis",
