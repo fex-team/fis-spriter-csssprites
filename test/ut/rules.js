@@ -56,7 +56,7 @@ assert.equal(rule_4_2.getPosition()[1], 1.3, 'y = 1.3');
 
 //background-position left
 var rule_4_3 = _rules.wrap('left', 'background-position: left top');
-assert.equal(rule_4_3.getPosition()[0], 'left', 'x = left');
+assert.equal(rule_4_3.getPosition()[0], 0, 'x = 0');
 assert.equal(rule_4_3.getPosition()[1], 0, 'y = 0');
 
 //background-position left
