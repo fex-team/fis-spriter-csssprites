@@ -5,7 +5,6 @@
 
 'use strict';
 var Image = require('node-images');
-var Pngquant = require('node-pngquant-native');
 
 module.exports = function(file, list, ret, settings, opt) {
     var gen = new Generator(file, list, ret, settings, opt);
@@ -56,6 +55,10 @@ function Generator(file, list, ret, settings, opt) {
 }
 
 Generator.prototype = {
+    createImage: function () {
+        var argc = arguments.length
+            , args = arguments;
+    },
     getImage: function(release) {
         var i;
         for (i in this.ret.src) {
