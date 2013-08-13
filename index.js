@@ -3,9 +3,13 @@
  * @site fis.baidu.com
  * @type {*}
  */
+
+'use strict';
+
 var cssParser = require('./libs/cssParser.js');
+var imgGen;
 try {
-    var imgGen = require('./libs/image.js');
+    imgGen = require('./libs/image.js');
 } catch (e) {
     fis.log.warning('csssprites does not support your node ' + process.version +
         ', report it to https://github.com/xiangshouding/fis-spriter-csssprites/issues');
@@ -31,7 +35,7 @@ module.exports = function(ret, conf, settings, opt) {
 
 function _process(file, ret, settings, opt) {
     var res = cssParser(file.getContent());
-    content = res.content;
+    var content = res.content;
     if (res.map && res.map.length > 0) {
         var css = imgGen(file, res.map, ret, settings, opt);
         content = content + css;
