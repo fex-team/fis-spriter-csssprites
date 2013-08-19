@@ -21,7 +21,7 @@ module.exports = function(ret, conf, settings, opt) {
     }
     //文件属性中useSprite == true的css做图片合并
     fis.util.map(ret.src, function(subpath, file) {
-        if (file.rExt == '.css' && file.useSprite) {
+        if (file.isCssLike && file.useSprite) {
             _process(file, ret, settings, opt);
         }
     });
