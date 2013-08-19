@@ -1,4 +1,6 @@
 ##fis-spriter-csssprites
+[![NPM version](https://badge.fury.io/js/fis-spriter-csssprites.png)](http://badge.fury.io/js/fis-spriter-csssprites)
+
 基于FIS的csssprites，对css文件以文件为级别进行csssprites处理。支持`repeat-x`, `repeat-y`, `background-position`
 
 ###安装
@@ -8,7 +10,7 @@ $ npm install -g fis-spriter-csssprites
 ```
 
 ####环境要求
-0. 依赖native插件，[node-images](https://github.com/xiangshouding/node-images) 环境需要符合个插件的要求。(OS X、Windows node 32位提供了二进制包)
+0. 依赖native插件，[node-images](https://github.com/xiangshouding/node-images) 环境需要符合个插件的要求。(OS X、Windows提供了二进制包)
 0. 只能在FIS中使用
 
 ###配置
