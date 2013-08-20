@@ -64,6 +64,7 @@ GrowingPacker.prototype = {
             down: this.root,
             right: { x: this.root.w, y: 0, w: w, h: this.root.h }
         };
+        var node;
         if (node = this.findNode(this.root, w, h))
             return this.splitNode(node, w, h);
         else
@@ -80,6 +81,7 @@ GrowingPacker.prototype = {
             down:  { x: 0, y: this.root.h, w: this.root.w, h: h },
             right: this.root
         };
+        var node;
         if (node = this.findNode(this.root, w, h))
             return this.splitNode(node, w, h);
         else

@@ -55,10 +55,6 @@ function Generator(file, list, ret, settings, opt) {
 }
 
 Generator.prototype = {
-    createImage: function () {
-        var argc = arguments.length
-            , args = arguments;
-    },
     getImage: function(release) {
         var i;
         for (i in this.ret.src) {
@@ -100,7 +96,7 @@ Generator.prototype = {
             //宽度或者高的和
             total = 0,
             parsed = [],
-            i, k, j, len, count, op_max;
+            i, k, len, count, op_max;
 
         for (i = 0, k = -1, len = list.length; i < len; i++) {
             if (parsed.indexOf(list[i].getImageUrl()) == -1) {
