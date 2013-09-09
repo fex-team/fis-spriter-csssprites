@@ -6,8 +6,8 @@
 'use strict';
 var Image = require('node-images');
 
-module.exports = function(file, list, ret, settings, opt) {
-    var gen = new Generator(file, list, ret, settings, opt);
+module.exports = function(file, list, images, ret, settings, opt) {
+    var gen = new Generator(file, list, images, ret, settings, opt);
     return gen.css;
 };
 
@@ -36,6 +36,7 @@ function Generator(file, list, ret, settings, opt) {
     this.settings = settings;
     this.opt = opt;
     this.css = '';
+    this.images = images;
 
     var list_x = [];
     var list_y = [];
@@ -56,16 +57,8 @@ function Generator(file, list, ret, settings, opt) {
 
 Generator.prototype = {
     getImage: function(release) {
-        var i;
-        for (i in this.ret.src) {
-            if (this.ret.src.hasOwnProperty(i)
-                    && this.ret.src[i].getUrl(this.opt.hash, this.opt.domain) == release) {
-                if (this.ret.src[i].release != false) {
-                    return this.ret.src[i];
-                } else {
-                    break;
-                }
-            }
+        if (this.images.indexOf(release)) {
+            return this.images[release];
         }
         return false;
     },

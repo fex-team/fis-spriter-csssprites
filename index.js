@@ -19,6 +19,8 @@ module.exports = function(ret, conf, settings, opt) {
     if (!imgGen) {
         return;
     }
+    
+
     //文件属性中useSprite == true的css做图片合并
     fis.util.map(ret.src, function(subpath, file) {
         if (file.isCssLike && file.useSprite) {
@@ -34,7 +36,11 @@ module.exports = function(ret, conf, settings, opt) {
 };
 
 function _process(file, ret, settings, opt) {
-    var res = cssParser(file.getContent());
+    var images = {};
+    fis.util.map(ret.src, function (subpath, file) {
+        images[file.release] = file;
+    });
+    var res = cssParser(file.getContent(), images);
     var content = res.content;
     if (res.map && res.map.length > 0) {
         var css = imgGen(file, res.map, ret, settings, opt);
