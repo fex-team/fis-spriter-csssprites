@@ -1,7 +1,7 @@
 fis.config.merge({
     namespace: 'csssprites',
     modules: {
-        spriter: 'csssprites'
+        spriter: require('../../')
     },
     roadmap: {
         path: [
