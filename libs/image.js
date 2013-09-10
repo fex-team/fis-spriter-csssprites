@@ -11,7 +11,7 @@ module.exports = function(file, list, images, ret, settings, opt) {
     return gen.css;
 };
 
-function Generator(file, list, ret, settings, opt) {
+function Generator(file, list, images, ret, settings, opt) {
     var default_settings = {
         'margin': 3,
         'width_limit': 10240,
@@ -57,7 +57,7 @@ function Generator(file, list, ret, settings, opt) {
 
 Generator.prototype = {
     getImage: function(release) {
-        if (this.images.indexOf(release)) {
+        if (this.images.hasOwnProperty(release)) {
             return this.images[release];
         }
         return false;

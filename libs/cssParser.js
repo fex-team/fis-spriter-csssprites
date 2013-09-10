@@ -13,7 +13,7 @@ module.exports = function (content, images) {
     _content = content.replace(reg, function(m, selector, css) {
         if (css) {
             var rules = Rules.wrap(selector.trim(), css.trim());
-            if (rules.isSprites() && images.indexOf(rules.getImageUrl())) {
+            if (rules.isSprites() && images.hasOwnProperty(rules.getImageUrl())) {
                 _arr_css.push(rules);
                 css = rules.getCss();
             }
