@@ -31,6 +31,8 @@ var Rules = Object.derive(function (id, css) {
     self._type = null;
     self._have_position = false;
 
+    //获取spriter的配置
+    self._settings = fis.config.get('settings.spriter.csssprites');
     /**
      * get position
      * @param res
@@ -42,7 +44,8 @@ var Rules = Object.derive(function (id, css) {
         }
         self._have_position = true;
         if (['left', 'right'].indexOf(res[1]) != -1) {
-            self._type = res[1];
+            //left 和 right 都靠右排，so 类型都为`left`
+            self._type = 'left';
             self._position[0] = (res[1] == 'left') ? 0 : res[1];
         } else {
             self._position[0] = parseFloat(res[1]);
@@ -123,9 +126,12 @@ var Rules = Object.derive(function (id, css) {
         return this._is_sprites;
     },
     getType: function() {
-        //return this._type;
-        //测试
-        return 'left';
+        if (this._settings && this._settings['optimalPacking']) {
+            //如果使用混排
+            return this._type;
+        } else {
+            return 'left';
+        }
     },
     getDirect: function() {
         return this._direct;

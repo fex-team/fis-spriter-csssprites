@@ -17,7 +17,9 @@ fis.config.merge({
     settings: {
         spriter: {
             csssprites: {
-                margin: 10
+                margin: 10,
+                //如果需要用到最优排列，请设置为`true`
+                optimalPacking: false
             }
         }
     }

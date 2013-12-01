@@ -35,6 +35,12 @@ module.exports = function(ret, conf, settings, opt) {
     });
 };
 
+
+module.exports.defaultOptions = {
+    //最优排列（装箱），混合排序
+    'optimalPacking': false
+};
+
 function _process(file, ret, settings, opt) {
     var images = {};
     fis.util.map(ret.src, function (subpath, file) {
@@ -50,4 +56,3 @@ function _process(file, ret, settings, opt) {
     }
     file.setContent(content);
 }
-
