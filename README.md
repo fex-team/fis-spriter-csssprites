@@ -40,7 +40,7 @@ fis.config.merge({
                 //图之间的边距
                 margin: 10,
                 //如果要使用最优排列（混排）, 默认为`false`
-                optimalPackling: true
+                optimalPacking: true
             }
         }
     }
