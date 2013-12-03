@@ -39,8 +39,8 @@ fis.config.merge({
             csssprites: {
                 //图之间的边距
                 margin: 10,
-                //如果要使用最优排列（混排）, 默认为`false`
-                optimalPacking: true
+                //使用矩阵排列方式，默认为线性`linear`
+                layout: 'matrix' 
             }
         }
     }

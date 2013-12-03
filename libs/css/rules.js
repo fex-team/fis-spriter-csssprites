@@ -125,13 +125,11 @@ var Rules = Object.derive(function (id, css) {
     isSprites: function() {
         return this._is_sprites;
     },
+    setType: function(type) {
+        this._type = type;
+    },
     getType: function() {
-        if (this._settings && this._settings['optimalPacking']) {
-            //如果使用混排
-            return this._type;
-        } else {
-            return 'left';
-        }
+        return this._type;
     },
     getDirect: function() {
         return this._direct;

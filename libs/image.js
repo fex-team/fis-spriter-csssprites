@@ -12,11 +12,14 @@ module.exports = function(file, list, images, ret, settings, opt) {
 };
 
 function Generator(file, list, images, ret, settings, opt) {
+    
     var default_settings = {
         'margin': 3,
         'width_limit': 10240,
-        'height_limit': 10240
+        'height_limit': 10240,
+        'layout': 'linear'
     }
+
 
     fis.util.map(default_settings, function (key, value) {
         if (settings.hasOwnProperty(key)) {
@@ -27,6 +30,12 @@ function Generator(file, list, images, ret, settings, opt) {
             settings[key] = value;
         }
     });
+
+    //如果layout不支持的类型，默认为linear
+    var layouts = ['matrix', 'linear']; 
+    if (layouts.indexOf(settings.layout) == -1) {
+        settings.layout = 'linear';
+    }
 
     //设置宽高限制
     Image.setLimit(settings.width_limit, settings.height_limit);
@@ -175,6 +184,11 @@ Generator.prototype = {
         var i, k, k0, length, images = [[], []], parsed = [[], []], max = [0, 0], total = [0, 0];
         for (i = 0, k = [-1, -1], length = list.length; i < length; i++) {
             var item = list[i];
+            // 如果默认是linear，type全都设为left
+            if (this.settings.layout == 'linear') {
+                item.setType('left');
+            }
+
             if (item.getType() == 'left') {
                 k0 = 0;
             } else {

@@ -1,7 +1,7 @@
 fis.config.merge({
     namespace: 'csssprites',
     modules: {
-        spriter: require('../../')
+        spriter: [require('../../')]
     },
     roadmap: {
         path: [
@@ -15,13 +15,12 @@ fis.config.merge({
         '/aio.css': '**.css'
     },
     settings: {
-        spriter: {
-            csssprites: {
+        spriter:  [{
                 margin: 10,
-                //如果需要用到最优排列，请设置为`true`
-                optimalPacking: false
-            }
-        }
+                //矩阵排列方式 
+                layout: 'matrix'
+        }]
+        
     }
 });
 
