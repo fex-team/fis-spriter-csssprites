@@ -4,7 +4,10 @@ fis.config.merge({
         spriter: [require('../../')]
     },
     roadmap: {
-        path: [
+        path: [ {
+            reg: '**.png',
+            query: '?t=123124132'
+            },
             {
                 reg: '**.css',
                 useSprite: true

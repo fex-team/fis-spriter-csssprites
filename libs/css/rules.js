@@ -62,7 +62,7 @@ var Rules = Object.derive(function (id, css) {
                 if (res && res[1]) {
                     info = _.stringQuote(res[1]);
                     info = _.query(info.rest);
-                    self.image = info.rest;
+                    self.image = info.origin.replace(__sprites_re, '');
                     if (info.query && __sprites_re.test(info.query)) {
                         self._is_sprites = true;
                     }
