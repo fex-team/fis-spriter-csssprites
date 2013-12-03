@@ -13,7 +13,7 @@ var Rules = Object.derive(function (id, css) {
         , __image_url_re = /url\s*\(\s*("(?:[^\\"\r\n\f]|\\[\s\S])*"|'(?:[^\\'\n\r\f]|\\[\s\S])*'|[^)}]+)\s*\)/i
         , __support_position_re = /(0|[+-]?(?:\d*\.|)\d+px|left|right)\s*(0|[+-]?(?:\d*\.|)\d+px|top)/i
         , __repeat_re = /\brepeat-(x|y)/i
-        , __sprites_re = /\?__sprite/i
+        , __sprites_re = /[?&]__sprite/i
         , __sprites_hook_ld = '<<<'
         , __sprites_hook_rd = '>>>';
     //selectors
