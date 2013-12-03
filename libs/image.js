@@ -86,7 +86,7 @@ Generator.prototype = {
         fis.compile(image_file);
         this.ret.pkg[this.file.subpathNoExt + ext] = image_file;
         this.css += arr_selector.join(',')
-            + '{background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + ')}';
+            + '{background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + image_file.query + ')}';
     },
     z_pack: require('./pack.js'),
     fill: function(list, direct) {
