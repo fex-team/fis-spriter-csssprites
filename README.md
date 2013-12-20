@@ -23,11 +23,11 @@ fis.config.merge({
     },
     roadmap: {
         path: {
-            reg: /\static\/.*\.css$/i
+            reg: /\static\/.*\.css$/i,
             //配置useSprite表示reg匹配到的css需要进行图片合并
             useSprite: true
         }
-    }
+    },
     pack: {
         //对合并的aio.css进行处理
         'aio.css': [
