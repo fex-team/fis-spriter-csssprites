@@ -19,14 +19,14 @@ module.exports = function(ret, conf, settings, opt) {
     if (!imgGen) {
         return;
     }
-
     //文件属性中useSprite == true的css做图片合并
     //文件属性中useSprite == true的html文件<style></style>标签内做图片合并
     fis.util.map(ret.src, function(subpath, file) {
         if (file.isCssLike && file.useSprite) {
             processCss(file, ret, settings, opt);
         }
-        if (file.isHtmlLike && file.useSprite) {
+        if (file.isHtmlLike && (file.useSprite || settings.styleReg)) {
+            //todo
             processInline(file, ret, settings, opt);
         }
     });
@@ -47,7 +47,7 @@ function processCss(file, ret, settings, opt) {
 function processInline(file, ret, settings, opt) {
     //匹配 <style></style> 以及用户自定义标签 setting
     var style_reg = /(<style(?:(?=\s)[\s\S]*?["'\s\w\/\-]>|>))([\s\S]*?)(<\/style\s*>|$)/ig;
-    var reg = settings.inlineTagReg ? settings.inlineTagReg : style_reg;
+    var reg = settings.styleReg ? settings.styleReg : style_reg;
     var content = file.getContent();
     var i = 0;
     content = content.replace(reg, function(m, start_tag, content, end_tag){
@@ -56,7 +56,7 @@ function processInline(file, ret, settings, opt) {
     file.setContent(content);
 }
 
-function _process(content, file, imgName, ret, settings, opt){
+function _process(content, file, index, ret, settings, opt){
     var images = {};
     fis.util.map(ret.src, function (subpath, file) {
         if (file.isImage()) {
@@ -66,7 +66,7 @@ function _process(content, file, imgName, ret, settings, opt){
     var res = cssParser(content, images);
     var content = res.content;
     if (res.map && res.map.length > 0) {
-        var css = imgGen(file, imgName, res.map, images, ret, settings, opt);
+        var css = imgGen(file, index, res.map, images, ret, settings, opt);
         content = content + css;
     }
     return content;
