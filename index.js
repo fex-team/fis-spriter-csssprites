@@ -52,12 +52,12 @@ function _processInline(file, ret, settings, opt) {
     var reg = new RegExp(styleReg + inlineTagReg, 'ig');
     var content = file.getContent();
     var i = 0;
-    content = content.replace(reg, function(m, m1, m2, m3, m4, m5, m6){
+    content = content.replace(reg, function(m, $1, $2, $3, $4, $5, $6){
         var imgName = file.filename + i++;
-        if(m1){
-            return m1 + _process(m2, file, imgName, ret, settings, opt) + m3;
-        }else if(m4){
-            return m4 + _process(m5, file, imgName, ret, settings, opt) + m6;
+        if($1){
+            return $1 + _process($2, file, imgName, ret, settings, opt) + $3;
+        }else if($4){
+            return $4 + _process($5, file, imgName, ret, settings, opt) + $6;
         }
     });
     file.setContent(content);
