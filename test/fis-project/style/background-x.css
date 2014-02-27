@@ -1,0 +1,12 @@
+.box_x {
+     width: 600px;
+     height: 100px;
+     background-image: url(./img/background-x.jpg?__sprite);
+     background-repeat: repeat-x;
+}
+
+.box_x_small {
+    width: 600px;
+    height: 100px;
+    background: url('./img/background-small.jpg?__sprite') repeat-x;
+}

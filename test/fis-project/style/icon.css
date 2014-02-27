@@ -1,0 +1,701 @@
+
+.answer-excellent {
+  width: 41px;
+  height: 57px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/answer-excellent.png?__sprite);
+}
+
+.answer-best {
+  width: 41px;
+  height: 57px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/answer-best.png?__sprite);
+}
+
+.answer-recommend {
+  width: 41px;
+  height: 57px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/answer-recommend.png?__sprite);
+}
+.answer-best-recommend {
+  width: 73px;
+  height: 57px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/answer-best-recommend.png?__sprite);
+}
+
+
+.i-tick {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-tick.png?__sprite);
+}
+
+.i-failure {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-failure.png?__sprite);
+}
+
+.i-updating {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-updating.png?__sprite);
+}
+
+.i-status-being {
+  width: 21px;
+  height: 21px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-status-being.png?__sprite);
+}
+
+.i-related-search {
+  width: 19px;
+  height: 19px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-related-search.png?__sprite);
+}
+
+.i-evaluate {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-evaluate.png?__sprite);
+}
+
+.i-wealth {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-wealth.png?__sprite);
+}
+.i-scores {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-scores.png?__sprite);
+}
+.i-diamond {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-diamond.png?__sprite);
+}
+
+.i-from-wap {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-from-wap.png?__sprite);
+}
+
+.i-from-open {
+  width: 19px;
+  height: 19px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-from-open.png?__sprite);
+}
+
+.i-insert-img {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-insert-img.png?__sprite);
+}
+
+.i-insert-map {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-insert-map.png?__sprite);
+}
+
+.i-del-img {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-del-img.png?__sprite);
+}
+
+.i-del-map {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-del-map.png?__sprite);
+}
+
+.i-has-img {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-has-img.png?__sprite);
+}
+
+.i-added {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-added.png?__sprite);
+}
+
+.i-enhance {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-enhance.png?__sprite);
+}
+
+.i-adopt {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-adopt.png?__sprite);
+}
+
+.i-category {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-category.png?__sprite);
+}
+
+.i-team {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-team.png?__sprite);
+}
+
+.i-arrow-up {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-arrow-up.png?__sprite);
+}
+
+.i-arrow-down {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-arrow-down.png?__sprite);
+}
+
+.i-arrow-up-green {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-arrow-up-green.png?__sprite);
+}
+
+.i-arrow-down-green {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-arrow-down-green.png?__sprite);
+}
+
+.i-arrow-up-black {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-arrow-up-black.png?__sprite);
+}
+
+.i-arrow-down-black {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-arrow-down-black.png?__sprite);
+}
+
+.i-list-dot {
+  width: 11px;
+  height: 11px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-list-dot.png?__sprite);
+}
+
+.i-lbs {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-lbs.png?__sprite);
+}
+
+.i-auth {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-auth.png?__sprite);
+}
+
+.i-set-noname {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-set-noname.png?__sprite);
+}
+
+.i-reward {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-reward.png?__sprite);
+}
+
+.i-push-asker {
+  width: 46px;
+  height: 46px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-push-asker.png?__sprite);
+}
+
+.i-del {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-del.png?__sprite);
+}
+
+.i-del-hover {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-del-hover.png?__sprite);
+}
+
+.i-hi-on {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-hi-on.png?__sprite);
+}
+
+.i-hi-off {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-hi-off.png?__sprite);
+}
+
+.i-excellent {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-excellent.png?__sprite);
+}
+
+.i-exp {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-image: url(./icon/i-exp.png?__sprite);
+}
+.i-guan {
+  width: 19px;
+  height: 19px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-image: url(./icon/i-guan.png?__sprite);
+}
+.i-zhuan {
+  width: 19px;
+  height: 19px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-image: url(./icon/i-zhuan.png?__sprite);
+}
+.i-government {
+  width: 19px;
+  height: 19px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-image: url(./icon/i-government.png?__sprite);
+}
+.i-company {
+  width: 19px;
+  height: 19px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-image: url(./icon/i-company.png?__sprite);
+}
+.i-government-avatar {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-image: url(./icon/i-government-avatar.png?__sprite);
+}
+.i-company-avatar {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-image: url(./icon/i-company-avatar.png?__sprite);
+}
+.i-guan-avatar {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-image: url(./icon/i-guan-avatar.png?__sprite);
+}
+.i-zhuan-avatar {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-image: url(./icon/i-zhuan-avatar.png?__sprite);
+}
+
+.i-famous {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-famous.png?__sprite);
+}
+
+.i-master {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-master.png?__sprite);
+}
+
+.i-open-answer-total {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-open-answer-total.png?__sprite);
+}
+
+.i-open-answer-best {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-open-answer-best.png?__sprite);
+}
+
+.i-user-admin-0 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-0.png?__sprite);
+}
+.i-user-admin-1 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-1.png?__sprite);
+}
+.i-user-admin-2 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-2.png?__sprite);
+}
+.i-user-admin-3 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-3.png?__sprite);
+}
+.i-user-admin-4 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-4.png?__sprite);
+}
+.i-user-admin-5 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-5.png?__sprite);
+}
+.i-user-admin-6 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-6.png?__sprite);
+}
+.i-user-admin-7 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-7.png?__sprite);
+}
+.i-user-admin-8 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-8.png?__sprite);
+}
+.i-user-admin-9 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-9.png?__sprite);
+}
+.i-user-admin-10 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-10.png?__sprite);
+}
+.i-user-admin-11 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-11.png?__sprite);
+}
+.i-user-admin-12 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-12.png?__sprite);
+}
+.i-user-admin-13 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-13.png?__sprite);
+}
+.i-user-admin-14 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-14.png?__sprite);
+}
+.i-user-admin-15 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-15.png?__sprite);
+}
+.i-user-admin-16 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-16.png?__sprite);
+}
+.i-user-admin-17 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-17.png?__sprite);
+}
+.i-user-admin-18 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-18.png?__sprite);
+}
+.i-user-admin-19 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-19.png?__sprite);
+}
+.i-user-admin-20 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-20.png?__sprite);
+}
+.i-user-admin-10000 {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(./icon/i-user-admin-10000.png?__sprite);
+}
+
+.open-level {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+}
+.open-level-1 {
+  width: 36px;
+  background-position: left top;
+  background-image: url(./icon/open-level.png?__sprite);
+}
+.open-level-2 {
+  width: 39px;
+  background-position: left -18px;
+    background-image: url(./icon/open-level.png?__sprite);
+}
+.open-level-3 {
+  width: 39px;
+  background-position: left -36px;
+    background-image: url(./icon/open-level.png?__sprite);
+}
+.open-level-4 {
+  width: 39px;
+  background-position: left -54px;
+    background-image: url(./icon/open-level.png?__sprite);
+}
+.open-level-5 {
+  width: 39px;
+  background-position: left -72px;
+    background-image: url(./icon/open-level.png?__sprite);
+}
+.open-level-6 {
+  width: 37px;
+  background-position: left -90px;
+    background-image: url(./icon/open-level.png?__sprite);
+}
+.open-level-7 {
+  width: 37px;
+  background-position: left -108px;
+    background-image: url(./icon/open-level.png?__sprite);
+}
+.open-level-8 {
+  width: 37px;
+  background-position: left -126px;
+    background-image: url(./icon/open-level.png?__sprite);
+}
+.open-level-9 {
+  width: 37px;
+  background-position: left -144px;
+    background-image: url(./icon/open-level.png?__sprite);
+}
+.open-level-10 {
+  width: 41px;
+  background-position: left -162px;
+    background-image: url(./icon/open-level.png?__sprite);
+}
+.open-level-11 {
+  width: 39px;
+  background-position: left -180px;
+    background-image: url(./icon/open-level.png?__sprite);
+}
+.open-level-12 {
+  width: 42px;
+  background-position: left -198px;
+    background-image: url(./icon/open-level.png?__sprite);
+}
+.open-level-13 {
+  width: 42px;
+  background-position: left -216px;
+    background-image: url(./icon/open-level.png?__sprite);
+}
+.open-level-14 {
+  width: 42px;
+  background-position: left -234px;
+    background-image: url(./icon/open-level.png?__sprite);
+}
+.open-level-15 {
+  width: 42px;
+  background-position: left -252px;
+    background-image: url(./icon/open-level.png?__sprite);
+}
+.open-level-16 {
+  width: 42px;
+  background-position: left -270px;
+    background-image: url(./icon/open-level.png?__sprite);
+}
+.open-level-17 {
+  width: 42px;
+  background-position: left -288px;
+    background-image: url(./icon/open-level.png?__sprite);
+}
+.open-level-18 {
+  width: 42px;
+  background-position: left -306px;
+    background-image: url(./icon/open-level.png?__sprite);
+}
+.open-level-19 {
+  width: 42px;
+  background-position: left -324px;
+    background-image: url(./icon/open-level.png?__sprite);
+}
+.open-level-20 {
+  width: 45px;
+  background-position: left -342px;
+    background-image: url(./icon/open-level.png?__sprite);
+}

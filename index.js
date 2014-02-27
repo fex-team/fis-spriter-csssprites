@@ -44,27 +44,14 @@ function processCss(file, ret, settings, opt) {
     file.setContent(content);
 }
 
-function processReg(str){
-    if(str.indexOf('/') == 0){
-        str = str.substring(1, str.lastIndexOf('/'));
-    }
-    return fis.util.escapeReg(str);
-}
-
 function processInline(file, ret, settings, opt) {
     //匹配 <style></style> 以及用户自定义标签 setting
-    var inlineTagReg = settings.inlineTagReg ? '|' + processReg(settings.inlineTagReg.toString()) : '';
-    var style_reg = /(<style(?:(?=\s)[\s\S]*?["'\s\w/\-]>|>))([\s\s]*?)(<\/style\s*>|$)/;
-
-    var reg = new RegExp(processReg(style_reg.toString()) + inlineTagReg, 'ig');
+    var style_reg = /(<style(?:(?=\s)[\s\S]*?["'\s\w\/\-]>|>))([\s\S]*?)(<\/style\s*>|$)/ig;
+    var reg = settings.inlineTagReg ? settings.inlineTagReg : style_reg;
     var content = file.getContent();
     var i = 0;
-    content = content.replace(reg, function(m, $1, $2, $3, $4, $5, $6){
-        if($1){
-            return $1 + _process($2, file, i++, ret, settings, opt) + $3;
-        }else if($4){
-            return $4 + _process($5, file, i++, ret, settings, opt) + $6;
-        }
+    content = content.replace(reg, function(m, start_tag, content, end_tag){
+        return start_tag + _process(content, file, i++, ret, settings, opt) + end_tag;
     });
     file.setContent(content);
 }
