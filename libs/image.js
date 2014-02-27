@@ -6,12 +6,12 @@
 'use strict';
 var Image = require('node-images');
 
-module.exports = function(file, imgName, list, images, ret, settings, opt) {
-    var gen = new Generator(file, imgName, list, images, ret, settings, opt);
+module.exports = function(file, index, list, images, ret, settings, opt) {
+    var gen = new Generator(file, index, list, images, ret, settings, opt);
     return gen.css;
 };
 
-function Generator(file, imgName, list, images, ret, settings, opt) {
+function Generator(file, index, list, images, ret, settings, opt) {
     
     var default_settings = {
         'margin': 3,
@@ -46,7 +46,7 @@ function Generator(file, imgName, list, images, ret, settings, opt) {
     this.opt = opt;
     this.css = '';
     this.images = images;
-    this.imgName = imgName;
+    this.index = index;
 
     var list_x = [];
     var list_y = [];
@@ -81,14 +81,11 @@ Generator.prototype = {
         return false;
     },
     after: function (image, arr_selector, direct) {
-        var imgRealPath = this.file.dirname + '/' + this.imgName;
-        var imgSubPath = this.file.subdirname + '/' + this.imgName;
-
-        var ext = '_' + direct + '.png';
-        var image_file = fis.file.wrap(imgRealPath + ext);
+        var ext = this.index + '_' + direct + '.png';
+        var image_file = fis.file.wrap(this.file.realpathNoExt + ext);
         image_file.setContent(image.encode('png'));
         fis.compile(image_file);
-        this.ret.pkg[imgSubPath + ext] = image_file;
+        this.ret.pkg[this.file.subpathNoExt + ext] = image_file;
         this.css += arr_selector.join(',')
             + '{background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + image_file.hash + ')}';
     },
