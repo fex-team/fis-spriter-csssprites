@@ -20,13 +20,12 @@ module.exports = function(ret, conf, settings, opt) {
         return;
     }
     //文件属性中useSprite == true的css做图片合并
-    //文件属性中useSprite == true的html文件<style></style>标签内做图片合并
+    //html文件<style></style>标签内做图片合并
     fis.util.map(ret.src, function(subpath, file) {
         if (file.isCssLike && file.useSprite) {
             processCss(file, ret, settings, opt);
         }
-        if (file.isHtmlLike && (file.useSprite || settings.styleReg)) {
-            //todo
+        if (file.isHtmlLike && (file.useSprite || settings.htmlUseSprite)) {
             processInline(file, ret, settings, opt);
         }
     });
