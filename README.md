@@ -52,9 +52,9 @@ fis.config.set('settings.spriter.csssprites', {
 ```
 
 **styleReg规则**
-* 默认不配置styleReg，仅支持html中默认style标签中的css内容
-* 配置styleReg时候，仅支持styleReg匹配到的内容。
-* styleReg正则必须捕获三个分组，$1为：开始标签（start tag）， $2为：内容(content) , $3为：结束标签(end tag)
+    * 默认不配置styleReg，仅支持html中默认style标签中的css内容
+    * 配置styleReg时候，仅支持styleReg匹配到的内容。
+    * styleReg正则必须捕获三个分组，$1为：开始标签（start tag）， $2为：内容(content) , $3为：结束标签(end tag)
 
 * csssprites其他设置
 
