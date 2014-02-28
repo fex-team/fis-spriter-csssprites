@@ -47,7 +47,7 @@ $ npm install -g fis-spriter-csssprites
     ```javascript
     fis.config.set('settings.spriter.csssprites', {
         //开启模板内联css处理,默认关闭
-        htmlUseSprite: true
+        htmlUseSprite: true,
         //默认针对html原生<style></style>标签内的内容处理。
         //用户可以通过配置styleTag来扩展要识别的css片段
         //以下是默认<style></style>标签的匹配正则
@@ -70,7 +70,7 @@ $ npm install -g fis-spriter-csssprites
         //图之间的边距
         margin: 10,
         //使用矩阵排列方式，默认为线性`linear`
-        layout: 'matrix',
+        layout: 'matrix'
     });
     ```
 
