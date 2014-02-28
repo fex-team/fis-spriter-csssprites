@@ -5,11 +5,15 @@ fis.config.merge({
     },
     roadmap: {
         path: [ {
-            reg: '**.png',
-            query: '?t=123124132'
+                reg: '**.png',
+                query: '?t=123124132'
             },
             {
                 reg: '**.css',
+                useSprite: true
+            },
+            {
+                reg: '**.html',
                 useSprite: true
             }
         ]
@@ -23,7 +27,6 @@ fis.config.merge({
                 //矩阵排列方式 
                 layout: 'matrix'
         }]
-        
     }
 });
 
