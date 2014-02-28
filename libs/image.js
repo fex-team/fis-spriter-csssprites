@@ -81,7 +81,7 @@ Generator.prototype = {
         return false;
     },
     after: function (image, arr_selector, direct) {
-        var ext = this.index + '_' + direct + '.png';
+        var ext = '_' + this.index + '_' + direct + '.png';
         var image_file = fis.file.wrap(this.file.realpathNoExt + ext);
         image_file.setContent(image.encode('png'));
         fis.compile(image_file);
