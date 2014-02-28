@@ -66,7 +66,7 @@ fis.config.set('settings.spriter.csssprites', {
 ```
 **注意** ：
 * 以上设置可以按照需求，合并使用。
-* html使用csssprites，可参考最后的详细文档
+* html配置csssprites，可参考最后的详细文档
 
 ###使用
 调用执行spriter，需要`fis release`时加`-p`参数: `fis release -p`，具体请[参照文档](https://github.com/fis-dev/fis/wiki/%E9%85%8D%E7%BD%AEAPI#modulesspriter)
@@ -190,4 +190,4 @@ fis.config.set('settings.spriter.csssprites', {
 
 ###其他
 * [实现原理](https://github.com/xiangshouding/fis-spriter-csssprites/wiki/CssSprites%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86)
-* [html使用csssprite详细文档](https://github.com/lily-zhangying/fis-spriter-csssprites/wiki/csssprite%E6%94%AF%E6%8C%81%E5%86%85%E8%81%94css)
+* [html配置csssprite详细文档](https://github.com/lily-zhangying/fis-spriter-csssprites/wiki/csssprite%E6%94%AF%E6%8C%81%E5%86%85%E8%81%94css)
