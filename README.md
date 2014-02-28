@@ -19,7 +19,7 @@ $ npm install -g fis-spriter-csssprites
 ```javascript
 fis.config.set('modules.spriter', 'csssprites');
 ```
-* **合并后的css** 文件自动进行csssprites
+* **合并后的css** 文件 **自动** 进行csssprites
 
 ```javascript
 fis.config.set('pack', {
@@ -65,7 +65,7 @@ fis.config.set('settings.spriter.csssprites', {
 });
 ```
 **styleReg规则**
-* 默认不配置styleReg，仅支持 <style> </style> 标签中的css内容
+* 默认不配置styleReg，仅支持html中默认style标签中的css内容
 * 配置styleReg时候，仅支持styleReg匹配到的内容。
 * styleReg正则必须捕获三个分组，$1为：开始标签（start tag）， $2为：内容(content) , $3为：结束标签(end tag)
 
@@ -194,4 +194,3 @@ fis.config.set('settings.spriter.csssprites', {
 
 ###其他
 * [实现原理](https://github.com/xiangshouding/fis-spriter-csssprites/wiki/CssSprites%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86)
-* [html配置csssprite详细文档](https://github.com/lily-zhangying/fis-spriter-csssprites/wiki/csssprite%E6%94%AF%E6%8C%81%E5%86%85%E8%81%94css)
