@@ -60,6 +60,7 @@ fis.config.set('settings.spriter.csssprites', {
     htmlUseSprite: true
     //默认针对html原生<style></style>标签内的内容处理。
     //用户可以通过配置styleTag来扩展要识别的css片段
+    //以下是默认<style></style>标签的匹配正则
     styleReg: /(<style(?:(?=\s)[\s\S]*?["'\s\w\/\-]>|>))([\s\S]*?)(<\/style\s*>|$)/ig
 });
 ```
