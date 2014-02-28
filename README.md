@@ -1,7 +1,7 @@
 ##fis-spriter-csssprites
 [![NPM version](https://badge.fury.io/js/fis-spriter-csssprites.png)](http://badge.fury.io/js/fis-spriter-csssprites)
 
-基于FIS的csssprites，对css文件以文件为级别进行csssprites处理。支持`repeat-x`, `repeat-y`, `background-position`
+基于FIS的csssprites，对css文件,以及html文件css片段进行csssprites处理。支持`repeat-x`, `repeat-y`, `background-position`
 
 ###安装
 
@@ -15,38 +15,55 @@ $ npm install -g fis-spriter-csssprites
 
 ###配置
 
+1. 配置FIS中使用csssprites
 ```javascript
-fis.config.merge({
-    namespace: 'demo',
-    modules: {
-        spriter: 'csssprites'
-    },
-    roadmap: {
-        path: {
-            reg: /\/static\/.*\.css$/i,
-            //配置useSprite表示reg匹配到的css需要进行图片合并
-            useSprite: true
-        }
-    },
-    pack: {
-        //对合并的aio.css进行处理
-        'aio.css': [
-            '**.css'
-        ]
-    },
-    settings: {
-        spriter: {
-            csssprites: {
-                //图之间的边距
-                margin: 10,
-                //使用矩阵排列方式，默认为线性`linear`
-                layout: 'matrix' 
-            }
-        }
-    }
-});
-
+fis.config.set('modules.spriter', 'csssprites');
 ```
+
+2. 配置css文件进行csssprite
+
+```javascript
+fis.config.set('roadmap.path', {
+    reg: /\/static\/.*\.css$/i,
+    //配置useSprite表示reg匹配到的css需要进行图片合并
+    useSprite: true
+});
+```
+
+3. 配置html文件进行csssprite
+
+```javascript
+fis.config.set('roadmap.path', {
+    reg: /\/page\/.*\.html$/i,
+    //配置useSprite表示reg匹配到的css需要进行图片合并
+    useSprite: true
+});
+```
+4. 配置打包，打包后的css文件进行csssprite
+
+```javascript
+fis.config.set('pack', {
+    //对合并的aio.css进行处理
+    'aio.css': [
+       '**.css'
+    ]
+});
+```
+5. csssprite其他设置
+
+```javascript
+fis.config.set('settings.spriter.csssprites', {
+    //图之间的边距
+    margin: 10,
+    //使用矩阵排列方式，默认为线性`linear`
+    layout: 'matrix',
+    //开启模板内联css处理,默认关闭
+    htmlUseSprite:true
+    //html中内联css识别正则，以下为识别<style></style>标签正则。**注意**必须捕获三个分组
+    styleReg: /(<style(?:(?=\s)[\s\S]*?["'\s\w\/\-]>|>))([\s\S]*?)(<\/style\s*>|$)/ig
+});
+```
+**注意** ：默认针对html原生<style></style>标签内的内容处理。用户可以通过配置styleTag来扩展要识别的css片段。
 
 ###使用
 调用执行spriter，需要`fis release`时加`-p`参数: `fis release -p`，具体请[参照文档](https://github.com/fis-dev/fis/wiki/%E9%85%8D%E7%BD%AEAPI#modulesspriter)
@@ -170,3 +187,4 @@ fis.config.merge({
 
 ###其他
 [实现原理](https://github.com/xiangshouding/fis-spriter-csssprites/wiki/CssSprites%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86)
+[html使用csssprite详细文档](https://github.com/lily-zhangying/fis-spriter-csssprites/wiki/csssprite%E6%94%AF%E6%8C%81%E5%86%85%E8%81%94css)
