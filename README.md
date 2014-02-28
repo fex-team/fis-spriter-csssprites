@@ -19,7 +19,16 @@ $ npm install -g fis-spriter-csssprites
 ```javascript
 fis.config.set('modules.spriter', 'csssprites');
 ```
+* **合并后的css** 文件自动进行csssprites
 
+```javascript
+fis.config.set('pack', {
+    //对合并的aio.css进行处理
+    'aio.css': [
+       '**.css'
+    ]
+});
+```
 * 配置 **css** 文件进行csssprites
 
 ```javascript
@@ -39,16 +48,6 @@ fis.config.set('roadmap.path', {
     useSprite: true
 });
 ```
-* 配置 **打包** ，打包后的css文件进行csssprites
-
-```javascript
-fis.config.set('pack', {
-    //对合并的aio.css进行处理
-    'aio.css': [
-       '**.css'
-    ]
-});
-```
 * csssprites其他设置
 
 ```javascript
@@ -64,9 +63,13 @@ fis.config.set('settings.spriter.csssprites', {
     styleReg: /(<style(?:(?=\s)[\s\S]*?["'\s\w\/\-]>|>))([\s\S]*?)(<\/style\s*>|$)/ig
 });
 ```
+**styleReg规则**
+* 默认不配置styleReg，仅支持 <style> </style> 标签中的css内容
+* 配置styleReg时候，仅支持styleReg匹配到的内容。
+* styleReg正则必须捕获三个分组，$1为：开始标签（start tag）， $2为：内容(content) , $3为：结束标签(end tag)
+
 **注意** ：
 * 以上设置可以按照需求，合并使用。
-* html配置csssprites，可参考最后的详细文档
 
 ###使用
 调用执行spriter，需要`fis release`时加`-p`参数: `fis release -p`，具体请[参照文档](https://github.com/fis-dev/fis/wiki/%E9%85%8D%E7%BD%AEAPI#modulesspriter)
