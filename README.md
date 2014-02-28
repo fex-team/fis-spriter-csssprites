@@ -15,12 +15,12 @@ $ npm install -g fis-spriter-csssprites
 
 ###配置
 
-1. 配置FIS中使用csssprites
+* 配置FIS中使用csssprites
 ```javascript
 fis.config.set('modules.spriter', 'csssprites');
 ```
 
-2. 配置css文件进行csssprite
+* 配置 **css** 文件进行csssprites
 
 ```javascript
 fis.config.set('roadmap.path', {
@@ -30,7 +30,7 @@ fis.config.set('roadmap.path', {
 });
 ```
 
-3. 配置html文件进行csssprite
+* 配置 **html** 文件进行csssprites
 
 ```javascript
 fis.config.set('roadmap.path', {
@@ -39,7 +39,7 @@ fis.config.set('roadmap.path', {
     useSprite: true
 });
 ```
-4. 配置打包，打包后的css文件进行csssprite
+* 配置 **打包** ，打包后的css文件进行csssprites
 
 ```javascript
 fis.config.set('pack', {
@@ -49,7 +49,7 @@ fis.config.set('pack', {
     ]
 });
 ```
-5. csssprite其他设置
+* csssprites其他设置
 
 ```javascript
 fis.config.set('settings.spriter.csssprites', {
@@ -58,12 +58,14 @@ fis.config.set('settings.spriter.csssprites', {
     //使用矩阵排列方式，默认为线性`linear`
     layout: 'matrix',
     //开启模板内联css处理,默认关闭
-    htmlUseSprite:true
-    //html中内联css识别正则，以下为识别<style></style>标签正则。**注意**必须捕获三个分组
+    htmlUseSprite: true
+    //默认针对html原生<style></style>标签内的内容处理。
+    //用户可以通过配置styleTag来扩展要识别的css片段
     styleReg: /(<style(?:(?=\s)[\s\S]*?["'\s\w\/\-]>|>))([\s\S]*?)(<\/style\s*>|$)/ig
 });
 ```
-**注意** ：默认针对html原生<style></style>标签内的内容处理。用户可以通过配置styleTag来扩展要识别的css片段。
+**注意** ：
+* 以上设置可以按照需求，合并使用。
 
 ###使用
 调用执行spriter，需要`fis release`时加`-p`参数: `fis release -p`，具体请[参照文档](https://github.com/fis-dev/fis/wiki/%E9%85%8D%E7%BD%AEAPI#modulesspriter)
@@ -186,5 +188,5 @@ fis.config.set('settings.spriter.csssprites', {
 如上，`1px_bg.png`会合并到`aio_x.png`(aio.css对应图片), `nav_bg.png`合并到`aio_y.png`, `add.jpg`和`mul.jpg`被合并到`aio_z.png`。
 
 ###其他
-[实现原理](https://github.com/xiangshouding/fis-spriter-csssprites/wiki/CssSprites%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86)
-[html使用csssprite详细文档](https://github.com/lily-zhangying/fis-spriter-csssprites/wiki/csssprite%E6%94%AF%E6%8C%81%E5%86%85%E8%81%94css)
+* [实现原理](https://github.com/xiangshouding/fis-spriter-csssprites/wiki/CssSprites%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86)
+* [html使用csssprite详细文档](https://github.com/lily-zhangying/fis-spriter-csssprites/wiki/csssprite%E6%94%AF%E6%8C%81%E5%86%85%E8%81%94css)
