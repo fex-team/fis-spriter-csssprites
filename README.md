@@ -48,16 +48,15 @@ fis.config.set('settings.spriter.csssprites', {
     //用户可以通过配置styleTag来扩展要识别的css片段
     //以下是默认<style></style>标签的匹配正则
     styleReg: /(<style(?:(?=\s)[\s\S]*?["'\s\w\/\-]>|>))([\s\S]*?)(<\/style\s*>|$)/ig
+
+    //**styleReg规则**
+    //1. 默认不配置styleReg，仅支持html中默认style标签中的css内容
+    //2. 配置styleReg时候，仅支持styleReg匹配到的内容。
+    //3. styleReg正则必须捕获三个分组，$1为：开始标签（start tag）， $2为：内容(content) , $3为：结束标签(end tag)
 });
 ```
 
-**styleReg规则**
-
-    1. 默认不配置styleReg，仅支持html中默认style标签中的css内容
-    2. 配置styleReg时候，仅支持styleReg匹配到的内容。
-    3. styleReg正则必须捕获三个分组，$1为：开始标签（start tag）， $2为：内容(content) , $3为：结束标签(end tag)
-
-* csssprites其他设置
+* **csssprites其他设置**
 
 ```javascript
 fis.config.set('settings.spriter.csssprites', {
