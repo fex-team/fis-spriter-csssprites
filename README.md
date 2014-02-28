@@ -15,7 +15,7 @@ $ npm install -g fis-spriter-csssprites
 
 ###配置
 
-* 配置FIS中使用csssprites
+* 首先要配置FIS中使用csssprites
 ```javascript
 fis.config.set('modules.spriter', 'csssprites');
 ```
@@ -38,6 +38,23 @@ fis.config.set('roadmap.path', {
     useSprite: true
 });
 ```
+* 如果想配置html中的css片段进行csssprites处理，可以像下面这样配置
+
+```javascript
+fis.config.set('settings.spriter.csssprites', {
+    //开启模板内联css处理,默认关闭
+    htmlUseSprite: true
+    //默认针对html原生<style></style>标签内的内容处理。
+    //用户可以通过配置styleTag来扩展要识别的css片段
+    //以下是默认<style></style>标签的匹配正则
+    styleReg: /(<style(?:(?=\s)[\s\S]*?["'\s\w\/\-]>|>))([\s\S]*?)(<\/style\s*>|$)/ig
+});
+```
+
+**styleReg规则**
+* 默认不配置styleReg，仅支持html中默认style标签中的css内容
+* 配置styleReg时候，仅支持styleReg匹配到的内容。
+* styleReg正则必须捕获三个分组，$1为：开始标签（start tag）， $2为：内容(content) , $3为：结束标签(end tag)
 
 * csssprites其他设置
 
@@ -47,21 +64,11 @@ fis.config.set('settings.spriter.csssprites', {
     margin: 10,
     //使用矩阵排列方式，默认为线性`linear`
     layout: 'matrix',
-    //开启模板内联css处理,默认关闭
-    htmlUseSprite: true
-    //默认针对html原生<style></style>标签内的内容处理。
-    //用户可以通过配置styleTag来扩展要识别的css片段
-    //以下是默认<style></style>标签的匹配正则
-    styleReg: /(<style(?:(?=\s)[\s\S]*?["'\s\w\/\-]>|>))([\s\S]*?)(<\/style\s*>|$)/ig
 });
 ```
-**styleReg规则**
-* 默认不配置styleReg，仅支持html中默认style标签中的css内容
-* 配置styleReg时候，仅支持styleReg匹配到的内容。
-* styleReg正则必须捕获三个分组，$1为：开始标签（start tag）， $2为：内容(content) , $3为：结束标签(end tag)
 
 **注意** ：
-* 以上设置可以按照需求，合并使用。
+* 以上设置可以按照需求，合并使用噢。
 
 ###使用
 调用执行spriter，需要`fis release`时加`-p`参数: `fis release -p`，具体请[参照文档](https://github.com/fis-dev/fis/wiki/%E9%85%8D%E7%BD%AEAPI#modulesspriter)
