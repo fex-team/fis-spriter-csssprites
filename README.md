@@ -82,7 +82,7 @@ $ npm install -g fis-spriter-csssprites
 
 在书写css时标注`background-image`的图片是否进行合并，标注说明；
 
-![background](https://raw.github.com/xiangshouding/fis-spriter-csssprites/master/doc/image/background.png)
+![background](https://raw.github.com/fex-team/fis-spriter-csssprites/master/doc/image/background.png)
 
 通过图片添加query识别图片是否需要做图片合并，具体
 
