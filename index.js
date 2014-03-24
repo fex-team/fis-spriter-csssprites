@@ -39,7 +39,7 @@ module.exports = function(ret, conf, settings, opt) {
 };
 
 function processCss(file, ret, settings, opt) {
-    var content = _process(file.getContent(), file, '', ret, settings, opt);
+    var content = _process(file.getContent(), file, null, ret, settings, opt);
     file.setContent(content);
 }
 
