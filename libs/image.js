@@ -104,7 +104,7 @@ Generator.prototype = {
         }
 
         if (this.settings.ie_bug_fix) {
-            var MAX = this.settings.max_selectores || 36;
+            var MAX = this.settings.max_selectores || 30; //max 36
             var arr_selector = unique(arr_selector.join(',').split(','));
             var len = arr_selector.length;
             var n =  Math.ceil(len / MAX);
