@@ -17,8 +17,9 @@ function Generator(file, index, list, images, ret, settings, opt) {
         'margin': 3,
         'width_limit': 10240,
         'height_limit': 10240,
-        'layout': 'linear'
-    }
+        'layout': 'linear',
+        'ie_bug_fix': true
+    };
 
 
     fis.util.map(default_settings, function (key, value) {
@@ -91,8 +92,32 @@ Generator.prototype = {
         image_file.setContent(image.encode('png'));
         fis.compile(image_file);
         this.ret.pkg[this.file.subpathNoExt + ext] = image_file;
-        this.css += arr_selector.join(',')
-            + '{background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + image_file.hash + ')}';
+        
+        function unique(array) {
+            var tmp = [];
+            for (var i = 0, len = array.length; i < len; i++) {
+                if (tmp.indexOf(array[i]) == -1) {
+                    tmp.push(array[i]);
+                }
+            }
+            return tmp;
+        }
+
+        if (this.settings.ie_bug_fix) {
+            var MAX = this.settings.max_selectores || 36;
+            var arr_selector = unique(arr_selector.join(',').split(','));
+            var len = arr_selector.length;
+            var n =  Math.ceil(len / MAX);
+
+            for (var i = 0; i < n; i++) {
+                var step = i * MAX
+                this.css += arr_selector.slice(step, step * MAX || MAX).join(',')
+                    + '{background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + image_file.hash + ')}';
+            }
+        } else {
+            this.css += unique(arr_selector.join(',').split(',')).join(',')
+                + '{background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + image_file.hash + ')}';
+        }
     },
     z_pack: require('./pack.js'),
     fill: function(list, direct) {
