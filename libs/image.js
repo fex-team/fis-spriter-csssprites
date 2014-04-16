@@ -93,14 +93,11 @@ Generator.prototype = {
         fis.compile(image_file);
         this.ret.pkg[this.file.subpathNoExt + ext] = image_file;
         
-        function unique(array) {
-            var tmp = [];
-            for (var i = 0, len = array.length; i < len; i++) {
-                if (tmp.indexOf(array[i]) == -1) {
-                    tmp.push(array[i]);
-                }
-            }
-            return tmp;
+        function unique(arr) {
+            var map = {};
+            return arr.filter(function(item){
+                return map.hasOwnProperty(item) ? false : map[item] = true;
+            });
         }
 
         if (this.settings.ie_bug_fix) {
