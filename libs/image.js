@@ -108,7 +108,7 @@ Generator.prototype = {
 
             for (var i = 0; i < n; i++) {
                 var step = i * MAX
-                this.css += arr_selector.slice(step, step * MAX || MAX).join(',')
+                this.css += arr_selector.slice(step, step + MAX).join(',')
                     + '{background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + image_file.hash + ')}';
             }
         } else {
