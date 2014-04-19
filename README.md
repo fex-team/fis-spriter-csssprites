@@ -36,11 +36,11 @@ $ npm install -g fis-spriter-csssprites
 * 如果有个别css文件没有合并，但是想进行csssprites处理，可以像下面这样配置
 
     ```javascript
-    fis.config.set('roadmap.path', {
+    fis.config.set('roadmap.path', [{
         reg: /\/static\/.*\.css$/i,
         //配置useSprite表示reg匹配到的css需要进行图片合并
         useSprite: true
-    });
+    }]);
     ```
 * 如果想配置html中的css片段进行csssprites处理，可以像下面这样配置
 
