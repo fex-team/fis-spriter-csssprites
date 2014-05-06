@@ -50,7 +50,7 @@ function Generator(file, index, list, images, ret, settings, opt) {
     this.index = index;
 
     var list_ = {};
-    var scale = {};
+    var scales = {};
 
     function getImage(release) {
         if (that.images.hasOwnProperty(release)) {
@@ -74,12 +74,15 @@ function Generator(file, index, list, images, ret, settings, opt) {
         bg.image_ = image_;
         
         if (bg.size[0] != -1) {
-            var key = '' + bg.size[0] / image_.size().width;
-            if (scale[key]) {
-                insertToObject(scale[key], direct, bg);
-            } else {
-                scale[key] = {};
-                insertToObject(scale[key], direct, bg);
+            //不支持repeat，只支持平铺
+            if (direct === 'z') {
+                var key = '' + bg.size[0] / image_.size().width;
+                if (scales[key]) {
+                    insertToObject(scales[key], direct, bg);
+                } else {
+                    scales[key] = {};
+                    insertToObject(scales[key], direct, bg);
+                }
             }
         } else {
             insertToObject(list_, direct, bg);
@@ -88,14 +91,11 @@ function Generator(file, index, list, images, ret, settings, opt) {
 
     this.fill(list_['x'], 'x');
     this.fill(list_['y'], 'y');
-    this.zFill(list_['z']);
+    this.zFill(list_['z'], settings.scale);
 
     //backgroud-size
-
-    fis.util.map(scale, function (s, l) {
+    fis.util.map(scales, function (s, l) {
         s = parseFloat(s);
-        that.fill(l['x'], 'x', s);
-        that.fill(l['y'], 'y', s);
         that.zFill(l['z'], s);
     });
 }
@@ -131,7 +131,7 @@ Generator.prototype = {
                 return map.hasOwnProperty(item) ? false : map[item] = true;
             });
         }
-        
+
         if (this.settings.ie_bug_fix) {
             var MAX = this.settings.max_selectores || 30; //max 36
             var arr_selector = unique(arr_selector.join(',').split(','));
@@ -153,7 +153,7 @@ Generator.prototype = {
         }
     },
     z_pack: require('./pack.js'),
-    fill: function(list, direct, scale) {
+    fill: function(list, direct) {
         if (!list || list.length == 0) {
             return;
         }
@@ -235,7 +235,7 @@ Generator.prototype = {
             }
         }
 
-        this.after(image, cls, direct, scale);
+        this.after(image, cls, direct);
     },
     zFill: function(list, scale) {
         if (!list || list.length == 0) {
