@@ -9,9 +9,10 @@
 var Rules = Object.derive(function (id, css) {
     var self = this
         , _ = fis.util
-        , __background_re = /(?:\/\*[\s\S]*?(?:\*\/|$))|\bbackground(?:-image)?:([\s\S]*?)(?:;|$)|background-position:([\s\S]*?)(?:;|$)|background-repeat:([\s\S]*?)(?:;|$)/gi
+        , __background_re = /(?:\/\*[\s\S]*?(?:\*\/|$))|\bbackground(?:-image)?:([\s\S]*?)(?:;|$)|background-position:([\s\S]*?)(?:;|$)|background-repeat:([\s\S]*?)(?:;|$)|background-size:([\s\S]*?)(?:;|$)/gi
         , __image_url_re = /url\s*\(\s*("(?:[^\\"\r\n\f]|\\[\s\S])*"|'(?:[^\\'\n\r\f]|\\[\s\S])*'|[^)}]+)\s*\)/i
         , __support_position_re = /(0|[+-]?(?:\d*\.|)\d+px|left|right)\s*(0|[+-]?(?:\d*\.|)\d+px|top)/i
+        , __support_size_re = /(\d+px)\s*(\d+px)/i //只支持px
         , __repeat_re = /\brepeat-(x|y)/i
         , __sprites_re = /[?&]__sprite/i
         , __sprites_hook_ld = '<<<'
@@ -21,6 +22,7 @@ var Rules = Object.derive(function (id, css) {
     //use image url
     self.image = '';
     self.repeat = false;
+    self.size = [-1, -1];
 
     self._position = [0, 0];
     //image has __sprite query ?
@@ -54,7 +56,7 @@ var Rules = Object.derive(function (id, css) {
     }
 
     self._css = css.replace(__background_re,
-        function(m, image, position, repeat) {
+        function(m, image, position, repeat, size) {
             var res, info;
             if (image) {
                 //get the url of image
@@ -91,6 +93,14 @@ var Rules = Object.derive(function (id, css) {
                 if (res) {
                     self.repeat = res[1].trim();
                     self._direct = res[1];
+                }
+            }
+
+            if (size) {
+                res = size.match(__support_size_re);
+                if (res) {
+                    self.size[0] = parseFloat(res[1]);
+                    self.size[1] = parseFloat(res[2]);
                 }
             }
             return __sprites_hook_ld + m + __sprites_hook_rd;
