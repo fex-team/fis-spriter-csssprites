@@ -131,9 +131,7 @@ Generator.prototype = {
                 return map.hasOwnProperty(item) ? false : map[item] = true;
             });
         }
-
-        console.log(scale ? direct : '');
-
+        
         if (this.settings.ie_bug_fix) {
             var MAX = this.settings.max_selectores || 30; //max 36
             var arr_selector = unique(arr_selector.join(',').split(','));
