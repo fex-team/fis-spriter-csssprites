@@ -74,7 +74,7 @@ function Generator(file, index, list, images, ret, settings, opt) {
         bg.image_ = image_;
         
         if (bg.size[0] != -1) {
-            //不支持repeat，只支持平铺
+            //不支持x, y
             if (direct === 'z') {
                 var key = '' + bg.size[0] / image_.size().width;
                 if (scales[key]) {
