@@ -1,7 +1,7 @@
 ## fis-spriter-csssprites
 [![NPM version](https://badge.fury.io/js/fis-spriter-csssprites.png)](http://badge.fury.io/js/fis-spriter-csssprites)
 
-基于FIS的csssprites，对css文件,以及html文件css片段进行csssprites处理。支持`repeat-x`, `repeat-y`, `background-position`
+基于FIS的csssprites，对css文件,以及html文件css片段进行csssprites处理。支持`repeat-x`, `repeat-y`, `background-position` 和 `background-size`
 
 ### 安装
 
@@ -61,6 +61,19 @@ $ npm install -g fis-spriter-csssprites
         //     $2为：内容(content) ,
         //     $3为：结束标签(end tag)
     });
+    ```
+* `background-size`
+    
+    `background-size` 只支持图片同倍率缩小或者放大；`scale < 1`缩小, `scale > 1`放大；其配置如下，当设置`scale`时，不需要给每一个规则都写上`background-size`，csssprites会根据scale产出正确的结果。
+
+    * 支持情况
+        * 不支持跟`background-repeat`一起用。
+        * 设置了`scale`，则规则不允许写`background-size`。
+
+    ```javascript
+    fis.config.set('settings.spriter.csssprites', {
+        scale: 0.5
+    })
     ```
 
 * **csssprites其他设置**
