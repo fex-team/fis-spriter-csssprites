@@ -5,32 +5,32 @@ var assert = require('chai').assert
     , parser = require('../../libs/cssParser.js')
     , __root = __dirname + '/cssParser/';
 
-//tests
-var files = {
-    'background.css': function(rules) {
-        assert.equal(rules.length, 1, '包含一个带有__sprite的规则组');
-    },
-    'background-image.css': function(rules) {
-    },
-    'background-position.css': function(rules) {
-    }
-};
 
-function __replace(cont) {
-    return cont.replace(/[\r\n]/g, function(m) {
-        return '';
-    });
+function getSource(fn) {
+    var source = fn.toString();
+    var m = source.match(/\/\*([\s\S]*)\*\//i);
+    return m[1];
 }
 
-for (var file in files) {
-    if (!files.hasOwnProperty(file)) {
-        continue;
-    }
-    var cont = fs.readFileSync(__root + 'src/' + file, {
-        encoding: 'utf-8'
-    });
 
-    var ret = parser(cont);
-    assert.equal(__replace(ret.content), __replace(fs.readFileSync(__root + 'expect/' + file, {encoding: 'utf-8'})), file);
-    files[file](ret.map);
-}
+describe ('#1 需要合并的图片都存在', function () {
+    it ('map.length == 2', function () {
+        var test_1 = parser(
+           
+            getSource(function () {
+                /*
+                #a {
+                    background: url("a.png?__sprite")
+                }
+                #b {
+                    background: url("b.png?__sprite")
+                }
+                */
+            }), {
+                'a.png': {},
+                'b.png': {}
+            }
+        );
+        assert.equal(test_1.map.length, 2);
+    });
+});

@@ -11,7 +11,7 @@ assert.equal(rule_1.getImageUrl(), '/static/m.png', 'image url: /static/m.png');
 assert.equal(rule_1.repeat, false, "background-repeat: no-repeat;");
 assert.equal(rule_1.isSprites(), false, "包含图片不需要做图片合并");
 assert.equal(rule_1.getId(), 'cls', "当前处理的ID为'cls'");
-assert.equal(rule_1.getType(), 'left', "type为left");
+assert.equal(rule_1.getType(), null, "type为null");
 assert.equal(rule_1.getPosition()[0], 0, "position x = 0");
 assert.equal(rule_1.getPosition()[1], 0, 'position y = 0');
 
@@ -21,7 +21,7 @@ assert.equal(rule_2.getImageUrl(), 'a.png', 'image url: a.png');
 assert.equal(rule_2.repeat, false, "background-repeat: no-repeat;");
 assert.equal(rule_2.isSprites(), true, "包含图片不需要做图片合并");
 assert.equal(rule_2.getId(), 'cls_2', "当前处理的ID为'cls_2'");
-assert.equal(rule_2.getType(), 'left', "type为left");
+assert.equal(rule_2.getType(), null, "type为null");
 assert.equal(rule_2.getPosition()[0], -10.1, "position x = -10.1");
 assert.equal(rule_2.getPosition()[1], 0, 'position y = 0');
 
@@ -63,3 +63,13 @@ assert.equal(rule_4_3.getPosition()[1], 0, 'y = 0');
 var rule_4_4 = _rules.wrap('left', 'background-position: right top');
 assert.equal(rule_4_4.getPosition()[0], 'right', 'x = right');
 assert.equal(rule_4_4.getPosition()[1], 0, 'y = 0');
+
+//background-size
+var rule_5_0 = _rules.wrap('#background-size-0', 'background-size: 10px 5px');
+
+assert.equal(rule_5_0.size[0], 10, 'width is 10');
+assert.equal(rule_5_0.size[1], 5, 'height is 5');
+
+var rule_5_1 = _rules.wrap('#backgorund-size-1', 'background-size: 50%');
+assert.equal(rule_5_1.size[0], -1, 'width is -1');
+assert.equal(rule_5_1.size[1], -1, 'height is -1');
