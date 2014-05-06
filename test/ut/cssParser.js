@@ -23,7 +23,8 @@ describe ('#1 需要合并的图片都存在', function () {
                     background: url("a.png?__sprite")
                 }
                 #b {
-                    background: url("b.png?__sprite")
+                    background: url("b.png?__sprite");
+                    background-size: 10px 100px;
                 }
                 */
             }), {

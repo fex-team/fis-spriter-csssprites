@@ -40,7 +40,7 @@ function Generator(file, index, list, images, ret, settings, opt) {
 
     //设置宽高限制
     Image.setLimit(settings.width_limit, settings.height_limit);
-
+    var that = this;
     this.file = file;
     this.ret = ret;
     this.settings = settings;
@@ -49,30 +49,58 @@ function Generator(file, index, list, images, ret, settings, opt) {
     this.images = images;
     this.index = index;
 
-    var list_x = [];
-    var list_y = [];
-    var list_z = [];
+    var list_ = {};
+    var scale = {};
+
+    function getImage(release) {
+        if (that.images.hasOwnProperty(release)) {
+            return that.images[release];
+        }
+        return false;
+    }
+
+    function insertToObject(o, key, elm) {
+        if (o[key]) {
+            o[key].push(elm);
+        } else {
+            o[key] = [elm];
+        }
+    }
+
     fis.util.map(list, function (k, bg) {
-        if (bg.getDirect() === 'x') {
-            list_x.push(bg);
-        } else if (bg.getDirect() === 'y') {
-            list_y.push(bg);
-        } else if (bg.getDirect() === 'z') {
-            list_z.push(bg);
+        var image_ = Image(getImage(bg.getImageUrl()).getContent());
+        var direct = bg.getDirect();
+
+        bg.image_ = image_;
+        
+        if (bg.size[0] != -1) {
+            var key = '' + bg.size[0] / image_.size().width;
+            if (scale[key]) {
+                insertToObject(scale[key], direct, bg);
+            } else {
+                scale[key] = {};
+                insertToObject(scale[key], direct, bg);
+            }
+        } else {
+            insertToObject(list_, direct, bg);
         }
     });
-    this.fill(list_x, 'x');
-    this.fill(list_y, 'y');
-    this.zFill(list_z);
+
+    this.fill(list_['x'], 'x');
+    this.fill(list_['y'], 'y');
+    this.zFill(list_['z']);
+
+    //backgroud-size
+
+    fis.util.map(scale, function (s, l) {
+        s = parseFloat(s);
+        that.fill(l['x'], 'x', s);
+        that.fill(l['y'], 'y', s);
+        that.zFill(l['z'], s);
+    });
 }
 
 Generator.prototype = {
-    getImage: function(release) {
-        if (this.images.hasOwnProperty(release)) {
-            return this.images[release];
-        }
-        return false;
-    },
     _imageExist: function (images, url) {
         for (var i = 0, len = images.length; i < len; i++) {
             if (url == images[i].url) {
@@ -81,11 +109,15 @@ Generator.prototype = {
         }
         return false;
     },
-    after: function (image, arr_selector, direct) {
+    after: function (image, arr_selector, direct, scale) {
         var ext = '_' + direct + '.png';
-        
+        var size = image.size();
         if (this.index) {
             ext = '_' + this.index + ext;
+        }
+
+        if (scale) {
+            ext = '_' + scale + ext;
         }
 
         var image_file = fis.file.wrap(this.file.realpathNoExt + ext);
@@ -100,6 +132,8 @@ Generator.prototype = {
             });
         }
 
+        console.log(scale ? direct : '');
+
         if (this.settings.ie_bug_fix) {
             var MAX = this.settings.max_selectores || 30; //max 36
             var arr_selector = unique(arr_selector.join(',').split(','));
@@ -109,34 +143,34 @@ Generator.prototype = {
             for (var i = 0; i < n; i++) {
                 var step = i * MAX
                 this.css += arr_selector.slice(step, step + MAX).join(',')
-                    + '{background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + image_file.hash + ')}';
+                    + '{'
+                    + (scale ? 'background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;': '')
+                    + 'background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + image_file.hash + ')}';
             }
         } else {
             this.css += unique(arr_selector.join(',').split(',')).join(',')
-                + '{background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + image_file.hash + ')}';
+                + '{'
+                + (scale ? 'background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;': '')
+                + 'background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + image_file.hash + ')}';
         }
     },
     z_pack: require('./pack.js'),
-    fill: function(list, direct) {
-        if (list.length == 0) {
+    fill: function(list, direct, scale) {
+        if (!list || list.length == 0) {
             return;
         }
-        var max = 0,
-            images = [],
-            //宽度或者高的和
-            total = 0,
-            parsed = [],
-            i, k, len, count, op_max;
+        var max = 0;
+        var images = [];
+        //宽度或者高的和
+        var total = 0;
+        var parsed = [];
+        var i, k, len, count, op_max;
 
         for (i = 0, k = -1, len = list.length; i < len; i++) {
             if (parsed.indexOf(list[i].getImageUrl()) == -1) {
-                var image_info = this.getImage(list[i].getImageUrl());
-                if (!image_info) {
-                    continue;
-                }
                 parsed.push(list[i].getImageUrl());
                 k++;
-                var img = Image(image_info.getContent());
+                var img = list[i].image_;
                 var size = img.size();
                 images[k] = {
                     url: list[i].getImageUrl(),
@@ -203,10 +237,10 @@ Generator.prototype = {
             }
         }
 
-        this.after(image, cls, direct);
+        this.after(image, cls, direct, scale);
     },
-    zFill: function(list) {
-        if (list.length == 0) {
+    zFill: function(list, scale) {
+        if (!list || list.length == 0) {
             return;
         }
         var i, k, k0, length, images = [[], []], parsed = [[], []], max = [0, 0], total = [0, 0];
@@ -224,11 +258,7 @@ Generator.prototype = {
             }
             if (parsed[k0].indexOf(item.getImageUrl()) == -1) {
                 parsed[k0].push(item.getImageUrl());
-                var image_info = this.getImage(item.getImageUrl());
-                if (!image_info) {
-                    continue;
-                }
-                var img = Image(image_info.getContent());
+                var img = item.image_;
                 var size = img.size();
                 if (item.getType() == 'left') {
                     //计算最大宽度
@@ -302,9 +332,16 @@ Generator.prototype = {
                 y = current.fit.y;
                 image.draw(Image(current.image), x, y);
                 for (j = 0, count = current.cls.length; j < count; j++) {
+                    x = current.cls[j].position[0] + -x;
+                    y = current.cls[j].position[1] + -y;
+                    if (scale) {
+                        x = x * scale;
+                        y = y * scale;
+                    }
+
                     this.css += current.cls[j].selector + '{background-position:'
-                        + (current.cls[j].position[0] + -x)+ 'px '
-                        + (current.cls[j].position[1] + -y) + 'px}';
+                        + x + 'px '
+                        + y + 'px}';
                     cls.push(current.cls[j].selector);
                 }
             }
@@ -317,20 +354,29 @@ Generator.prototype = {
                 x = max[zero] + max[left] - current.w;
                 image.draw(Image(current.image), x, y);
                 for (j = 0, count = current.cls.length; j < count; j++) {
-                    var x_cur;
+                    var x_cur, y_cur = (current.cls[j].position[1] + -y) + 'px';
+                    if (scale) {
+                        y_cur = ((current.cls[j].position[1] + -y) * scale) + 'px'
+                    }
+
                     if (current.cls[j].position[0] == 'right') {
                         x_cur = 'right ';
                     } else {
-                        x_cur = (-x + current.cls[j].position[0]) + 'px ';
+                        x = -x + current.cls[j].position[0];
+                        if (scale) {
+                            x = x * scale;
+                        }
+                        x_cur = x + 'px ';
                     }
+
                     this.css += current.cls[j].selector + '{background-position:'
                         + x_cur
-                        + (current.cls[j].position[1] + -y) + 'px}';
+                        + y_cur + '}';
                     cls.push(current.cls[j].selector);
                 }
                 y += current.h;
             }
         }
-        this.after(image, cls, 'z');
+        this.after(image, cls, 'z', scale);
     }
 };
