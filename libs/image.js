@@ -73,15 +73,17 @@ function Generator(file, index, list, images, ret, settings, opt) {
 
         bg.image_ = image_;
         
-        if (bg.size[0] != -1) {
+        var scale_ = bg.size[0] / image_.size().width;
+
+        if (bg.size[0] != -1 && scale_ != settings.scale) {
+            scale_ = '' + scale_;
             //不支持x, y
             if (direct === 'z') {
-                var key = '' + bg.size[0] / image_.size().width;
-                if (scales[key]) {
-                    insertToObject(scales[key], direct, bg);
+                if (scales[scale_]) {
+                    insertToObject(scales[scale_], direct, bg);
                 } else {
-                    scales[key] = {};
-                    insertToObject(scales[key], direct, bg);
+                    scales[scale_] = {};
+                    insertToObject(scales[scale_], direct, bg);
                 }
             }
         } else {
@@ -312,6 +314,7 @@ Generator.prototype = {
                 height = total[i];
             }
         }
+
         //减掉多加了一次的margin
         height = height - this.settings.margin;
         //left, zero
@@ -328,18 +331,19 @@ Generator.prototype = {
                 current = images[zero][i];
                 x = current.fit.x;
                 y = current.fit.y;
+
                 image.draw(Image(current.image), x, y);
                 for (j = 0, count = current.cls.length; j < count; j++) {
-                    x = current.cls[j].position[0] + -x;
-                    y = current.cls[j].position[1] + -y;
+                    var x_ = current.cls[j].position[0] + -x;
+                    var y_ = current.cls[j].position[1] + -y;
                     if (scale) {
-                        x = x * scale;
-                        y = y * scale;
+                        x_ = x_ * scale;
+                        y_ = y_ * scale;
                     }
 
                     this.css += current.cls[j].selector + '{background-position:'
-                        + x + 'px '
-                        + y + 'px}';
+                        + x_ + 'px '
+                        + y_ + 'px}';
                     cls.push(current.cls[j].selector);
                 }
             }
@@ -352,24 +356,24 @@ Generator.prototype = {
                 x = max[zero] + max[left] - current.w;
                 image.draw(Image(current.image), x, y);
                 for (j = 0, count = current.cls.length; j < count; j++) {
-                    var x_cur, y_cur = (current.cls[j].position[1] + -y) + 'px';
+                    var x_, y_ = (current.cls[j].position[1] + -y) + 'px';
                     if (scale) {
-                        y_cur = ((current.cls[j].position[1] + -y) * scale) + 'px'
+                        y_ = ((current.cls[j].position[1] + -y) * scale) + 'px'
                     }
 
                     if (current.cls[j].position[0] == 'right') {
-                        x_cur = 'right ';
+                        x_ = 'right ';
                     } else {
-                        x = -x + current.cls[j].position[0];
+                        x_ = -x + current.cls[j].position[0];
                         if (scale) {
-                            x = x * scale;
+                            x_ = x_ * scale;
                         }
-                        x_cur = x + 'px ';
+                        x_ = x_ + 'px ';
                     }
 
                     this.css += current.cls[j].selector + '{background-position:'
-                        + x_cur
-                        + y_cur + '}';
+                        + x_
+                        + y_ + '}';
                     cls.push(current.cls[j].selector);
                 }
                 y += current.h;

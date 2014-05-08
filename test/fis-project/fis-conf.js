@@ -9,7 +9,7 @@ fis.config.merge({
                 query: '?t=123124132'
             },
             {
-                reg: '**.css',
+                reg: /style\.css/i,
                 useSprite: true
             },
             {
@@ -23,10 +23,17 @@ fis.config.merge({
     },
     settings: {
         spriter:  [{
-                margin: 10,
+                margin: 256,
                 //矩阵排列方式 
+                scale: 0.5,
                 layout: 'matrix'
-        }]
+        }],
+
+        optimizer: {
+            "png-compressor": {
+                type: 'pngquant'
+            }
+        }
     }
 });
 
