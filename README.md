@@ -3,11 +3,9 @@
 
 基于FIS的csssprites，对css文件,以及html文件css片段进行csssprites处理。支持`repeat-x`, `repeat-y`, `background-position` 和 `background-size`
 
-### 安装
+### 使用
 
-```bash
-$ npm install -g fis-spriter-csssprites
-```
+**FIS 内置**
 
 #### 环境要求
 
