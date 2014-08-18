@@ -95,7 +95,7 @@ function Generator(file, index, list, images, ret, settings, opt) {
     this.fill(list_['y'], 'y');
     this.zFill(list_['z'], settings.scale);
 
-    //backgroud-size
+    //background-size
     fis.util.map(scales, function (s, l) {
         s = parseFloat(s);
         that.zFill(l['z'], s);
