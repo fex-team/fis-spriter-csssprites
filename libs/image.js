@@ -153,6 +153,12 @@ Generator.prototype = {
                 + (scale ? 'background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;': '')
                 + 'background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + image_file.hash + ')}';
         }
+
+        //@TODO record
+        var report = {};
+        report[image_file.subpath] = unique(arr_selector.join(',').split(',')).length;
+        fis.emitter.emit('csssprite:record', report);
+
     },
     z_pack: require('./pack.js'),
     fill: function(list, direct) {
