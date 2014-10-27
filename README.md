@@ -63,6 +63,8 @@
 * `background-size`
     
     `background-size` 只支持图片同倍率缩小或者放大；`scale < 1`缩小, `scale > 1`放大；其配置如下，当设置`scale`时，不需要给每一个规则都写上`background-size`，csssprites会根据scale产出正确的结果。
+    
+    **注意**: 当写像素时，必须两个大小同时写才能识别。如`background-size:10px 15px`  
 
     * 支持情况
         * 不支持跟`background-repeat`一起用。
