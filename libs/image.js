@@ -4,7 +4,7 @@
  */
 
 'use strict';
-var Image = require('node-images');
+var Image = require('images');
 
 module.exports = function(file, index, list, images, ret, settings, opt) {
     var gen = new Generator(file, index, list, images, ret, settings, opt);
