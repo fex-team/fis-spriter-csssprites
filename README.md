@@ -9,7 +9,7 @@
 
 #### 环境要求
 
-0. 依赖native插件，[node-images](https://github.com/xiangshouding/node-images) 环境需要符合个插件的要求。(OS X、Windows、Linux x86 提供了二进制包)
+0. 依赖native插件，[images](https://github.com/zhangyuanwei/node-images) 环境需要符合这个插件的要求。(OS X、Windows、Linux x86 提供了二进制包)
 0. 只能在FIS中使用
 
 ### 配置
