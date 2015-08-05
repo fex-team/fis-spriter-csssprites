@@ -134,25 +134,27 @@ Generator.prototype = {
             });
         }
 
-        if (this.settings.ie_bug_fix) {
-            var MAX = this.settings.max_selectores || 30; //max 36
-            var arr_selector = unique(arr_selector.join(',').split(','));
-            var len = arr_selector.length;
-            var n =  Math.ceil(len / MAX);
+    var imageUrl = image_file.getUrl(this.opt.hash, this.opt.domain); // image_file.basename;
+    imageUrl = imageUrl.substr(imageUrl.lastIndexOf('/')+1);
+    if (this.settings.ie_bug_fix) {
+      var MAX = this.settings.max_selectores || 30; //max 36
+      var arr_selector = unique(arr_selector.join(',').split(','));
+      var len = arr_selector.length;
+      var n = Math.ceil(len / MAX);
 
-            for (var i = 0; i < n; i++) {
-                var step = i * MAX
-                this.css += arr_selector.slice(step, step + MAX).join(',')
-                    + '{'
-                    + (scale ? 'background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;': '')
-                    + 'background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + image_file.hash + ')}';
-            }
-        } else {
-            this.css += unique(arr_selector.join(',').split(',')).join(',')
-                + '{'
-                + (scale ? 'background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;': '')
-                + 'background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + image_file.hash + ')}';
-        }
+      for (var i = 0; i < n; i++) {
+        var step = i * MAX
+        this.css += arr_selector.slice(step, step + MAX).join(',')
+          + '{'
+          + (scale ? 'background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;' : '')
+          + 'background-image: url(' + imageUrl + image_file.hash + ')}'; // image_file.getUrl(this.opt.hash, this.opt.domain)
+      }
+    } else {
+      this.css += unique(arr_selector.join(',').split(',')).join(',')
+        + '{'
+        + (scale ? 'background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;' : '')
+        + 'background-image: url(' + imageUrl + image_file.hash + ')}';
+    }
 
         //@TODO record
         var report = {};
