@@ -1,6 +1,6 @@
 {
-  "name": "fis-spriter-csssprites",
-  "version": "0.3.0",
+  "name": "fxd-spriter-csssprites",
+  "version": "0.0.1",
   "description": "基于fis的csssprite，支持repeat-x，repeat-x，background-position",
   "main": "index.js",
   "directories": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fis-dev/fis-spriter-csssprites.git"
+    "url": "https://github.com/femxd/fxd-spriter-csssprites.git"
   },
   "dependencies": {
     "images": "2.1.5"
@@ -30,6 +30,6 @@
   "author": "xiangshouding <xiangshouding@baidu.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fis-dev/fis-spriter-csssprites/issues"
+    "url": "https://github.com/femxd/fxd-spriter-csssprites/issues"
   }
 }
