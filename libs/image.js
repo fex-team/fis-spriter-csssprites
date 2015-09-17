@@ -4,7 +4,8 @@
  */
 
 'use strict';
-var Image = require('images');
+var Image = require('images'),
+    path = require('path');
 
 module.exports = function(file, index, list, images, ret, settings, opt) {
     var gen = new Generator(file, index, list, images, ret, settings, opt);
@@ -121,12 +122,19 @@ Generator.prototype = {
         if (scale) {
             ext = '_' + scale + ext;
         }
+        var image_file;
+        if(this.file.spriteRelease){
+            image_file = fis.file.wrap(fis.project.getProjectPath() + this.file.spriteRelease);
+            image_file.setContent(image.encode('png'));
+            fis.compile(image_file);
+            this.ret.pkg[this.file.spriteRelease] = image_file;
+        }else{
+            image_file = fis.file.wrap(this.file.realpathNoExt + ext);
+            image_file.setContent(image.encode('png'));
+            fis.compile(image_file);
+            this.ret.pkg[this.file.subpathNoExt + ext] = image_file;
+        }
 
-        var image_file = fis.file.wrap(this.file.realpathNoExt + ext);
-        image_file.setContent(image.encode('png'));
-        fis.compile(image_file);
-        this.ret.pkg[this.file.subpathNoExt + ext] = image_file;
-        
         function unique(arr) {
             var map = {};
             return arr.filter(function(item){
@@ -134,27 +142,39 @@ Generator.prototype = {
             });
         }
 
-    var imageUrl = image_file.getUrl(this.opt.hash, this.opt.domain); // image_file.basename;
-    imageUrl = imageUrl.substr(imageUrl.lastIndexOf('/')+1);
-    if (this.settings.ie_bug_fix) {
-      var MAX = this.settings.max_selectores || 30; //max 36
-      var arr_selector = unique(arr_selector.join(',').split(','));
-      var len = arr_selector.length;
-      var n = Math.ceil(len / MAX);
+        function hasUsedRelativeHook(){
+            var hooks = fis.get("modules.hook");
+            return hooks.some(function(hook){
+                if(typeof hook === "object" && hook.__name === 'relative'){
+                    return true;
+                }
+            });
+        }
 
-      for (var i = 0; i < n; i++) {
-        var step = i * MAX
-        this.css += arr_selector.slice(step, step + MAX).join(',')
-          + '{'
-          + (scale ? 'background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;' : '')
-          + 'background-image: url(' + imageUrl + image_file.hash + ')}'; // image_file.getUrl(this.opt.hash, this.opt.domain)
-      }
-    } else {
-      this.css += unique(arr_selector.join(',').split(',')).join(',')
-        + '{'
-        + (scale ? 'background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;' : '')
-        + 'background-image: url(' + imageUrl + image_file.hash + ')}';
-    }
+        var spriteUrl = image_file.getUrl(this.opt.hash, this.opt.domain) + image_file.hash;
+        if(hasUsedRelativeHook() && !(image_file.useDomain && image_file.domain)){
+            spriteUrl = path.relative(this.file.subdirname, spriteUrl).replace(/[\/\\]+/g, '/');
+        }
+
+        if (this.settings.ie_bug_fix) {
+            var MAX = this.settings.max_selectores || 30; //max 36
+            var arr_selector = unique(arr_selector.join(',').split(','));
+            var len = arr_selector.length;
+            var n =  Math.ceil(len / MAX);
+
+            for (var i = 0; i < n; i++) {
+                var step = i * MAX
+                this.css += arr_selector.slice(step, step + MAX).join(',')
+                    + '{'
+                    + (scale ? 'background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;': '')
+                    + 'background-image: url(' + spriteUrl + ')}';
+            }
+        } else {
+            this.css += unique(arr_selector.join(',').split(',')).join(',')
+                + '{'
+                + (scale ? 'background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;': '')
+                + 'background-image: url(' + spriteUrl + ')}';
+        }
 
         //@TODO record
         var report = {};
