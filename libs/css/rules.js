@@ -14,7 +14,7 @@ var Rules = Object.derive(function (id, css) {
         , __support_position_re = /(0|[+-]?(?:\d*\.|)\d+px|left|right)\s+(0|[+-]?(?:\d*\.|)\d+px|top)/i
         , __support_size_re = /(\d+px)\s*(\d+px)/i //只支持px
         , __repeat_re = /\brepeat-(x|y)/i
-        , __sprites_re = /[?&]__sprite/i
+        , __sprites_re = /[?&]__sprite(?:__(\w+)$)?/i
         , __sprites_hook_ld = '<<<'
         , __sprites_hook_rd = '>>>';
     //selectors
@@ -67,6 +67,8 @@ var Rules = Object.derive(function (id, css) {
                     self.image = info.origin.replace(__sprites_re, '');
                     if (info.query && __sprites_re.test(info.query)) {
                         self._is_sprites = true;
+                        if(RegExp.$1)
+                            self._sprite_name = RegExp.$1 + '.png';
                     }
                 }
                 //judge repeat-x or repeat-y
