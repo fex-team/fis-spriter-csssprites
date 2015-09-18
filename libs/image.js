@@ -13,15 +13,31 @@ module.exports = function(file, index, list, images, ret, settings, opt) {
 };
 
 function Generator(file, index, list, images, ret, settings, opt) {
-    
-    var default_settings = {
-        'margin': 3,
-        'width_limit': 10240,
-        'height_limit': 10240,
-        'layout': 'linear',
-        'ie_bug_fix': true
-    };
+    var self = this;
+    var missSpriteName = fis.util.every(list, function(item) {
+        return !item._sprite_name;
+    });
+    if (missSpriteName) {
+        this._process(file, index, list, images, ret, settings, opt);
+    } else {
+        var spriteNameGrp = fis.util.groupBy(list, function(item) {
+            return !!item._sprite_name ? item._sprite_name : 'NULL';
+        });
+        fis.util.each(spriteNameGrp, function(imageList, spriteName) {
+            self._process(file, spriteName, imageList, images, ret, settings, opt);
+        })
+    }
+}
 
+Generator.prototype = {
+    _process: function(file, index, list, images, ret, settings, opt) {
+        var default_settings = {
+            'margin': 3,
+            'width_limit': 10240,
+            'height_limit': 10240,
+            'layout': 'linear',
+            'ie_bug_fix': true
+        };
 
     fis.util.map(default_settings, function (key, value) {
         if (settings.hasOwnProperty(key)) {
@@ -46,7 +62,7 @@ function Generator(file, index, list, images, ret, settings, opt) {
     this.ret = ret;
     this.settings = settings;
     this.opt = opt;
-    this.css = '';
+    this.css = this.css || '';
     this.images = images;
     this.index = index;
 
@@ -68,43 +84,40 @@ function Generator(file, index, list, images, ret, settings, opt) {
         }
     }
 
-    fis.util.map(list, function (k, bg) {
-        var image_ = Image(getImage(bg.getImageUrl()).getContent());
-        var direct = bg.getDirect();
+        fis.util.map(list, function(k, bg) {
+            var image_ = Image(getImage(bg.getImageUrl()).getContent());
+            var direct = bg.getDirect();
 
-        bg.image_ = image_;
-        
-        var scale_ = bg.size[0] / image_.size().width;
+            bg.image_ = image_;
 
-        if (bg.size[0] != -1 && scale_ != settings.scale) {
-            scale_ = '' + scale_;
-            //不支持x, y
-            if (direct === 'z') {
-                if (scales[scale_]) {
-                    insertToObject(scales[scale_], direct, bg);
-                } else {
-                    scales[scale_] = {};
-                    insertToObject(scales[scale_], direct, bg);
+            var scale_ = bg.size[0] / image_.size().width;
+
+            if (bg.size[0] != -1 && scale_ != settings.scale) {
+                scale_ = '' + scale_;
+                //不支持x, y
+                if (direct === 'z') {
+                    if (scales[scale_]) {
+                        insertToObject(scales[scale_], direct, bg);
+                    } else {
+                        scales[scale_] = {};
+                        insertToObject(scales[scale_], direct, bg);
+                    }
                 }
+            } else {
+                insertToObject(list_, direct, bg);
             }
-        } else {
-            insertToObject(list_, direct, bg);
-        }
-    });
+        });
 
-    this.fill(list_['x'], 'x');
-    this.fill(list_['y'], 'y');
-    this.zFill(list_['z'], settings.scale);
-
-    //background-size
-    fis.util.map(scales, function (s, l) {
-        s = parseFloat(s);
-        that.zFill(l['z'], s);
-    });
-}
-
-Generator.prototype = {
-    _imageExist: function (images, url) {
+        this.fill(list_['x'], 'x', index);
+        this.fill(list_['y'], 'y', index);
+        this.zFill(list_['z'], settings.scale, index);
+        //background-size
+        fis.util.map(scales, function(s, l) {
+            s = parseFloat(s);
+            that.zFill(l['z'], s, index);
+        });
+    },
+    _imageExist: function(images, url) {
         for (var i = 0, len = images.length; i < len; i++) {
             if (url == images[i].url) {
                 return i;
@@ -112,19 +125,24 @@ Generator.prototype = {
         }
         return false;
     },
-    after: function (image, arr_selector, direct, scale) {
+    after: function(image, arr_selector, direct, scale, spriteName) {
         var ext = '_' + direct + '.png';
         var size = image.size();
-        if (this.index) {
-            ext = '_' + this.index + ext;
-        }
+        // FIXME allanyu
+        //if (this.index) {
+        //    ext = '_' + this.index + ext;
+        //}
 
         if (scale) {
             ext = '_' + scale + ext;
         }
         var image_file;
-        if(this.file.spriteRelease){
-            image_file = fis.file.wrap(fis.project.getProjectPath() + this.file.spriteRelease);
+        if (this.file.spriteRelease) {
+            var imagePath = fis.project.getProjectPath() + this.file.spriteRelease;
+            if (spriteName && spriteName !== 'NULL') {
+                imagePath = path.dirname(imagePath) + "/" + spriteName;
+            }
+            image_file = fis.file.wrap(imagePath);
             image_file.setContent(image.encode('png'));
             fis.compile(image_file);
             this.ret.pkg[this.file.spriteRelease] = image_file;
@@ -183,7 +201,7 @@ Generator.prototype = {
 
     },
     z_pack: require('./pack.js'),
-    fill: function(list, direct) {
+    fill: function(list, direct, spriteName) {
         if (!list || list.length == 0) {
             return;
         }
@@ -265,9 +283,9 @@ Generator.prototype = {
             }
         }
 
-        this.after(image, cls, direct);
+        this.after(image, cls, direct, null, spriteName);
     },
-    zFill: function(list, scale) {
+    zFill: function(list, scale, spriteName) {
         if (!list || list.length == 0) {
             return;
         }
@@ -407,6 +425,6 @@ Generator.prototype = {
                 y += current.h;
             }
         }
-        this.after(image, cls, 'z', scale);
+        this.after(image, cls, 'z', scale, spriteName);
     }
 };
