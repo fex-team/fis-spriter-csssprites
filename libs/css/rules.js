@@ -14,7 +14,7 @@ var Rules = Object.derive(function (id, css) {
         , __support_position_re = /(0|[+-]?(?:\d*\.|)\d+px|left|right)\s+(0|[+-]?(?:\d*\.|)\d+px|top)/i
         , __support_size_re = /(\d+px)\s*(\d+px)/i //只支持px
         , __repeat_re = /\brepeat-(x|y)/i
-        , __sprites_re = /[?&]__sprite(?:__(\w+)$)?/i
+        , __sprites_re = /[?&]__sprite(?:__([\w-]+)$)?/i
         , __sprites_hook_ld = '<<<'
         , __sprites_hook_rd = '>>>';
     //selectors
