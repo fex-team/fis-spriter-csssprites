@@ -145,12 +145,14 @@ Generator.prototype = {
                 this.css += arr_selector.slice(step, step + MAX).join(',')
                     + '{'
                     + (scale ? 'background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;': '')
+                    + (scale ? '-webkit-background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;': '')
                     + 'background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + image_file.hash + ')}';
             }
         } else {
             this.css += unique(arr_selector.join(',').split(',')).join(',')
                 + '{'
                 + (scale ? 'background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;': '')
+                + (scale ? '-webkit-background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;': '')
                 + 'background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + image_file.hash + ')}';
         }
 
