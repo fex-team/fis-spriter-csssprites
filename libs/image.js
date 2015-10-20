@@ -5,6 +5,7 @@
 
 'use strict';
 var Image = require('images');
+var util = require('./util.js');
 
 module.exports = function(file, index, list, images, ret, settings, opt) {
     var gen = new Generator(file, index, list, images, ret, settings, opt);
@@ -133,7 +134,7 @@ Generator.prototype = {
                 return map.hasOwnProperty(item) ? false : map[item] = true;
             });
         }
-
+        var imageUrl = util.getUrl(image_file, this.file, opt);
         if (this.settings.ie_bug_fix) {
             var MAX = this.settings.max_selectores || 30; //max 36
             var arr_selector = unique(arr_selector.join(',').split(','));
@@ -145,13 +146,13 @@ Generator.prototype = {
                 this.css += arr_selector.slice(step, step + MAX).join(',')
                     + '{'
                     + (scale ? 'background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;': '')
-                    + 'background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + image_file.hash + ')}';
+                    + 'background-image: url(' + imageUrl + ')}';
             }
         } else {
             this.css += unique(arr_selector.join(',').split(',')).join(',')
                 + '{'
                 + (scale ? 'background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;': '')
-                + 'background-image: url(' + image_file.getUrl(this.opt.hash, this.opt.domain) + image_file.hash + ')}';
+                + 'background-image: url(' + imageUrl + ')}';
         }
 
         //@TODO record
