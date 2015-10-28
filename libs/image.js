@@ -290,6 +290,7 @@ Generator.prototype = {
             return;
         }
         var i, k, k0, length, images = [[], []], parsed = [[], []], max = [0, 0], total = [0, 0];
+        var _images = [];
         for (i = 0, k = [-1, -1], length = list.length; i < length; i++) {
             var item = list[i];
             // 如果默认是linear，type全都设为left
@@ -345,6 +346,7 @@ Generator.prototype = {
         }
         if (images[zero]) {
             var zero_root;
+            _images = images[zero].concat([]);// 为了在后面保证css的顺序一致
             //高度从大到小排序
             images[zero].sort(function(a, b) {
                 return -(a.h - b.h);
@@ -354,7 +356,7 @@ Generator.prototype = {
             max[zero] = zero_root.w;
             total[zero] = zero_root.h;
         }
-        var height  = 0;
+        var height = 0;
         for (i = 0, length = total.length; i < length; i++) {
             if (total[i] > height) {
                 height = total[i];
@@ -390,7 +392,14 @@ Generator.prototype = {
                     this.css += current.cls[j].selector + '{background-position:'
                         + x_ + 'px '
                         + y_ + 'px}';
-                    cls.push(current.cls[j].selector);
+                    // NOTE: 为了保证css顺序而注释本行
+		    //  cls.push(current.cls[j].selector);
+                }
+            }
+            for (i = 0, length = _images.length; i < length; i++) {
+                current = _images[i];
+                for (j = 0, count = current.cls.length; j < count; j++) {
+                     cls.push(current.cls[j].selector);
                 }
             }
         }
