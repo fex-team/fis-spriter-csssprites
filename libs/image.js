@@ -13,7 +13,7 @@ module.exports = function(file, index, list, images, ret, settings, opt) {
 };
 
 function Generator(file, index, list, images, ret, settings, opt) {
-    
+
     var default_settings = {
         'margin': 3,
         'width_limit': 10240,
@@ -34,7 +34,7 @@ function Generator(file, index, list, images, ret, settings, opt) {
     });
 
     //如果layout不支持的类型，默认为linear
-    var layouts = ['matrix', 'linear']; 
+    var layouts = ['matrix', 'linear'];
     if (layouts.indexOf(settings.layout) == -1) {
         settings.layout = 'linear';
     }
@@ -73,7 +73,7 @@ function Generator(file, index, list, images, ret, settings, opt) {
         var direct = bg.getDirect();
 
         bg.image_ = image_;
-        
+
         var scale_ = bg.size[0] / image_.size().width;
 
         if (bg.size[0] != -1 && scale_ != settings.scale) {
@@ -127,14 +127,14 @@ Generator.prototype = {
         image_file.setContent(image.encode('png'));
         fis.compile(image_file);
         this.ret.pkg[this.file.subpathNoExt + ext] = image_file;
-        
+
         function unique(arr) {
             var map = {};
             return arr.filter(function(item){
                 return map.hasOwnProperty(item) ? false : map[item] = true;
             });
         }
-        var imageUrl = util.getUrl(image_file, this.file, opt);
+        var imageUrl = util.getUrl(image_file, this.file, this.opt);
         if (this.settings.ie_bug_fix) {
             var MAX = this.settings.max_selectores || 30; //max 36
             var arr_selector = unique(arr_selector.join(',').split(','));

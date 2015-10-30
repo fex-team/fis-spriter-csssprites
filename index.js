@@ -59,7 +59,7 @@ function processInline(file, ret, settings, opt) {
 function _process(content, file, index, ret, settings, opt){
     var images = {};
     fis.util.map(ret.src, function (subpath, item) {
-        if (file.isImage()) {
+        if (item.isImage()) {
             images[util.getUrl(item, file, opt)] = item;
         }
     });
