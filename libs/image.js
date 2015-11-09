@@ -7,6 +7,8 @@
 var Image = require('images'),
     path = require('path');
 
+var RET_LINE_REG = /\\r\\n\s*/g;
+
 module.exports = function(file, index, list, images, ret, settings, opt) {
     var gen = new Generator(file, index, list, images, ret, settings, opt);
     return gen.css;
@@ -170,7 +172,8 @@ Generator.prototype = {
         }
 
         var spriteUrl = image_file.getUrl(this.opt.hash, this.opt.domain) + image_file.hash;
-        if(hasUsedRelativeHook() && !(image_file.useDomain && image_file.domain)){
+        var _tmp_css = null;
+        if (hasUsedRelativeHook() && !(image_file.useDomain && image_file.domain)) {
             spriteUrl = path.relative(this.file.subdirname, spriteUrl).replace(/[\/\\]+/g, '/');
         }
 
@@ -182,16 +185,18 @@ Generator.prototype = {
 
             for (var i = 0; i < n; i++) {
                 var step = i * MAX
-                this.css += arr_selector.slice(step, step + MAX).join(',')
-                    + '{'
-                    + (scale ? 'background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;': '')
-                    + 'background-image: url(' + spriteUrl + ')}';
+                _tmp_css = "\r\n" + arr_selector.slice(step, step + MAX).join(',') + '{'
+                    + (scale ? '\r\n    background-size: ' + this.px2rem(size.width * scale + "px ") + this.px2rem(size.height * scale + "px") + ';' : '')
+                    + '\r\n    background-image: url(' + spriteUrl + ')\r\n}';
+                if (this.file.optimizer) _tmp_css = _tmp_css.replace(RET_LINE_REG, "");
+                this.css += _tmp_css;
             }
         } else {
-            this.css += unique(arr_selector.join(',').split(',')).join(',')
-                + '{'
-                + (scale ? 'background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;': '')
-                + 'background-image: url(' + spriteUrl + ')}';
+            _tmp_css = "\r\n" + unique(arr_selector.join(',').split(',')).join(',') + '{'
+                + (scale ? '\r\n    background-size: ' + this.px2rem(size.width * scale + "px ") + this.px2rem(size.height * scale + "px") + ';' : '')
+                + '\r\n    background-image: url(' + spriteUrl + ')\r\n}'
+            if (this.file.optimizer) _tmp_css = _tmp_css.replace(RET_LINE_REG, "");
+            this.css += _tmp_css;
         }
 
         //@TODO record
@@ -284,6 +289,14 @@ Generator.prototype = {
         }
 
         this.after(image, cls, direct, null, spriteName);
+    },
+    px2rem: function(_px) {
+        var unit = this.settings.px2rem && !isNaN(parseInt(this.settings.px2rem)) && parseInt(this.settings.px2rem);
+        if (!unit) {
+            return _px;
+        }
+        var px = parseInt(_px);
+        return typeof _px === 'string' ? px / unit + 'rem ' : px / unit;
     },
     zFill: function(list, scale, spriteName) {
         if (!list || list.length == 0) {
@@ -389,9 +402,12 @@ Generator.prototype = {
                         y_ = y_ * scale;
                     }
 
-                    this.css += current.cls[j].selector + '{background-position:'
-                        + x_ + 'px '
-                        + y_ + 'px}';
+                    var _tmp_css = "";
+                    this.css += "\r\n" + current.cls[j].selector + '{\r\n    background-position:'
+                        + this.px2rem(x_ + 'px ')
+                        + this.px2rem(y_ + 'px') + ';\r\n}';
+                    if (this.file.optimizer) _tmp_css = _tmp_css.replace(RET_LINE_REG, "");
+                    this.css += _tmp_css;
                     // NOTE: 为了保证css顺序而注释本行
 		    //  cls.push(current.cls[j].selector);
                 }
@@ -423,7 +439,7 @@ Generator.prototype = {
                         if (scale) {
                             x_ = x_ * scale;
                         }
-                        x_ = x_ + 'px ';
+                        x_ = this.px2rem(x_ + 'px ');
                     }
 
                     this.css += current.cls[j].selector + '{background-position:'
