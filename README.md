@@ -108,6 +108,10 @@
         <td>?__sprite</td>
         <td>标识图片要做合并</td>
     </tr>
+    <tr>
+        <td>?__sprite=group</td>
+        <td>标识图片合并到group</td>
+    </tr>
 </table>
 
 支持图片的background-position：有的情况下引用的图片已经是合并了几个小图的图片，通过`background-position`来显示每个小图，这种情况也是支持的。
@@ -142,13 +146,13 @@
 .icon_add {
     width: 25px;
     height: 25px;
-    background: url(/img/icon/add.jpg?__sprite) no-repeat;
+    background: url(/img/icon/add.jpg?__sprite=icon) no-repeat;
 }
 
 .icon_mul {
     width: 25px;
     height: 25px;
-    background: url(/img/icon/mul.jpg?__sprite) no-repeat;
+    background: url(/img/icon/mul.jpg?__sprite=icon) no-repeat;
 }
 ```
 产出结果：
@@ -203,7 +207,7 @@
 }
 
 .icon_add, .icon_mul {
-    background-image: url('aio_z.png');
+    background-image: url('icon_z.png');
 }
 
 ```
