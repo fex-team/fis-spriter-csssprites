@@ -1,6 +1,6 @@
 {
   "name": "fis-spriter-csssprites-group",
-  "version": "0.3.5",
+  "version": "0.3.5.1",
   "description": "基于fis的csssprite，支持repeat-x，repeat-x，background-position，分组合并",
   "main": "index.js",
   "directories": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fis-dev/fis-spriter-csssprites-group.git"
+    "url": "https://github.com/mudoo/fis-spriter-csssprites-group.git"
   },
   "dependencies": {
     "images": "2.1.10"
@@ -27,9 +27,9 @@
     "jpeg",
     "gif"
   ],
-  "author": "xiangshouding <xiangshouding@baidu.com>",
+  "author": "mudoo <mudoo@qq.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fis-dev/fis-spriter-csssprites-group/issues"
+    "url": "https://github.com/mudoo/fis-spriter-csssprites-group/issues"
   }
 }
