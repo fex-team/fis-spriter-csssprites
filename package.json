@@ -1,7 +1,7 @@
 {
   "name": "fis-spriter-csssprites-group",
-  "version": "0.3.5.1",
-  "description": "基于fis的csssprite，支持repeat-x，repeat-x，background-position，分组合并",
+  "version": "0.3.7",
+  "description": "基于fis的csssprite，支持分组合并图片",
   "main": "index.js",
   "directories": {
     "test": "test"
