@@ -14,7 +14,7 @@ var Rules = Object.derive(function (id, css) {
         , __support_position_re = /(0|[+-]?(?:\d*\.|)\d+px|left|right)\s+(0|[+-]?(?:\d*\.|)\d+px|top)/i
         , __support_size_re = /(\d+px)\s*(\d+px)/i //只支持px
         , __repeat_re = /\brepeat-(x|y)/i
-        , __sprites_re = /[?&]__sprite/i
+        , __sprites_re = /([?&])__sprite=?([a-z0-9_-]+)?(&)?/i  // 支持分组合并，多参数
         , __sprites_hook_ld = '<<<'
         , __sprites_hook_rd = '>>>';
     //selectors
@@ -27,6 +27,8 @@ var Rules = Object.derive(function (id, css) {
     self._position = [0, 0];
     //image has __sprite query ?
     self._is_sprites = false;
+    //group
+    self._group = '__default__';
     //x,y,z
     self._direct = 'z';
     //left or right
@@ -64,7 +66,20 @@ var Rules = Object.derive(function (id, css) {
                 if (res && res[1]) {
                     info = _.stringQuote(res[1]);
                     info = _.query(info.rest);
-                    self.image = info.origin.replace(__sprites_re, '');
+                    // 图片分组合并支持
+                    self.image = info.origin.replace(__sprites_re, function (value, first, group, last) {
+                        self._group = group ? group : '__default__';
+                        if (first === '?') {
+                            if (last === '&') {
+                                return first;
+                            }else{
+                                return '';
+                            }
+                        } else {
+                            return last ? last : '';
+                        }
+                    });
+
                     if (info.query && __sprites_re.test(info.query)) {
                         self._is_sprites = true;
                     }
@@ -140,6 +155,9 @@ var Rules = Object.derive(function (id, css) {
     },
     getType: function() {
         return this._type;
+    },
+    getGroup: function() {
+        return this._group;
     },
     getDirect: function() {
         return this._direct;

@@ -65,7 +65,7 @@ function _process(content, file, index, ret, settings, opt){
     });
     var res = cssParser(content, images);
     var content = res.content;
-    if (res.map && res.map.length > 0) {
+    if (res.map) {
         var css = imgGen(file, index, res.map, images, ret, settings, opt);
         content = content + css;
     }
