@@ -2,8 +2,8 @@
 
 基于FIS的csssprites，由[fis-spriter-csssprites](https://github.com/fex-team/fis-spriter-csssprites) 修改而来，具体说明请访问原项目了解
 
-### 特性
-支持图片分组合并
+### 新特性
+支持图片分组合并、合并路径指定
 
 <table>
     <tr>
@@ -19,6 +19,8 @@
         <td>标识图片合并到"group_(x|y|z).png"</td>
     </tr>
 </table>
+
+> `group`只支持“字母、数字、-、_”
 
 ### 配置
 
@@ -38,5 +40,9 @@ fis.config.set('settings.spriter.csssprites-group', {
     margin: 10,
     //使用矩阵排列方式，默认为线性`linear`
     layout: 'matrix',
+    //合并图片存到/img/
+    to: '/img'
 });
 ```
+
+> `to` 参数可以为相对路径（相对当前css路径）、绝对路径（项目根路径）

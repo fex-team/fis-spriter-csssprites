@@ -19,7 +19,8 @@ function Generator(file, index, list, images, ret, settings, opt) {
         'width_limit': 10240,
         'height_limit': 10240,
         'layout': 'linear',
-        'ie_bug_fix': true
+        'ie_bug_fix': true,
+        'to': ''
     };
 
 
@@ -129,12 +130,16 @@ Generator.prototype = {
             ext = '_' + scale + ext;
         }
 
-        group = group.replace('__default__', this.file.filename);
+        ext = (group=='__default__' ? '' : '_'+group) + ext;
 
-        var image_file = fis.file.wrap(this.file.dirname+'/'+group + ext);
+        var root = fis.project.getProjectPath(),
+        	to_path = root + fis.util((this.settings.to.substr(0,1)=='/' ? '/' : this.file.subdirname) +'/'+this.settings.to +'/'+ this.file.filename + ext),
+        	pkg_path = to_path.substring(root.length);
+
+        var image_file = fis.file.wrap(to_path);
         image_file.setContent(image.encode('png'));
         fis.compile(image_file);
-        this.ret.pkg[this.file.subdirname+'/'+group + ext] = image_file;
+        this.ret.pkg[pkg_path] = image_file;
         
         function unique(arr) {
             var map = {};
