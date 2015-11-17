@@ -3,6 +3,9 @@
 
 基于FIS的csssprites，对css文件,以及html文件css片段进行csssprites处理。支持`repeat-x`, `repeat-y`, `background-position` 和 `background-size`
 
+### 新特性
+支持图片分组合并、合并路径指定
+
 ### 使用
 
 **FIS 内置**
@@ -83,9 +86,13 @@
         //图之间的边距
         margin: 10,
         //使用矩阵排列方式，默认为线性`linear`
-        layout: 'matrix'
+        layout: 'matrix',
+        //合并图片存到/img/
+        to: '/img'
     });
     ```
+
+> `to` 参数可以为相对路径（相对当前css路径）、绝对路径（项目根路径）
 
 *以上设置可以按照需求任意组合*
 
@@ -108,7 +115,13 @@
         <td>?__sprite</td>
         <td>标识图片要做合并</td>
     </tr>
+    <tr>
+        <td>?__sprite=group</td>
+        <td>标识图片合并到"group_(x|y|z).png"</td>
+    </tr>
 </table>
+
+> `group`只支持“字母、数字、-、_”
 
 支持图片的background-position：有的情况下引用的图片已经是合并了几个小图的图片，通过`background-position`来显示每个小图，这种情况也是支持的。
 
