@@ -51,7 +51,7 @@ function Generator(file, index, list, images, ret, settings, opt) {
     this.images = images;
     this.index = index;
 
-    this.create = function() {
+    this.create = function(group, list) {
         var list_ = {};
         var scales = {};
 
