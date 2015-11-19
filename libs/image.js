@@ -389,7 +389,8 @@ Generator.prototype = {
             , j = 0
             , cls = []
             , count = 0
-            , current;
+            , current
+            , _tmp_css;
         if (images[zero]) {
             for (i = 0, length = images[zero].length; i < length; i++) {
                 current = images[zero][i];
@@ -404,13 +405,8 @@ Generator.prototype = {
                         x_ = x_ * scale;
                         y_ = y_ * scale;
                     }
-
-                    var _tmp_css = "\r\n" + current.cls[j].selector + '{\r\n    background-position:'
-                        + this.px2rem(x_ + 'px ')
-                        + this.px2rem(y_ + 'px') + ';\r\n}';
-                    if (this.file.optimizer)
-                        _tmp_css = _tmp_css.replace(RET_LINE_REG, "");
-                    this.css += _tmp_css;
+                    current.cls[j].x_ = x_;
+                    current.cls[j].y_ = y_;
                     // NOTE: 为了保证css顺序而注释本行
                     //  cls.push(current.cls[j].selector);
                 }
@@ -418,6 +414,12 @@ Generator.prototype = {
             for (i = 0, length = _images.length; i < length; i++) {
                 current = _images[i];
                 for (j = 0, count = current.cls.length; j < count; j++) {
+                    _tmp_css = "\r\n" + current.cls[j].selector + '{\r\n    background-position:'
+                        + this.px2rem(current.cls[j].x_ + 'px ')
+                        + this.px2rem(current.cls[j].y_ + 'px') + ';\r\n}';
+                    if (this.file.optimizer)
+                        _tmp_css = _tmp_css.replace(RET_LINE_REG, "");
+                    this.css += _tmp_css;
                     cls.push(current.cls[j].selector);
                 }
             }
