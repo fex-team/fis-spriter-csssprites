@@ -50,6 +50,8 @@ function Generator(file, index, list, images, ret, settings, opt) {
     this.css = '';
     this.images = images;
     this.index = index;
+    this.rem = settings.rem || 1;
+    this.units = settings.rem ? "rem" : "px";
 
     fis.util.map(list, function (group, glist) {
         that.create(group, glist);
@@ -82,7 +84,7 @@ Generator.prototype = {
 	        var direct = bg.getDirect();
 
 	        bg.image_ = image_;
-	        
+
 	        var scale_ = bg.size[0] / image_.size().width;
 
 	        if (bg.size[0] != -1 && scale_ != that.settings.scale) {
@@ -140,7 +142,7 @@ Generator.prototype = {
         image_file.setContent(image.encode('png'));
         fis.compile(image_file);
         this.ret.pkg[pkg_path] = image_file;
-        
+
         function unique(arr) {
             var map = {};
             return arr.filter(function(item){
@@ -158,13 +160,13 @@ Generator.prototype = {
                 var step = i * MAX
                 this.css += arr_selector.slice(step, step + MAX).join(',')
                     + '{'
-                    + (scale ? 'background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;': '')
+                    + (scale ? 'background-size: ' + (size.width * scale / this.rem) + this.units + ' ' + (size.height * scale / this.rem) + this.units + ';': '')
                     + 'background-image: url(' + imageUrl + ')}';
             }
         } else {
             this.css += unique(arr_selector.join(',').split(',')).join(',')
                 + '{'
-                + (scale ? 'background-size: ' + (size.width * scale) + 'px ' + (size.height * scale) + 'px;': '')
+                + (scale ? 'background-size: ' + (size.width * scale / this.rem) + this.units + ' ' + (size.height * scale / this.rem) + this.units + ';': '')
                 + 'background-image: url(' + imageUrl + ')}';
         }
 
@@ -246,8 +248,8 @@ Generator.prototype = {
             }
             for (k = 0, count = images[i].cls.length; k < count; k++) {
                 this.css += images[i].cls[k].selector + '{background-position:'
-                    + (images[i].cls[k].position[0] + -x) + 'px '
-                    + (images[i].cls[k].position[1] + -y) + 'px}';
+                    + (images[i].cls[k].position[0] + -x) / this.rem + this.units + ' '
+                    + (images[i].cls[k].position[1] + -y) / this.rem + this.units + '}';
                 cls.push(images[i].cls[k].selector);
             }
             if (direct == 'x') {
@@ -362,8 +364,8 @@ Generator.prototype = {
                     }
 
                     this.css += current.cls[j].selector + '{background-position:'
-                        + x_ + 'px '
-                        + y_ + 'px}';
+                        + x_ / this.rem + this.units + ' '
+                        + y_ / this.rem + this.units + '}';
                     cls.push(current.cls[j].selector);
                 }
             }
@@ -376,9 +378,9 @@ Generator.prototype = {
                 x = max[zero] + max[left] - current.w;
                 image.draw(Image(current.image), x, y);
                 for (j = 0, count = current.cls.length; j < count; j++) {
-                    var x_, y_ = (current.cls[j].position[1] + -y) + 'px';
+                    var x_, y_ = (current.cls[j].position[1] + -y) / this.rem + this.units + ' ';
                     if (scale) {
-                        y_ = ((current.cls[j].position[1] + -y) * scale) + 'px'
+                        y_ = ((current.cls[j].position[1] + -y) * scale) / this.rem + this.units + ''
                     }
 
                     if (current.cls[j].position[0] == 'right') {
@@ -388,7 +390,7 @@ Generator.prototype = {
                         if (scale) {
                             x_ = x_ * scale;
                         }
-                        x_ = x_ + 'px ';
+                        x_ = x_ / this.rem + this.units + ' ';
                     }
 
                     this.css += current.cls[j].selector + '{background-position:'

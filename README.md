@@ -2,8 +2,8 @@
 
 基于FIS的csssprites，由[fis-spriter-csssprites](https://github.com/fex-team/fis-spriter-csssprites) 修改而来，具体说明请访问原项目了解
 
-### 新特性
-支持图片分组合并、合并路径指定
+### 特性
+在官方基础上，添加支持图片分组合并、合并路径指定、rem支持
 
 <table>
     <tr>
@@ -36,6 +36,10 @@ fis.match('::package', {
 
 ```javascript
 fis.config.set('settings.spriter.csssprites-group', {
+	//图片缩放比例
+	scale: 1,
+	//1rem像素值
+	rem: 50,
     //图之间的边距
     margin: 10,
     //使用矩阵排列方式，默认为线性`linear`
