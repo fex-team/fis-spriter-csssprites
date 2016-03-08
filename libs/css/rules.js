@@ -9,10 +9,11 @@
 var Rules = Object.derive(function (id, css) {
     var self = this
         , _ = fis.util
-        , __background_re = /(?:\/\*[\s\S]*?(?:\*\/|$))|\bbackground(?:-image)?:([\s\S]*?)(?:;|$)|background-position:([\s\S]*?)(?:;|$)|(?:[^\{\};]*)background-repeat:([\s\S]*?)(?:;|$)|(?:\{\};]*)background-size:([\s\S]*?)(?:;|$)/gi
+        , __background_re = /(?:\/\*[\s\S]*?(?:\*\/|$))|\bbackground(?:-image)?:([\s\S]*?)(?:;|$)|background-position:([\s\S]*?)(?:;|$)|(?:[^\{\};]*)background-repeat:([\s\S]*?)(?:;|$)|(?:[^\{\};]*)background-size:([\s\S]*?)(?:;|$)/gi
         , __image_url_re = /url\s*\(\s*("(?:[^\\"\r\n\f]|\\[\s\S])*"|'(?:[^\\'\n\r\f]|\\[\s\S])*'|[^)}]+)\s*\)/i
         , __support_position_re = /(0|[+-]?(?:\d*\.|)\d+px|left|right)\s+(0|[+-]?(?:\d*\.|)\d+px|top)/i
         , __support_size_re = /(\d+px)\s*(\d+px)/i //只支持px
+        , __color_re = /((?:^|\s)#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|\b(?:rgba?|hsla?)\([\s\S]*?\))/i
         , __repeat_re = /\brepeat-(x|y)/i
         , __sprites_re = /([?&])__sprite=?([a-z0-9_-]+)?(&)?/i  // 支持分组合并，多参数
         , __sprites_hook_ld = '<<<'
@@ -22,6 +23,7 @@ var Rules = Object.derive(function (id, css) {
     //use image url
     self.image = '';
     self.repeat = false;
+    self.color = false;
     self.size = [-1, -1];
 
     self._position = [0, 0];
@@ -95,6 +97,11 @@ var Rules = Object.derive(function (id, css) {
                 if (res) {
                     _get_position(res);
                 }
+                // color
+                res = image.match(__color_re);
+                if(res) {
+                	self.color = res[1].trim();
+                }
             }
             if (position) {
                 //if use background-position, get it.
@@ -140,9 +147,12 @@ var Rules = Object.derive(function (id, css) {
                 pre_pad = ';';
             }
             if (this.repeat) {
-                ret += pre_pad + 'background-repeat: repeat-' + this.repeat;
+                ret += pre_pad + 'background-repeat: repeat-' + this.repeat +';';
             } else {
                 ret += pre_pad + 'background-repeat: no-repeat;';
+            }
+            if(this.color) {
+            	ret += 'background-color:'+ this.color +';';
             }
         }
         return ret;
