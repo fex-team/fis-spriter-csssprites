@@ -112,7 +112,7 @@ Generator.prototype = {
         }
         return false;
     },
-    after: function (image, arr_selector, direct, scale) {
+    after: function (image, arr_selector, direct, scale, list) {
         var ext = '_' + direct + '.png';
         var size = image.size();
         if (this.index) {
@@ -129,11 +129,9 @@ Generator.prototype = {
         this.ret.pkg[this.file.subpathNoExt + ext] = image_file;
 
         // 记录这些图片已经被打包到其他文件上了。
-        var images = this.images;
-        images && Object.keys(images).forEach(function(key) {
-          var image = images[key];
-          var map = image.map = image.map || {};
-          map.pkg = image_file.getId();
+        list.forEach(function(image) {
+            var map = image.map = image.map || {};
+            map.cssspritePkg = image_file.getId();
         });
 
         function unique(arr) {
@@ -252,7 +250,7 @@ Generator.prototype = {
             }
         }
 
-        this.after(image, cls, direct);
+        this.after(image, cls, direct, null, list);
     },
     zFill: function(list, scale) {
         if (!list || list.length == 0) {
@@ -394,6 +392,6 @@ Generator.prototype = {
                 y += current.h;
             }
         }
-        this.after(image, cls, 'z', scale);
+        this.after(image, cls, 'z', scale, list);
     }
 };
