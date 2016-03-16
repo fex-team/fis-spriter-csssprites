@@ -129,8 +129,10 @@ Generator.prototype = {
         this.ret.pkg[this.file.subpathNoExt + ext] = image_file;
 
         // 记录这些图片已经被打包到其他文件上了。
-        list.forEach(function(image) {
-            var map = image.map = image.map || {};
+        var images = this.images;
+        list.forEach(function(item) {
+            var image = images[item.image],
+                map = image.map = image.map || {};
             map.cssspritePkg = image_file.getId();
         });
 
