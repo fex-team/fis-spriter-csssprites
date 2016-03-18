@@ -121,7 +121,7 @@ Generator.prototype = {
         }
         return false;
     },
-    after: function (group, image, arr_selector, direct, scale) {
+    after: function (group, image, arr_selector, direct, scale, list) {
         var ext = '_' + direct + '.png';
         var size = image.size();
         if (this.index) {
@@ -142,6 +142,16 @@ Generator.prototype = {
         image_file.setContent(image.encode('png'));
         fis.compile(image_file);
         this.ret.pkg[pkg_path] = image_file;
+
+        // 记录这些图片已经被打包到其他文件上了。
+        var images = this.images;
+        list.forEach(function(item) {
+            var image = images[item.image],
+            	map = image.map = image.map || {};
+            map.cssspritePkg = image_file.getId();
+        });
+
+
 
         function unique(arr) {
             var map = {};
@@ -259,7 +269,7 @@ Generator.prototype = {
             }
         }
 
-        this.after(group, image, cls, direct);
+        this.after(group, image, cls, direct, null, list);
     },
     zFill: function(group, list, scale) {
         if (!list || list.length == 0) {
@@ -401,6 +411,6 @@ Generator.prototype = {
                 y += current.h;
             }
         }
-        this.after(group, image, cls, 'z', scale);
+        this.after(group, image, cls, 'z', scale, list);
     }
 };
