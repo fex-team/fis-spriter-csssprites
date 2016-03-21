@@ -56,7 +56,7 @@ function processInline(file, ret, settings, opt) {
     file.setContent(content);
 }
 
-function _process(content, file, index, ret, settings, opt){
+function _processPart(content, file, index, ret, settings, opt){
     var images = {};
     fis.util.map(ret.src, function (subpath, item) {
         if (item.isImage()) {
@@ -70,4 +70,20 @@ function _process(content, file, index, ret, settings, opt){
         content = content + css;
     }
     return content;
+}
+
+var __part_re = /(\@media[\s\S]*?\{)((?:[^}]*?\{[\s\S]*?\})+)([\s\S]*?\})/gi;
+function _process(content, file, index, ret, settings, opt){
+	// 将css内容根据'@media'拆分，把每一部分看作一份单独的css处理，最后再经行组合
+	var i = index ? index+1 : 1,
+		part_css = [],
+
+		css = content.replace(__part_re, function(m, part_start, part, part_end) {
+			part_css.push(part_start + _processPart(part, file, i, ret, settings, opt) + part_end);
+			return '';
+		});
+
+	css = _processPart(css, file, index, ret, settings, opt) + part_css.join('');
+
+	return css;
 }

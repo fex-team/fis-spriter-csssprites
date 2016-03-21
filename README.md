@@ -3,7 +3,11 @@
 基于FIS的csssprites，由[fis-spriter-csssprites](https://github.com/fex-team/fis-spriter-csssprites) 修改而来，具体说明请访问原项目了解
 
 ### 特性
-在官方基础上，添加支持图片分组合并、合并路径指定、rem支持
+在官方基础上，添加支持图片分组合并、@media处理、合并路径指定、rem支持  
+
+####@media处理
+样式中存在的媒体查询，往往是需要做响应式兼容，大多数情况下需要跟其他图片分开处理，如retina处理。  
+所以，将**@media**当作单独的一部分样式处理，生成的css也写入到@media中，完美解决原先合并处理后生成的样式混乱问题。
 
 <table>
     <tr>
