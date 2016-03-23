@@ -72,18 +72,24 @@ function _processPart(content, file, index, ret, settings, opt){
     return content;
 }
 
-var __part_re = /(\@media[\s\S]*?\{)((?:[^}]*?\{[\s\S]*?\})+)([\s\S]*?\})/gi;
+var __media_re = /(\@media[\s\S]*?\{)((?:[^\}]*?\{[\s\S]*?\})+)([\s\S]*?\})/gi;
 function _process(content, file, index, ret, settings, opt){
 	// 将css内容根据'@media'拆分，把每一部分看作一份单独的css处理，最后再经行组合
-	var i = index ? index+1 : 1,
-		part_css = [],
+	var i = 0,
+		media_css = [],
 
-		css = content.replace(__part_re, function(m, part_start, part, part_end) {
-			part_css.push(part_start + _processPart(part, file, i, ret, settings, opt) + part_end);
-			return '';
+		css = content.replace(__media_re, function(m, media_start, media_cont, media_end) {
+			media_css.push(media_start + _processPart(media_cont, file, (index ? index +'_'+i : i), ret, settings, opt) + media_end);
+			return '/*##media_'+ (i++) +'##*/';
 		});
 
-	css = _processPart(css, file, index, ret, settings, opt) + part_css.join('');
+	// 处理无media样式
+	css = _processPart(css, file, index, ret, settings, opt);
+
+	// 将media样式插回原本位置
+	media_css.forEach(function(cont, i) {
+		css = css.replace('/*##media_'+ i +'##*/', cont);
+	});
 
 	return css;
 }

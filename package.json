@@ -1,6 +1,6 @@
 {
   "name": "fis-spriter-csssprites-group",
-  "version": "0.3.13",
+  "version": "0.3.14",
   "description": "基于fis的csssprite，支持分组合并图片，@media处理，合并路径指定",
   "main": "index.js",
   "directories": {
