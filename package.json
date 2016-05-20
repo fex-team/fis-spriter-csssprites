@@ -14,7 +14,7 @@
     "url": "https://github.com/mudoo/fis-spriter-csssprites-group.git"
   },
   "dependencies": {
-    "images": "2.1.11"
+    "images": "3.0.0"
   },
   "keywords": [
     "fis",
