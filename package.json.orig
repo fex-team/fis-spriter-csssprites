@@ -1,6 +1,14 @@
 {
+<<<<<<< HEAD
   "name": "atm3-spriter-csssprites",
-  "version": "0.0.9",
+  "version": "0.0.8",
+||||||| merged common ancestors
+  "name": "fis-spriter-csssprites",
+  "version": "0.3.0",
+=======
+  "name": "fis-spriter-csssprites",
+  "version": "0.3.11",
+>>>>>>> upstream/master
   "description": "基于fis的csssprite，支持repeat-x，repeat-x，background-position",
   "main": "index.js",
   "directories": {
@@ -14,7 +22,13 @@
     "url": "https://github.com/femxd/atm3-spriter-csssprites.git"
   },
   "dependencies": {
+<<<<<<< HEAD
+    "images": "2.1.10"
+||||||| merged common ancestors
+    "images": "2.1.5"
+=======
     "images": "3.0.0"
+>>>>>>> upstream/master
   },
   "keywords": [
     "fis",
