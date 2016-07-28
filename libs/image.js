@@ -51,7 +51,7 @@ function Generator(file, index, list, images, ret, settings, opt) {
     this.images = images;
     this.index = index;
     this.rem = settings.rem || 1;
-    this.units = settings.rem ? "rem" : "px";
+    this.units = "px";
 
     fis.util.map(list, function (group, glist) {
         that.create(group, glist);
@@ -87,6 +87,12 @@ Generator.prototype = {
 
 	        var scale_ = bg.size[0] / image_.size().width;
 
+	        // contain自适应
+	        // console.log(bg.size[0]);
+	        if(bg.size[0]==0){
+	        	scale_ = 1;
+	        	that.units = bg.units;
+	        }
 	        if (bg.size[0] != -1 && scale_ != that.settings.scale) {
 	            scale_ = '' + scale_;
 	            //不支持x, y
@@ -159,6 +165,7 @@ Generator.prototype = {
                 return map.hasOwnProperty(item) ? false : map[item] = true;
             });
         }
+        var rem = this.units=='rem' ? this.rem : 1;
         var imageUrl = util.getUrl(image_file, this.file, this.opt);
         if (this.settings.ie_bug_fix) {
             var MAX = this.settings.max_selectores || 30; //max 36
@@ -170,13 +177,13 @@ Generator.prototype = {
                 var step = i * MAX
                 this.css += arr_selector.slice(step, step + MAX).join(',')
                     + '{'
-                    + (scale ? 'background-size: ' + (size.width * scale / this.rem) + this.units + ' ' + (size.height * scale / this.rem) + this.units + ';': '')
+                    + (scale ? 'background-size: ' + (size.width * scale / rem) + this.units + ' ' + (size.height * scale / rem) + this.units + ';': '')
                     + 'background-image: url(' + imageUrl + ')}';
             }
         } else {
             this.css += unique(arr_selector.join(',').split(',')).join(',')
                 + '{'
-                + (scale ? 'background-size: ' + (size.width * scale / this.rem) + this.units + ' ' + (size.height * scale / this.rem) + this.units + ';': '')
+                + (scale ? 'background-size: ' + (size.width * scale / rem) + this.units + ' ' + (size.height * scale / rem) + this.units + ';': '')
                 + 'background-image: url(' + imageUrl + ')}';
         }
 
@@ -241,6 +248,7 @@ Generator.prototype = {
         var width = direct == 'x' ? max : total;
         var image = Image(width, height);
 
+        var rem = this.units=='rem' ? this.rem : 1;
         var x = 0, y = 0, cls = [];
         for (i = 0, len = images.length; i < len; i++) {
             image.draw(images[i].image, x, y);
@@ -258,8 +266,8 @@ Generator.prototype = {
             }
             for (k = 0, count = images[i].cls.length; k < count; k++) {
                 this.css += images[i].cls[k].selector + '{background-position:'
-                    + (images[i].cls[k].position[0] + -x) / this.rem + this.units + ' '
-                    + (images[i].cls[k].position[1] + -y) / this.rem + this.units + '}';
+                    + (images[i].cls[k].position[0] + -x) / rem + this.units + ' '
+                    + (images[i].cls[k].position[1] + -y) / rem + this.units + '}';
                 cls.push(images[i].cls[k].selector);
             }
             if (direct == 'x') {
@@ -351,6 +359,7 @@ Generator.prototype = {
         height = height - this.settings.margin;
         //left, zero
         //zero | left
+        var rem = this.units=='rem' ? this.rem : 1;
         var image = Image(max[left] + max[zero], height)
             , x = 0
             , y = 0
@@ -373,9 +382,10 @@ Generator.prototype = {
                         y_ = y_ * scale;
                     }
 
+                    // console.log(this.units);
                     this.css += current.cls[j].selector + '{background-position:'
-                        + x_ / this.rem + this.units + ' '
-                        + y_ / this.rem + this.units + '}';
+                        + x_ / rem + this.units + ' '
+                        + y_ / rem + this.units + '}';
                     cls.push(current.cls[j].selector);
                 }
             }
@@ -388,9 +398,9 @@ Generator.prototype = {
                 x = max[zero] + max[left] - current.w;
                 image.draw(Image(current.image), x, y);
                 for (j = 0, count = current.cls.length; j < count; j++) {
-                    var x_, y_ = (current.cls[j].position[1] + -y) / this.rem + this.units + ' ';
+                    var x_, y_ = (current.cls[j].position[1] + -y) / rem + this.units + ' ';
                     if (scale) {
-                        y_ = ((current.cls[j].position[1] + -y) * scale) / this.rem + this.units + ''
+                        y_ = ((current.cls[j].position[1] + -y) * scale) / rem + this.units + ''
                     }
 
                     if (current.cls[j].position[0] == 'right') {
@@ -400,7 +410,7 @@ Generator.prototype = {
                         if (scale) {
                             x_ = x_ * scale;
                         }
-                        x_ = x_ / this.rem + this.units + ' ';
+                        x_ = x_ / rem + this.units + ' ';
                     }
 
                     this.css += current.cls[j].selector + '{background-position:'

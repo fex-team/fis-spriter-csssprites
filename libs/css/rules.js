@@ -9,10 +9,12 @@
 var Rules = Object.derive(function (id, css) {
     var self = this
         , _ = fis.util
-        , __background_re = /(?:\/\*[\s\S]*?(?:\*\/|$))|\bbackground(?:-image)?:([\s\S]*?)(?:;|$)|background-position:([\s\S]*?)(?:;|$)|(?:[^\{\};]*)background-repeat:([\s\S]*?)(?:;|$)|(?:[^\{\};]*)background-size:([\s\S]*?)(?:;|$)/gi
+        , __size_re = /(?:\/\*[\s\S]*?(?:\*\/|$))|\b(?:width|height):([\s\S]*?)(?:\}|;|$)/
+        , __units_re = /\d+(px|rem)/i //尺寸单位
+        , __background_re = /(?:\/\*[\s\S]*?(?:\*\/|$))|\bbackground(?:-image)?:([\s\S]*?)(?:\}|;|$)|background-position:([\s\S]*?)(?:\}|;|$)|(?:[^\{\};]*)background-repeat:([\s\S]*?)(?:\}|;|$)|(?:[^\{\};]*)background-size:([\s\S]*?)(?:\}|;|$)/gi
         , __image_url_re = /url\s*\(\s*("(?:[^\\"\r\n\f]|\\[\s\S])*"|'(?:[^\\'\n\r\f]|\\[\s\S])*'|[^)}]+)\s*\)/i
         , __support_position_re = /(0|[+-]?(?:\d*\.|)\d+px|left|right)\s+(0|[+-]?(?:\d*\.|)\d+px|top)/i
-        , __support_size_re = /(\d+px)\s*(\d+px)/i //只支持px
+        , __support_size_re = /(\d+)(px|rem)\s*(\d+)(px|rem)/i //只支持px
         , __color_re = /((?:^|\s)#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|\btransparent|\b(?:rgba?|hsla?)\([\s\S]*?\))/i
         , __repeat_re = /\brepeat-(x|y)/i
         , __sprites_re = /([?&])__sprite=?([a-z0-9_-]+)?(&)?/i  // 支持分组合并，多参数
@@ -25,6 +27,7 @@ var Rules = Object.derive(function (id, css) {
     self.repeat = false;
     self.color = false;
     self.size = [-1, -1];
+    self.units = 'px';
 
     self._position = [0, 0];
     //image has __sprite query ?
@@ -57,6 +60,19 @@ var Rules = Object.derive(function (id, css) {
             self._position[0] = parseFloat(res[1]);
         }
         self._position[1] = res[2] === 'top' ? 0 : parseFloat(res[2]);
+    }
+
+    function _get_units(res) {
+    	// console.log(res);
+    	if(!res[1]) return;
+
+    	var unitsRes = res[1].match(__units_re);
+    	// console.log(unitsRes[1]);
+    	if(unitsRes) {
+    		return unitsRes[1];
+    	}
+
+    	return 'px';
     }
 
     self._css = css.replace(__background_re,
@@ -122,7 +138,14 @@ var Rules = Object.derive(function (id, css) {
                 res = size.match(__support_size_re);
                 if (res) {
                     self.size[0] = parseFloat(res[1]);
-                    self.size[1] = parseFloat(res[2]);
+                    self.size[1] = parseFloat(res[3]);
+                    self.units = res[2];
+                }else if(size=='contain' && size) {
+                	res = css.match(__size_re);
+                	if(res) {
+                		self.units = _get_units(res);
+                		self.size = [0, 0];
+                	}
                 }
             }
             return __sprites_hook_ld + m + __sprites_hook_rd;
