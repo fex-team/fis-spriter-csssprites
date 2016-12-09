@@ -63,7 +63,7 @@ function _process(content, file, index, ret, settings, opt){
             images[util.getUrl(item, file, opt)] = item;
         }
     });
-    var res = cssParser(content, images);
+    var res = cssParser(file, content, images);
     var content = res.content;
     if (res.map && res.map.length > 0) {
         var css = imgGen(file, index, res.map, images, ret, settings, opt);
