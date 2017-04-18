@@ -122,7 +122,7 @@
 |background-position: left top;|background-position: left top;|需要合并的图片向左浮动|
 |background-position: right top;|background-position: right top;|需要合并的图片向右浮动
 
-###示例
+### 示例
 
 源代码: `aio.css`
 
