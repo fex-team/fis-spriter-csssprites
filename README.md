@@ -14,6 +14,8 @@
 
 ### 配置
 
+<font color="red">**以下配置均使用 fis 2.x 的配置方式配置，如果使用 fis3 请按照 fis3 的配置方式，具体见官网 fis.baidu.com**</font>
+
 * 首先要配置FIS中使用csssprites
 
     ```javascript
@@ -122,7 +124,7 @@
 |background-position: left top;|background-position: left top;|需要合并的图片向左浮动|
 |background-position: right top;|background-position: right top;|需要合并的图片向右浮动
 
-###示例
+### 示例
 
 源代码: `aio.css`
 
