@@ -25,7 +25,7 @@ fis.config.merge({
         spriter:  [{
                 margin: 256,
                 //矩阵排列方式 
-                scale: 0.5,
+                scale:1,
                 layout: 'matrix'
         }],
 

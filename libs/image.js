@@ -126,7 +126,7 @@ Generator.prototype = {
         var image_file = fis.file.wrap(this.file.realpathNoExt + ext);
         image_file.setContent(image.encode('png'));
         fis.compile(image_file);
-        this.file.addLink(image_file.subpath);
+        this.file.addLink && this.file.addLink(image_file.subpath);
         this.ret.pkg[this.file.subpathNoExt + ext] = image_file;
 
         // 记录这些图片已经被打包到其他文件上了。
