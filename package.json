@@ -1,6 +1,6 @@
 {
   "name": "fis-spriter-csssprites",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "基于fis的csssprite，支持repeat-x，repeat-x，background-position",
   "main": "index.js",
   "directories": {
@@ -14,7 +14,7 @@
     "url": "https://github.com/fis-dev/fis-spriter-csssprites.git"
   },
   "dependencies": {
-    "images": "3.0.1"
+    "images": "3.0.2"
   },
   "keywords": [
     "fis",
